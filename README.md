@@ -12,11 +12,39 @@ page is the map.
 Licence: MIT (see `LICENSE`). `usage` is based on an MIT plugin by another author and keeps that
 author's attribution.
 
-All screenshots in this README show invented data: the people, projects, mail, accounts and usage
-numbers do not exist. They were taken in a throwaway bb with made-up content (only the small CPU and
-memory readings in the sidebar strip are a real machine's load).
+<table>
+<tr>
+<td><img src="docs/screenshots/sidebar-tree-light.webp" alt="The sidebar as a tree: Chief of Staff, three managers, and a worker under each manager, with a face and a provider mark on every row" width="330"></td>
+<td><img src="docs/screenshots/sidebar-tree-dark.webp" alt="The same tree in the dark theme" width="330"></td>
+</tr>
+</table>
 
-![The chief's Board: a manager with a team, and workers reporting to the chief](docs/screenshots/chief-board-light.webp)
+## The hierarchy: chief, managers, workers
+
+The lead picture is bb's sidebar with the plugins installed. It is a tree, and the tree is the
+idea:
+
+- **The chief** ("Chief of Staff", top row) is one long-lived thread. You talk to it. It never does
+  the work itself: it decides who should, briefs them, and tells you only what needs you.
+- **Managers** ("Platform Lead", "ACME Lead", "Ops Lead") each own a team. A manager is a thread of
+  its own that breaks a topic up, briefs its workers and reports one summary upward. Use one per
+  client, product or area.
+- **Workers** ("Billing Dev", "ACME Inbox", "Release Worker" and so on) are reusable threads, one
+  per topic. A worker keeps its context, so you can send it more work next week. Each has its own
+  face, and a mark for the model provider it runs on.
+
+Every worker ends a turn with `Done:`, `Open:` and `Need:` lines. The chief and the managers read
+those lines, so you read one board instead of every thread. The rows show state at a glance: a
+working star, a question mark when a thread waits for an answer, a quiet dot when it is idle.
+
+The tree lines are bb's own thread nesting: the plugin links each worker to its manager and each
+manager to the chief when it creates them (`bb cos delegate`, or the chief does it for you).
+
+![The full window: the nested sidebar, the chief thread in the middle, and the Board on the right with each manager and its team](docs/screenshots/chief-board.webp)
+
+All screenshots in this README show invented data: the people, projects, threads, mail, accounts and
+usage numbers do not exist. They were taken in a throwaway bb with made-up content (only the small CPU
+and memory readings in the sidebar strip are a real machine's load).
 
 ## What is in it
 
@@ -32,30 +60,27 @@ memory readings in the sidebar strip are a real machine's load).
 
 ### Faces
 
-Each thread gets a face the first time it shows in the sidebar and keeps it. The sidebar reads
-at a glance: working, waiting for you, idle, done.
+Each thread gets a face the first time it shows in the sidebar and keeps it, so you tell threads
+apart by sight. Tree lines, faces, provider marks and state marks together:
 
-![The sidebar thread list with faces, working stars and question marks](docs/screenshots/faces-sidebar.webp)
+![A manager and its first workers: tree lines, faces, provider marks, working stars and question marks](docs/screenshots/faces-tree.webp)
 
-### The chief and its "For you" list
+### The chief's "For you" list
 
-The chief never does the work. It picks or creates a worker per topic, briefs it, and collects
-reports. Every worker ends a turn with `Done:`, `Open:` and `Need:` lines; the chief reads those
-and puts only what needs *you* on one list.
-
-![The For you list: decisions with buttons](docs/screenshots/chief-for-you.webp)
-
-The panel follows the theme and works on a phone.
-
-![The chief's Board in the dark theme](docs/screenshots/chief-board-dark.webp)
+The Board lists what each manager and worker reports. The **For you** tab is shorter: only the
+chief adds to it, one item at a time, and each item has buttons. Answer there, or from a shell with
+`bb cos board`.
 
 ### Mail and WhatsApp with approve-before-send
 
+Agents write drafts; you read them next to the conversation and press Send.
+
 ![Comms: conversations on the left, a conversation and the chief's draft on the right](docs/screenshots/comms-desktop.webp)
 
-![Comms on a phone](docs/screenshots/comms-phone.webp)
-
 ### The usage strip
+
+The strip at the bottom of the sidebar shows how much of each subscription window is used; click it
+for every window and when it resets.
 
 ![The usage popup: windows and reset times per account](docs/screenshots/usage-popup.webp)
 
