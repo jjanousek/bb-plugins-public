@@ -1,0 +1,57 @@
+{
+  "create_time": 1949145300000,
+  "execution_end_time": 1949147100000,
+  "execution_error": {
+    "current_inputs": {},
+    "current_outputs": {},
+    "exception_message": "API Error: Requested model example-video-model does not exist or you do not have access (status: not_found)\n",
+    "exception_type": "RuntimeError",
+    "node_id": "1",
+    "node_type": "ByteDanceTextToVideoNode",
+    "traceback": [
+      "  File \"/srv/example/runner.py\", line 12, in run_node\n    raise err\n",
+      "  File \"/srv/example/partner_api.py\", line 34, in call_partner\n    raise RuntimeError(text)\n"
+    ]
+  },
+  "execution_start_time": 1949146200000,
+  "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaabb",
+  "outputs_count": 0,
+  "previewable_outputs_count": 0,
+  "status": "failed",
+  "update_time": 1949147100000,
+  "user_id": "exampleUserIdAAAAAAAAAAAAAAA",
+  "workflow": {
+    "extra_data": {
+      "api_key_comfy_org": "REDACTED"
+    },
+    "prompt": {
+      "1": {
+        "class_type": "ByteDanceTextToVideoNode",
+        "inputs": {
+          "aspect_ratio": "9:16",
+          "camera_fixed": true,
+          "duration": 5,
+          "generate_audio": false,
+          "model": "example-video-model",
+          "prompt": "a stone bridge over a river in fog",
+          "resolution": "720p",
+          "seed": 42,
+          "watermark": false
+        }
+      },
+      "2": {
+        "class_type": "SaveVideo",
+        "inputs": {
+          "filename_prefix": "video/example",
+          "format": "mp4",
+          "format.codec": "h264",
+          "video": [
+            "1",
+            0
+          ]
+        }
+      }
+    }
+  },
+  "workspace_id": "w-aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaba"
+}

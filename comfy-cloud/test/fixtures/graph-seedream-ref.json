@@ -1,0 +1,36 @@
+{
+  "1": {
+    "class_type": "ByteDanceSeedreamNodeV3",
+    "inputs": {
+      "prompt": "the same street as a watercolour postcard",
+      "model": "seedream 5.0 pro",
+      "model.size_preset": "(1K) 1024x1024 (1:1)",
+      "model.width": 1024,
+      "model.height": 1024,
+      "model.prompt_optimization": "standard",
+      "model.seed": 7,
+      "model.watermark": false,
+      "model.thinking": true,
+      "model.images.image_1": [
+        "3",
+        0
+      ]
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "1",
+        0
+      ],
+      "filename_prefix": "bb"
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "b2c3.png"
+    }
+  }
+}

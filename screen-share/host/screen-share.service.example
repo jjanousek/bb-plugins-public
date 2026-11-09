@@ -1,0 +1,32 @@
+# Example for /etc/systemd/system/screen-share.service. Replace YOUR_USER and the
+# paths, then: sudo systemctl daemon-reload && sudo systemctl enable --now screen-share.service
+#
+# Needs an X server on the display set in SCREEN_SHARE_DISPLAY (for example an
+# xvfb.service running `Xvfb :20 -screen 0 1600x900x24`). No TCP port is opened and there is no VNC
+# password: the sockets live in a 0700 directory and the tailnet is the
+# authentication.
+[Unit]
+Description=Screen share of the agent browser display (noVNC over unix sockets, served by tailscale at /vnc)
+Requires=xvfb.service
+After=xvfb.service
+
+[Service]
+Type=simple
+User=YOUR_USER
+Group=YOUR_USER
+Environment=HOME=/home/YOUR_USER
+Environment=SCREEN_SHARE_WEB=/path/to/screen-share/web
+# 0 makes the share permanent (websockify only honours --idle-timeout when non-zero).
+Environment=SCREEN_SHARE_IDLE_SECONDS=0
+# The X display the agent browser runs on.
+Environment=SCREEN_SHARE_DISPLAY=:20
+ExecStart=/home/YOUR_USER/bin/screen-share-serve
+ExecStopPost=/bin/rm -f /home/YOUR_USER/.screen-share/run/rfb.sock /home/YOUR_USER/.screen-share/run/web.sock
+KillMode=control-group
+# An explicit `systemctl stop`, including the plugin's Stop button, is honoured;
+# Restart only covers websockify or x11vnc dying underneath.
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

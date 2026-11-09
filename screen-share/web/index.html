@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent browser</title>
+<link rel="icon" href="data:,">
+<style>
+  html, body { margin: 0; height: 100%; background: #202124; color: #e8eaed; font: 15px system-ui, sans-serif; }
+  body { display: flex; align-items: center; justify-content: center; }
+  a { color: #8ab4f8; }
+</style>
+</head>
+<body>
+<p>Loading the viewer… <a href="vnc.html">desktop</a> · <a href="m.html">phone</a></p>
+<script>
+  // Phones and tablets get m.html (touch UI); everything else the stock noVNC page.
+  // Override with ?ui=desktop or ?ui=mobile. Query parameters are passed through.
+  const params = new URLSearchParams(location.search);
+  const forced = params.get("ui");
+  params.delete("ui");
+  const coarse = matchMedia("(pointer: coarse)").matches && !matchMedia("(hover: hover)").matches;
+  const mobile = forced === "mobile" || (forced !== "desktop" && coarse);
+  if (!params.has("autoconnect")) params.set("autoconnect", "1");
+  if (!mobile && !params.has("resize")) params.set("resize", "scale");
+  location.replace((mobile ? "m.html" : "vnc.html") + "?" + params.toString());
+</script>
+</body>
+</html>

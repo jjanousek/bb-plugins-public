@@ -1,0 +1,106 @@
+{
+  "create_time": 1931062500000,
+  "execution_end_time": 1931062541000,
+  "execution_meta": {
+    "2": {
+      "display_node": "2",
+      "node_id": "2",
+      "parent_node": null,
+      "real_node_id": "2"
+    }
+  },
+  "execution_start_time": 1931062501000,
+  "execution_status": {
+    "completed": true,
+    "messages": [
+      [
+        "execution_start",
+        {
+          "prompt_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaabaaa",
+          "timestamp": 1931062501000
+        }
+      ],
+      [
+        "execution_cached",
+        {
+          "nodes": [],
+          "prompt_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaabaaa",
+          "timestamp": 1931062502000
+        }
+      ],
+      [
+        "execution_success",
+        {
+          "prompt_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaabaaa",
+          "timestamp": 1931062540000
+        }
+      ]
+    ],
+    "status_str": "success"
+  },
+  "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaabaaa",
+  "outputs": {
+    "2": {
+      "animated": [
+        true
+      ],
+      "images": [
+        {
+          "asset_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaab",
+          "display_name": "video/bbtest_00001_.mp4",
+          "filename": "ababababababababababababababababababababababababababababababaaba.mp4",
+          "mime_type": "",
+          "size_bytes": 0,
+          "subfolder": "video",
+          "type": "output"
+        }
+      ]
+    }
+  },
+  "outputs_count": 1,
+  "preview_output": {
+    "filename": "ababababababababababababababababababababababababababababababaaba.mp4",
+    "mediaType": "images",
+    "nodeId": "2",
+    "subfolder": "video",
+    "type": "output"
+  },
+  "previewable_outputs_count": 1,
+  "status": "completed",
+  "update_time": 1931062541000,
+  "user_id": "exampleUserIdAAAAAAAAAAAAAAA",
+  "workflow": {
+    "extra_data": {
+      "api_key_comfy_org": "REDACTED"
+    },
+    "prompt": {
+      "1": {
+        "class_type": "ByteDanceTextToVideoNode",
+        "inputs": {
+          "aspect_ratio": "16:9",
+          "camera_fixed": false,
+          "duration": 3,
+          "generate_audio": false,
+          "model": "seedance-1-0-pro-fast-251015",
+          "prompt": "a windmill turning slowly on a hill at dawn",
+          "resolution": "480p",
+          "seed": 7,
+          "watermark": false
+        }
+      },
+      "2": {
+        "class_type": "SaveVideo",
+        "inputs": {
+          "filename_prefix": "video/bbtest",
+          "format": "mp4",
+          "format.codec": "h264",
+          "video": [
+            "1",
+            0
+          ]
+        }
+      }
+    }
+  },
+  "workspace_id": "w-aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaba"
+}

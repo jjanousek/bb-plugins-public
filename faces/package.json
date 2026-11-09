@@ -1,0 +1,42 @@
+{
+  "name": "bb-plugin-faces",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "description": "A small face beside every thread in bb's sidebar. It blooms while the thread works and pulses while it waits for you.",
+  "type": "module",
+  "engines": {
+    "bb": ">=0.48.1 <1",
+    "bbPluginSdk": ">=0.6.104 <1"
+  },
+  "bb": {
+    "name": "Faces",
+    "description": "A small face beside every thread in the sidebar. It blooms while the thread works and pulses while it waits for you.",
+    "branding": {
+      "icon": "./assets/icon.svg",
+      "experimental_icons": {
+        "face": "./assets/icon.svg"
+      }
+    },
+    "server": "./server.ts",
+    "app": "./app.tsx"
+  },
+  "scripts": {
+    "test": "tsc -p tsconfig.json && node --test --experimental-strip-types test/*.test.ts"
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@get-bb/plugin-sdk": "0.6.104",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "better-sqlite3": "^12.0.0",
+    "cron-parser": "^5.10.4",
+    "hono": "^4.11.9",
+    "jsdom": "^26.1.0",
+    "typescript": "^5.7.0"
+  }
+}

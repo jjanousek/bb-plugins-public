@@ -1,0 +1,28 @@
+{
+  "1": {
+    "class_type": "ByteDanceTextToVideoNode",
+    "inputs": {
+      "model": "seedance-1-0-pro-fast-251015",
+      "prompt": "a windmill turning slowly on a hill at dawn",
+      "resolution": "480p",
+      "aspect_ratio": "16:9",
+      "duration": 3,
+      "seed": 7,
+      "camera_fixed": false,
+      "watermark": false,
+      "generate_audio": false
+    }
+  },
+  "2": {
+    "class_type": "SaveVideo",
+    "inputs": {
+      "video": [
+        "1",
+        0
+      ],
+      "filename_prefix": "video/bb",
+      "format": "mp4",
+      "format.codec": "h264"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Refuse a commit whose typecheck or tests do not pass.
+#
+# The gate reads the test runner's own exit code. A pipeline such as
+# `npm test | grep ...` returns grep's status, which succeeds on a failing run.
+#
+# Typecheck always. Tests too where the repo has them; where it has none this
+# says so rather than passing silently, because a gate that cannot refuse is
+# not a gate and "no tests" must not read as "tests passed".
+#
+# Escape hatch: `git commit --no-verify`, for a commit that deliberately records
+# a broken tree. Use it deliberately and say so in the message.
+set -euo pipefail
+root="$(git rev-parse --show-toplevel)"
+cd "$root"
+[ -f package.json ] || exit 0
+
+has_test=$(node -e 'try{const s=require("./package.json").scripts||{};process.stdout.write(s.test?"1":"")}catch(e){}' 2>/dev/null || true)
+
+if [ -f tsconfig.json ]; then
+  echo "pre-commit: typecheck"
+  if ! npx --no-install tsc -p tsconfig.json; then
+    echo
+    echo "pre-commit: REFUSED. Typecheck failed, so nothing was committed."
+    echo "pre-commit: fix it, or use 'git commit --no-verify' if the break is deliberate."
+    exit 1
+  fi
+fi
+
+if [ -n "$has_test" ]; then
+  echo "pre-commit: npm test"
+  if ! npm test; then
+    echo
+    echo "pre-commit: REFUSED. Tests failed, so nothing was committed."
+    echo "pre-commit: fix them, or use 'git commit --no-verify' if the break is deliberate."
+    exit 1
+  fi
+else
+  echo "pre-commit: no test script in this repo; typecheck only. Not the same as tests passing."
+fi

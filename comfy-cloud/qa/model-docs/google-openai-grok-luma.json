@@ -1,0 +1,3565 @@
+{
+  "gemini-2.5-flash-image": {
+    "node": "GeminiImageNode",
+    "nodes": [
+      "GeminiImageNode"
+    ],
+    "registryKey": "GeminiImageNode/gemini-2.5-flash-image",
+    "vendor": "Google",
+    "label": "Nano Banana (Gemini 2.5 Flash Image)",
+    "kind": "image",
+    "apiModelId": "gemini-2.5-flash-image",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": null,
+      "aspects": [
+        "auto",
+        "1:1",
+        "2:3",
+        "3:2",
+        "3:4",
+        "4:3",
+        "4:5",
+        "5:4",
+        "9:16",
+        "16:9",
+        "21:9"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null,
+      "outputSize": "about 1 MP, 1024x1024 at 1:1; the ratio picks the exact size"
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.0387,
+      "credits": 8.17,
+      "confidence": "published",
+      "note": "Comfy's node price badge is a flat $0.039 per 1K image, approximate. Billing is really per token (Comfy lists 6.33 credits per 1K output image tokens and this model emits 1290 tokens per image). One 1024x1024 image costs 8.17 credits.",
+      "publishedUsd": 0.039,
+      "publishedCredits": 8.23
+    },
+    "strengths": "Fast, cheap image generation and conversational editing",
+    "notes": "The node exposes no resolution control: one size per aspect ratio, about 1 MP (1024x1024 at 1:1, 1344x768 at 16:9). Google's aspect table for this model lists the same ten ratios the node offers plus the node's own 'auto'. Reference images are an optional IMAGE input we do not use for text to image. Prompt length limit is not stated on the image generation page, so it is left null. All output carries an invisible SynthID watermark.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/image-generation",
+      "https://ai.google.dev/gemini-api/docs/models",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_gemini.py"
+    ]
+  },
+  "gemini-3-pro-image-preview": {
+    "node": "GeminiImage2Node",
+    "nodes": [
+      "GeminiImage2Node"
+    ],
+    "registryKey": "GeminiImage2Node/gemini-3-pro-image-preview",
+    "vendor": "Google",
+    "label": "Nano Banana Pro (Gemini 3 Pro Image)",
+    "kind": "image",
+    "apiModelId": "gemini-3-pro-image",
+    "capabilities": {
+      "resolutions": [
+        "1K",
+        "2K",
+        "4K"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "auto",
+        "1:1",
+        "2:3",
+        "3:2",
+        "3:4",
+        "4:3",
+        "4:5",
+        "5:4",
+        "9:16",
+        "16:9",
+        "21:9"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null,
+      "outputSize": "1K 1024x1024, 2K 2048x2048, 4K 4096x4096 at 1:1; the ratio picks the exact size"
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.1608,
+      "credits": 33.93,
+      "confidence": "published",
+      "by": {
+        "1K": {
+          "usd": 0.1608,
+          "credits": 33.93
+        },
+        "2K": {
+          "usd": 0.1608,
+          "credits": 33.93
+        },
+        "4K": {
+          "usd": 0.288,
+          "credits": 60.77
+        }
+      },
+      "note": "From the node's own price badge in the catalog (jsonata, approximate). 2K costs the same as 1K on this model; only 4K steps up. Billing is per token underneath (Comfy lists 30.38 credits per 1K output image tokens), so the real charge moves a few percent around these figures."
+    },
+    "strengths": "Studio-quality 4K output with reliable text rendering",
+    "notes": "The node sends 'gemini-3-pro-image' even though the option string still says '-preview'. Google's aspect ratio table for this model is headed '3.1 Pro Image' while the model list calls it 'Nano Banana Pro (Gemini 3 Pro Image) (gemini-3-pro-image)'; there is only one Pro table and one Pro id, so they are the same model, but the doc naming is inconsistent. Ten ratios, no 512px tier. Up to 14 reference images and up to 3 style references, none of which text to image uses.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/image-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_gemini.py"
+    ]
+  },
+  "Nano Banana 2 (Gemini 3.1 Flash Image)": {
+    "node": "GeminiNanoBanana2V2",
+    "nodes": [
+      "GeminiNanoBanana2V2",
+      "GeminiImage2Node",
+      "GeminiNanoBanana2"
+    ],
+    "deprecatedNodes": [
+      "GeminiNanoBanana2"
+    ],
+    "registryKey": "GeminiNanoBanana2V2/Nano Banana 2 (Gemini 3.1 Flash Image)",
+    "vendor": "Google",
+    "label": "Nano Banana 2 (Gemini 3.1 Flash Image)",
+    "kind": "image",
+    "apiModelId": "gemini-3.1-flash-image",
+    "capabilities": {
+      "resolutions": [
+        "1K",
+        "2K",
+        "4K"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "auto",
+        "1:1",
+        "2:3",
+        "3:2",
+        "3:4",
+        "4:3",
+        "4:5",
+        "5:4",
+        "9:16",
+        "16:9",
+        "21:9",
+        "1:4",
+        "4:1",
+        "8:1",
+        "1:8"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null,
+      "outputSize": "1K 1024x1024, 2K 2048x2048, 4K 4096x4096 at 1:1; the ratio picks the exact size"
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.0835,
+      "credits": 17.62,
+      "confidence": "published",
+      "by": {
+        "1K": {
+          "usd": 0.0835,
+          "credits": 17.62
+        },
+        "2K": {
+          "usd": 0.1217,
+          "credits": 25.68
+        },
+        "4K": {
+          "usd": 0.1848,
+          "credits": 38.99
+        }
+      },
+      "note": "From the node price badge (approximate). Billed on tokens underneath: Comfy lists 15.19 credits per 1K output image tokens and Google's table gives 1120 tokens at 1K, 1680 at 2K and 2520 at 4K.",
+      "perReferenceImageCredits": 0,
+      "referencesIncluded": 14
+    },
+    "strengths": "1K to 4K at flash speed, plus banner and strip aspect ratios",
+    "notes": "Only GeminiNanoBanana2V2 offers the four extreme ratios 1:4, 4:1, 8:1 and 1:8 that Google documents; GeminiImage2Node offers ten ratios, and GeminiNanoBanana2 is flagged deprecated. Google also documents a 512px (0.5K) tier for this model that no node exposes, so the narrower node list wins. thinking_level MINIMAL or HIGH is an extra with no default in the schema, so the builder must send one.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/image-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_gemini.py"
+    ]
+  },
+  "Nano Banana 2 Lite": {
+    "node": "GeminiNanoBanana2V2",
+    "nodes": [
+      "GeminiNanoBanana2V2"
+    ],
+    "registryKey": "GeminiNanoBanana2V2/Nano Banana 2 Lite",
+    "vendor": "Google",
+    "label": "Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image)",
+    "kind": "image",
+    "apiModelId": "gemini-3.1-flash-lite-image",
+    "capabilities": {
+      "resolutions": [
+        "1K"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "auto",
+        "1:1",
+        "2:3",
+        "3:2",
+        "3:4",
+        "4:3",
+        "4:5",
+        "5:4",
+        "9:16",
+        "16:9",
+        "21:9"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null,
+      "outputSize": "about 1 MP, 1024x1024 at 1:1"
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.0408,
+      "credits": 8.61,
+      "confidence": "published",
+      "note": "Flat, from the node price badge. 1K is the only tier.",
+      "perReferenceImageCredits": 0,
+      "referencesIncluded": 14
+    },
+    "strengths": "Nano Banana 2 at half the price, 1K only",
+    "notes": "MISMATCH: the node offers this model the same 14 aspect ratios as full Nano Banana 2, but Google documents only ten for Lite (1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9). The narrower documented set is recorded here; 1:4, 4:1, 8:1 and 1:8 are likely to be rejected. Resolution is correctly narrowed to 1K by the node. Not optimised for multiple reference inputs or multi-turn editing, which text to image does not care about.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/image-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_gemini.py"
+    ]
+  },
+  "veo-3.1-generate": {
+    "node": "Veo3VideoGenerationNode",
+    "nodes": [
+      "Veo3VideoGenerationNode"
+    ],
+    "registryKey": "Veo3VideoGenerationNode/veo-3.1-generate",
+    "vendor": "Google",
+    "label": "Veo 3.1",
+    "kind": "video",
+    "apiModelId": "veo-3.1-generate-001",
+    "capabilities": {
+      "resolutions": [
+        "720p",
+        "1080p",
+        "4k"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "16:9",
+        "9:16"
+      ],
+      "durations": {
+        "min": 4,
+        "max": 8,
+        "allowed": [
+          4,
+          6,
+          8
+        ]
+      },
+      "audio": true,
+      "audioToggle": true,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": null,
+      "promptMaxChars": null,
+      "promptMaxTokens": 1024
+    },
+    "constraints": [
+      {
+        "when": {
+          "resolution": "1080p"
+        },
+        "then": {
+          "duration": [
+            8
+          ]
+        },
+        "note": "1080p is only offered as an 8 second clip."
+      },
+      {
+        "when": {
+          "resolution": "4k"
+        },
+        "then": {
+          "duration": [
+            8
+          ]
+        },
+        "note": "4K is only offered as an 8 second clip."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.2,
+      "credits": 42.2,
+      "confidence": "published",
+      "by": {
+        "720p": {
+          "silent": {
+            "usd": 0.2,
+            "credits": 42.2
+          },
+          "audio": {
+            "usd": 0.4,
+            "credits": 84.4
+          }
+        },
+        "1080p": {
+          "silent": {
+            "usd": 0.2,
+            "credits": 42.2
+          },
+          "audio": {
+            "usd": 0.4,
+            "credits": 84.4
+          }
+        },
+        "4k": {
+          "silent": {
+            "usd": 0.4,
+            "credits": 84.4
+          },
+          "audio": {
+            "usd": 0.6,
+            "credits": 126.6
+          }
+        }
+      },
+      "note": "Per second of output; multiply by duration. 720p and 1080p cost the same on this tier. An 8 second 1080p clip with audio is $3.20, about 675 credits, so this is one of the most expensive models in the catalog."
+    },
+    "strengths": "Cinematic motion with natively synchronised audio",
+    "notes": "MISMATCH on audio: Google's Veo 3.1 feature table says audio is 'Always on' for every Veo 3.1 model, but the node exposes generate_audio (default false) and Comfy bills silent and audio runs at different rates. Treat audio as always produced and the flag as a billing choice you cannot verify from the docs; leaving it false may still return a clip with sound. duration_seconds is INT min 4 max 8 step 2, which is exactly the documented 4, 6, 8. One video per request, 24 fps. Prompt limit is 1,024 tokens, not characters. person_generation is an extra: text to video accepts only 'allow_all' upstream, so sending 'BLOCK' may fail.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/veo",
+      "https://ai.google.dev/gemini-api/docs/video",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_veo2.py"
+    ]
+  },
+  "veo-3.1-fast-generate": {
+    "node": "Veo3VideoGenerationNode",
+    "nodes": [
+      "Veo3VideoGenerationNode"
+    ],
+    "registryKey": "Veo3VideoGenerationNode/veo-3.1-fast-generate",
+    "vendor": "Google",
+    "label": "Veo 3.1 Fast",
+    "kind": "video",
+    "apiModelId": "veo-3.1-fast-generate-001",
+    "capabilities": {
+      "resolutions": [
+        "720p",
+        "1080p",
+        "4k"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "16:9",
+        "9:16"
+      ],
+      "durations": {
+        "min": 4,
+        "max": 8,
+        "allowed": [
+          4,
+          6,
+          8
+        ]
+      },
+      "audio": true,
+      "audioToggle": true,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": null,
+      "promptMaxChars": null,
+      "promptMaxTokens": 1024
+    },
+    "constraints": [
+      {
+        "when": {
+          "resolution": "1080p"
+        },
+        "then": {
+          "duration": [
+            8
+          ]
+        },
+        "note": "1080p is only offered as an 8 second clip."
+      },
+      {
+        "when": {
+          "resolution": "4k"
+        },
+        "then": {
+          "duration": [
+            8
+          ]
+        },
+        "note": "4K is only offered as an 8 second clip."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.08,
+      "credits": 16.88,
+      "confidence": "published",
+      "by": {
+        "720p": {
+          "silent": {
+            "usd": 0.08,
+            "credits": 16.88
+          },
+          "audio": {
+            "usd": 0.1,
+            "credits": 21.1
+          }
+        },
+        "1080p": {
+          "silent": {
+            "usd": 0.1,
+            "credits": 21.1
+          },
+          "audio": {
+            "usd": 0.12,
+            "credits": 25.32
+          }
+        },
+        "4k": {
+          "silent": {
+            "usd": 0.25,
+            "credits": 52.75
+          },
+          "audio": {
+            "usd": 0.3,
+            "credits": 63.3
+          }
+        }
+      },
+      "note": "Per second of output; multiply by duration. Two to four times cheaper than veo-3.1-generate at the same shape."
+    },
+    "strengths": "Veo 3.1 quality at a quarter of the price, same controls",
+    "notes": "MISMATCH on audio: Google's Veo 3.1 feature table says audio is 'Always on' for every Veo 3.1 model, but the node exposes generate_audio (default false) and Comfy bills silent and audio runs at different rates. Treat audio as always produced and the flag as a billing choice you cannot verify from the docs; leaving it false may still return a clip with sound. duration_seconds is INT min 4 max 8 step 2, which is exactly the documented 4, 6, 8. One video per request, 24 fps. Prompt limit is 1,024 tokens, not characters. person_generation is an extra: text to video accepts only 'allow_all' upstream, so sending 'BLOCK' may fail.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/veo",
+      "https://ai.google.dev/gemini-api/docs/video",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_veo2.py"
+    ]
+  },
+  "veo-3.1-lite": {
+    "node": "Veo3VideoGenerationNode",
+    "nodes": [
+      "Veo3VideoGenerationNode"
+    ],
+    "registryKey": "Veo3VideoGenerationNode/veo-3.1-lite",
+    "vendor": "Google",
+    "label": "Veo 3.1 Lite",
+    "kind": "video",
+    "apiModelId": "veo-3.1-lite-generate-001",
+    "capabilities": {
+      "resolutions": [
+        "720p",
+        "1080p"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "16:9",
+        "9:16"
+      ],
+      "durations": {
+        "min": 4,
+        "max": 8,
+        "allowed": [
+          4,
+          6,
+          8
+        ]
+      },
+      "audio": true,
+      "audioToggle": true,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": null,
+      "promptMaxChars": null,
+      "promptMaxTokens": 1024
+    },
+    "constraints": [
+      {
+        "when": {
+          "resolution": "1080p"
+        },
+        "then": {
+          "duration": [
+            8
+          ]
+        },
+        "note": "1080p is only offered as an 8 second clip."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.03,
+      "credits": 6.33,
+      "confidence": "published",
+      "by": {
+        "720p": {
+          "silent": {
+            "usd": 0.03,
+            "credits": 6.33
+          },
+          "audio": {
+            "usd": 0.05,
+            "credits": 10.55
+          }
+        },
+        "1080p": {
+          "silent": {
+            "usd": 0.05,
+            "credits": 10.55
+          },
+          "audio": {
+            "usd": 0.08,
+            "credits": 16.88
+          }
+        }
+      },
+      "note": "Per second of output. A 4 second silent 720p clip is $0.12, about 25 credits, which is the cheapest Veo shape."
+    },
+    "strengths": "The cheapest Veo, 720p and 1080p, no 4k",
+    "notes": "MISMATCH on audio: Google's Veo 3.1 feature table says audio is 'Always on' for every Veo 3.1 model, but the node exposes generate_audio (default false) and Comfy bills silent and audio runs at different rates. Treat audio as always produced and the flag as a billing choice you cannot verify from the docs; leaving it false may still return a clip with sound. duration_seconds is INT min 4 max 8 step 2, which is exactly the documented 4, 6, 8. One video per request, 24 fps. Prompt limit is 1,024 tokens, not characters. person_generation is an extra: text to video accepts only 'allow_all' upstream, so sending 'BLOCK' may fail. 4k is not available on lite: the node's resolution combo still offers '4k' for every model and raises 'a 4K resolution is not supported by the veo-3.1-lite model' at run time, so the picker must disable it. Lite also does not support video extension or reference images, neither of which text to video uses.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/veo",
+      "https://ai.google.dev/gemini-api/docs/video",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_veo2.py"
+    ]
+  },
+  "Omni Flash": {
+    "node": "GeminiVideoOmniV2",
+    "nodes": [
+      "GeminiVideoOmniV2",
+      "GeminiVideoOmni"
+    ],
+    "deprecatedNodes": [
+      "GeminiVideoOmni"
+    ],
+    "registryKey": "GeminiVideoOmniV2/Omni Flash",
+    "vendor": "Google",
+    "label": "Gemini Omni Flash",
+    "kind": "video",
+    "apiModelId": "gemini-omni-flash-preview",
+    "capabilities": {
+      "resolutions": [
+        "720p"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "16:9",
+        "9:16"
+      ],
+      "durations": {
+        "min": 3,
+        "max": 10,
+        "allowed": null,
+        "control": "prompt"
+      },
+      "audio": true,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null
+    },
+    "constraints": [
+      {
+        "when": {
+          "task_type": "text_to_video"
+        },
+        "then": {
+          "images": [],
+          "videos": []
+        },
+        "note": "This model is running as text to video, so it takes no attached picture or clip."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.1449,
+      "credits": 30.57,
+      "confidence": "published",
+      "note": "Flat per second at 720p. Duration cannot be set as a parameter, so a request costs whatever length the model returns: 3 s is about 46 credits and 10 s about 306 credits from the same click."
+    },
+    "strengths": "Native audio and multi-input reasoning, 720p only",
+    "notes": "DURATION IS NOT A PARAMETER. The length is written into the prompt ('a 6-second clip'); the model may return 3 to 10 seconds and defaults to 10. Because the price is per second, the estimate for this model is a range, not a number, and the picker should say so. On the older GeminiVideoOmni node the aspect ratio also has to be written into the prompt; GeminiVideoOmniV2 exposes aspect_ratio and task_type as real inputs, so prefer it. MISMATCH: both nodes expose temperature and top_p for this model and send them in generation_config, but Google's Omni limitations say 'System instructions, temperature, top_p, stop sequences, and negative prompts are not supported'. Superseded by Omni Flash 1.1.",
+    "hidden": false,
+    "recommended": false,
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/omni",
+      "https://ai.google.dev/gemini-api/docs/video",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_gemini.py"
+    ]
+  },
+  "Omni Flash 1.1": {
+    "node": "GeminiVideoOmniV2",
+    "nodes": [
+      "GeminiVideoOmniV2"
+    ],
+    "registryKey": "GeminiVideoOmniV2/Omni Flash 1.1",
+    "vendor": "Google",
+    "label": "Gemini Omni Flash 1.1",
+    "kind": "video",
+    "apiModelId": "gemini-omni-1.1-flash",
+    "capabilities": {
+      "resolutions": [
+        "360p",
+        "720p",
+        "1080p",
+        "4k"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "16:9",
+        "9:16"
+      ],
+      "durations": {
+        "min": 3,
+        "max": 10,
+        "allowed": null,
+        "control": "prompt",
+        "default": 10
+      },
+      "audio": true,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null
+    },
+    "constraints": [
+      {
+        "when": {
+          "task_type": "text_to_video"
+        },
+        "then": {
+          "images": [],
+          "videos": []
+        },
+        "note": "This model is running as text to video, so it takes no attached picture or clip."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.1449,
+      "credits": 30.57,
+      "confidence": "published",
+      "by": {
+        "360p": {
+          "usd": 0.0483,
+          "credits": 10.19
+        },
+        "720p": {
+          "usd": 0.1449,
+          "credits": 30.57
+        },
+        "1080p": {
+          "usd": 0.2174,
+          "credits": 45.87
+        },
+        "4k": {
+          "usd": 0.4349,
+          "credits": 91.76
+        }
+      },
+      "note": "Per second. Because duration is prompt-controlled and defaults to 10 s, a single default click at 720p costs about $1.45 (306 credits) and at 4k about $4.35 (918 credits). Show a range and warn before the click."
+    },
+    "strengths": "Google's default video model, 360p to 4k with native audio",
+    "notes": "Duration is prompt-controlled and defaults to 10 seconds, so this is the single most dangerous model in the catalog for an unexpected bill. 1080p and 4k are documented as upscaled, not native. task_type has six values; use 'text_to_video' for the picker's text to video path ('auto' also works with no media attached). Unlike the older Omni Flash, this model exposes no temperature or top_p, which matches Google's documented limitations.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/omni",
+      "https://ai.google.dev/gemini-api/docs/video",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_gemini.py"
+    ]
+  },
+  "dall-e-2": {
+    "node": "OpenAIDalle2",
+    "nodes": [
+      "OpenAIDalle2"
+    ],
+    "registryKey": "OpenAIDalle2",
+    "vendor": "OpenAI",
+    "label": "DALL-E 2",
+    "kind": "image",
+    "apiModelId": "dall-e-2",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": [
+        "256x256",
+        "512x512",
+        "1024x1024"
+      ],
+      "aspects": [
+        "1:1"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 8
+      },
+      "promptMinChars": null,
+      "promptMaxChars": null
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.02,
+      "credits": 4.22,
+      "confidence": "published",
+      "by": {
+        "256x256": {
+          "usd": 0.016,
+          "credits": 3.38
+        },
+        "512x512": {
+          "usd": 0.018,
+          "credits": 3.8
+        },
+        "1024x1024": {
+          "usd": 0.02,
+          "credits": 4.22
+        }
+      },
+      "note": "Multiplied by n. 256x256 at 3.38 credits is the cheapest OpenAI shape but the quality is far behind everything else in the catalog."
+    },
+    "strengths": "Cheap square drafts and up to eight variations at once",
+    "notes": "The node has no model input, so the registry key is the node class. Square only: all three sizes are 1:1. The node caps n at 8 while the OpenAI API allows 10, so the narrower node value is recorded. seed is accepted by the node and its tooltip says 'not implemented yet in backend', so it changes nothing. Superseded by GPT Image in every way except price. The node is no longer in the Comfy Cloud catalog; the record stays so that a node that comes back stays out of the picker.",
+    "hidden": false,
+    "recommended": false,
+    "sources": [
+      "https://platform.openai.com/docs/guides/image-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_openai.py"
+    ],
+    "supported": false,
+    "excludeReason": "The node is no longer in the Comfy Cloud catalog."
+  },
+  "dall-e-3": {
+    "node": "OpenAIDalle3",
+    "nodes": [
+      "OpenAIDalle3"
+    ],
+    "registryKey": "OpenAIDalle3",
+    "vendor": "OpenAI",
+    "label": "DALL-E 3",
+    "kind": "image",
+    "apiModelId": "dall-e-3",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": [
+        "1024x1024",
+        "1024x1792",
+        "1792x1024"
+      ],
+      "aspects": [
+        "1:1",
+        "9:16",
+        "16:9"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": null,
+      "promptMaxChars": null
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.04,
+      "credits": 8.44,
+      "confidence": "published",
+      "by": {
+        "standard": {
+          "1024x1024": {
+            "usd": 0.04,
+            "credits": 8.44
+          },
+          "1024x1792": {
+            "usd": 0.08,
+            "credits": 16.88
+          },
+          "1792x1024": {
+            "usd": 0.08,
+            "credits": 16.88
+          }
+        },
+        "hd": {
+          "1024x1024": {
+            "usd": 0.08,
+            "credits": 16.88
+          },
+          "1024x1792": {
+            "usd": 0.12,
+            "credits": 25.32
+          },
+          "1792x1024": {
+            "usd": 0.12,
+            "credits": 25.32
+          }
+        }
+      },
+      "note": "Per run; the node generates one image. quality standard or hd doubles or triples the rate."
+    },
+    "strengths": "Strong prompt rewriting, vivid or natural styling",
+    "notes": "The node has no model input, so the registry key is the node class. Two extras matter: quality (standard, hd) drives the price and style (natural, vivid) changes the look. seed is accepted but its own tooltip says it is not implemented. Only three sizes, roughly 1:1, 9:16 and 16:9. The node is no longer in the Comfy Cloud catalog; the record stays so that a node that comes back stays out of the picker.",
+    "hidden": false,
+    "recommended": false,
+    "sources": [
+      "https://platform.openai.com/docs/guides/image-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_openai.py"
+    ],
+    "supported": false,
+    "excludeReason": "The node is no longer in the Comfy Cloud catalog."
+  },
+  "gpt-image-2": {
+    "node": "OpenAIGPTImageNodeV2",
+    "nodes": [
+      "OpenAIGPTImageNodeV2",
+      "OpenAIGPTImage1"
+    ],
+    "deprecatedNodes": [
+      "OpenAIGPTImage1"
+    ],
+    "registryKey": "OpenAIGPTImageNodeV2/gpt-image-2",
+    "vendor": "OpenAI",
+    "label": "GPT Image 2",
+    "kind": "image",
+    "apiModelId": "gpt-image-2",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": [
+        "auto",
+        "1024x1024",
+        "1024x1536",
+        "1536x1024",
+        "2048x2048",
+        "2048x1152",
+        "1152x2048",
+        "3840x2160",
+        "2160x3840",
+        "Custom"
+      ],
+      "aspects": [
+        "auto",
+        "1:1",
+        "2:3",
+        "3:2",
+        "16:9",
+        "9:16"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 8
+      },
+      "promptMinChars": null,
+      "promptMaxChars": null,
+      "outputSize": "any size that satisfies the Custom constraints; 3840x2160 is the largest preset"
+    },
+    "constraints": [
+      {
+        "when": {
+          "sizePreset": "Custom"
+        },
+        "then": {
+          "dimensions": {
+            "step": 16,
+            "maxEdge": 3840,
+            "maxRatio": 3,
+            "minTotalPixels": 655360,
+            "maxTotalPixels": 8294400
+          }
+        },
+        "note": "A custom size has to be a multiple of 16, at most 3840 on the long edge, no more than three times as long as it is wide, and between 655,360 and 8,294,400 total pixels."
+      }
+    ],
+    "price": {
+      "unit": "per-image",
+      "usd": null,
+      "credits": null,
+      "confidence": "published",
+      "usdRange": [
+        0.005687,
+        0.853886
+      ],
+      "creditsRange": [
+        1.2,
+        180.17
+      ],
+      "by": {
+        "low": {
+          "1024x1024": {
+            "usd": 0.006825,
+            "credits": 1.44,
+            "creditsRange": [
+              1.44,
+              5.0
+            ]
+          },
+          "1024x1536": {
+            "usd": 0.005687,
+            "credits": 1.2,
+            "creditsRange": [
+              1.2,
+              5.0
+            ]
+          },
+          "1536x1024": {
+            "usd": 0.005687,
+            "credits": 1.2,
+            "creditsRange": [
+              1.2,
+              5.0
+            ]
+          },
+          "2048x2048": {
+            "usd": 0.014313,
+            "credits": 3.02,
+            "creditsRange": [
+              3.02,
+              5.0
+            ]
+          },
+          "2048x1152": {
+            "usd": 0.005687,
+            "credits": 1.2,
+            "creditsRange": [
+              1.2,
+              5.0
+            ]
+          },
+          "1152x2048": {
+            "usd": 0.005687,
+            "credits": 1.2,
+            "creditsRange": [
+              1.2,
+              5.0
+            ]
+          },
+          "3840x2160": {
+            "usd": 0.013412,
+            "credits": 2.83,
+            "creditsRange": [
+              2.83,
+              5.0
+            ]
+          },
+          "2160x3840": {
+            "usd": 0.013412,
+            "credits": 2.83,
+            "creditsRange": [
+              2.83,
+              5.0
+            ]
+          }
+        },
+        "medium": {
+          "1024x1024": {
+            "usd": 0.063223,
+            "credits": 13.34,
+            "creditsRange": [
+              13.34,
+              45.05
+            ]
+          },
+          "1024x1536": {
+            "usd": 0.049384,
+            "credits": 10.42,
+            "creditsRange": [
+              10.42,
+              45.05
+            ]
+          },
+          "1536x1024": {
+            "usd": 0.049384,
+            "credits": 10.42,
+            "creditsRange": [
+              10.42,
+              45.05
+            ]
+          },
+          "2048x2048": {
+            "usd": 0.128389,
+            "credits": 27.09,
+            "creditsRange": [
+              27.09,
+              45.05
+            ]
+          },
+          "2048x1152": {
+            "usd": 0.0509,
+            "credits": 10.74,
+            "creditsRange": [
+              10.74,
+              45.05
+            ]
+          },
+          "1152x2048": {
+            "usd": 0.0509,
+            "credits": 10.74,
+            "creditsRange": [
+              10.74,
+              45.05
+            ]
+          },
+          "3840x2160": {
+            "usd": 0.120095,
+            "credits": 25.34,
+            "creditsRange": [
+              25.34,
+              45.05
+            ]
+          },
+          "2160x3840": {
+            "usd": 0.120095,
+            "credits": 25.34,
+            "creditsRange": [
+              25.34,
+              45.05
+            ]
+          }
+        },
+        "high": {
+          "1024x1024": {
+            "usd": 0.252891,
+            "credits": 53.36,
+            "creditsRange": [
+              53.36,
+              180.17
+            ]
+          },
+          "1024x1536": {
+            "usd": 0.197583,
+            "credits": 41.69,
+            "creditsRange": [
+              41.69,
+              180.17
+            ]
+          },
+          "1536x1024": {
+            "usd": 0.197583,
+            "credits": 41.69,
+            "creditsRange": [
+              41.69,
+              180.17
+            ]
+          },
+          "2048x2048": {
+            "usd": 0.513791,
+            "credits": 108.41,
+            "creditsRange": [
+              108.41,
+              180.17
+            ]
+          },
+          "2048x1152": {
+            "usd": 0.203412,
+            "credits": 42.92,
+            "creditsRange": [
+              42.92,
+              180.17
+            ]
+          },
+          "1152x2048": {
+            "usd": 0.203412,
+            "credits": 42.92,
+            "creditsRange": [
+              42.92,
+              180.17
+            ]
+          },
+          "3840x2160": {
+            "usd": 0.480284,
+            "credits": 101.34,
+            "creditsRange": [
+              101.34,
+              180.17
+            ]
+          },
+          "2160x3840": {
+            "usd": 0.480284,
+            "credits": 101.34,
+            "creditsRange": [
+              101.34,
+              180.17
+            ]
+          }
+        }
+      },
+      "note": "Exact per size and per quality, read out of the node's own price_badge table rather than typed, the same way GPT Image 2.5 is. GPT Image bills on tokens and the count follows the size the model returns, so each figure is a floor and carries a span up to the top of its quality's own published range.",
+      "perReferenceImageUsd": [
+        0.010711,
+        0.0147
+      ],
+      "referencesIncluded": 0
+    },
+    "strengths": "Any resolution up to 4K, strongest instruction following",
+    "notes": "background is auto, opaque or transparent. Until the 2026-09-24 catalog the node offered only auto and opaque for this model although OpenAI documented transparent in preview; ComfyUI 0.37.0 (2026-09-21) added transparent, and the node's price badge does not read background, so it costs the same. The node caps n at 8 where the API allows 10. quality is the price lever, low to high spans about 35x, so it must be visible in the form. seed is accepted but documented in the node as not implemented. Prefer OpenAIGPTImageNodeV2: the older OpenAIGPTImage1 node is flagged deprecated and offers every gpt-image-2 size to gpt-image-1 and 1.5 as well, which those two models do not accept.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://platform.openai.com/docs/guides/image-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_openai.py"
+    ]
+  },
+  "gpt-image-1.5": {
+    "node": "OpenAIGPTImageNodeV2",
+    "nodes": [
+      "OpenAIGPTImageNodeV2",
+      "OpenAIGPTImage1"
+    ],
+    "deprecatedNodes": [
+      "OpenAIGPTImage1"
+    ],
+    "registryKey": "OpenAIGPTImageNodeV2/gpt-image-1.5",
+    "vendor": "OpenAI",
+    "label": "GPT Image 1.5",
+    "kind": "image",
+    "apiModelId": "gpt-image-1.5",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": [
+        "auto",
+        "1024x1024",
+        "1024x1536",
+        "1536x1024"
+      ],
+      "aspects": [
+        "auto",
+        "1:1",
+        "2:3",
+        "3:2"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 8
+      },
+      "promptMinChars": null,
+      "promptMaxChars": null
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": null,
+      "credits": null,
+      "confidence": "published",
+      "usdRange": [
+        0.009,
+        0.22
+      ],
+      "creditsRange": [
+        1.9,
+        46.42
+      ],
+      "by": {
+        "low": {
+          "usd": [
+            0.009,
+            0.02
+          ],
+          "credits": [
+            1.9,
+            4.22
+          ]
+        },
+        "medium": {
+          "usd": [
+            0.034,
+            0.062
+          ],
+          "credits": [
+            7.17,
+            13.08
+          ]
+        },
+        "high": {
+          "usd": [
+            0.133,
+            0.22
+          ],
+          "credits": [
+            28.06,
+            46.42
+          ]
+        }
+      },
+      "note": "A range per quality; billed on tokens. OpenAI's per-image table gives low $0.009 at 1024x1024 and $0.013 at 1024x1536, medium $0.034 and $0.05, high $0.133 and $0.20. The node's price badge bills every reference image, including the first, at 0.0016 to 0.0016 US dollars each (0.34 to 0.34 credits).",
+      "perReferenceImageUsd": [
+        0.0016,
+        0.0016
+      ],
+      "referencesIncluded": 0
+    },
+    "strengths": "Transparent backgrounds at three fixed sizes",
+    "notes": "Three real sizes plus auto. background auto, opaque or transparent, which gpt-image-2 has also offered since the 2026-09-24 catalog. The node caps n at 8 where the API allows 10. Superseded by gpt-image-2, which is cheaper at low quality and much more flexible on size.",
+    "hidden": false,
+    "recommended": false,
+    "sources": [
+      "https://platform.openai.com/docs/guides/image-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_openai.py"
+    ]
+  },
+  "gpt-image-1": {
+    "node": "OpenAIGPTImageNodeV2",
+    "nodes": [
+      "OpenAIGPTImageNodeV2",
+      "OpenAIGPTImage1"
+    ],
+    "deprecatedNodes": [
+      "OpenAIGPTImage1"
+    ],
+    "registryKey": "OpenAIGPTImageNodeV2/gpt-image-1",
+    "supported": false,
+    "excludeReason": "Comfy Cloud dropped gpt-image-1 from OpenAIGPTImageNodeV2 and OpenAIGPTImage1 by 2026-11-06. Use GPT Image 1.5 or GPT Image 2 instead.",
+    "vendor": "OpenAI",
+    "label": "GPT Image 1",
+    "kind": "image",
+    "apiModelId": "gpt-image-1",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": [
+        "auto",
+        "1024x1024",
+        "1024x1536",
+        "1536x1024"
+      ],
+      "aspects": [
+        "auto",
+        "1:1",
+        "2:3",
+        "3:2"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 8
+      },
+      "promptMinChars": null,
+      "promptMaxChars": null
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": null,
+      "credits": null,
+      "confidence": "published",
+      "usdRange": [
+        0.011,
+        0.25
+      ],
+      "creditsRange": [
+        2.32,
+        52.75
+      ],
+      "by": {
+        "low": {
+          "usd": [
+            0.011,
+            0.02
+          ],
+          "credits": [
+            2.32,
+            4.22
+          ]
+        },
+        "medium": {
+          "usd": [
+            0.042,
+            0.07
+          ],
+          "credits": [
+            8.86,
+            14.77
+          ]
+        },
+        "high": {
+          "usd": [
+            0.167,
+            0.25
+          ],
+          "credits": [
+            35.24,
+            52.75
+          ]
+        }
+      },
+      "note": "A range per quality; billed on tokens. OpenAI's per-image table gives low $0.011 at 1024x1024 and $0.016 at 1024x1536, medium $0.042 and $0.063, high $0.167 and $0.25. The node's price badge bills every reference image, including the first, at 0.0019 to 0.0019 US dollars each (0.4 to 0.4 credits).",
+      "perReferenceImageUsd": [
+        0.0019,
+        0.0019
+      ],
+      "referencesIncluded": 0
+    },
+    "strengths": "The original GPT Image, transparent backgrounds",
+    "notes": "The oldest and dearest of the three GPT Image models: every quality tier costs more than gpt-image-1.5 for the same sizes. Keep it working for saved settings, do not recommend it.",
+    "hidden": false,
+    "recommended": false,
+    "sources": [
+      "https://platform.openai.com/docs/guides/image-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_openai.py"
+    ]
+  },
+  "sora-2": {
+    "node": "OpenAIVideoSora2",
+    "nodes": [
+      "OpenAIVideoSora2"
+    ],
+    "registryKey": "OpenAIVideoSora2/sora-2",
+    "supported": false,
+    "excludeReason": "Comfy Cloud dropped this node from its catalog by 2026-10-03, after OpenAI stopped serving the Sora 2 API in September 2026.",
+    "vendor": "OpenAI",
+    "label": "Sora 2",
+    "kind": "video",
+    "apiModelId": "sora-2",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": [
+        "720x1280",
+        "1280x720"
+      ],
+      "aspects": [
+        "9:16",
+        "16:9"
+      ],
+      "durations": {
+        "min": 4,
+        "max": 12,
+        "allowed": [
+          4,
+          8,
+          12
+        ]
+      },
+      "audio": true,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": null,
+      "promptMaxChars": null
+    },
+    "constraints": [
+      {
+        "when": {
+          "model": "sora-2"
+        },
+        "then": {
+          "sizePreset": [
+            "720x1280",
+            "1280x720"
+          ]
+        },
+        "note": "Sora 2 offers 720x1280 and 1280x720 only."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.1,
+      "credits": 21.1,
+      "confidence": "published",
+      "note": "Per second; an 8 second clip is $0.80, about 169 credits."
+    },
+    "strengths": "Fast Sora drafts with sound, 720p portrait or landscape",
+    "notes": "The node display name is 'OpenAI Sora - Video (DEPRECATED)' and its own description says 'OpenAI will stop serving the Sora v2 API in September 2026', which is this month. MISMATCH: the catalog's per-node 'deprecated' flag is false for OpenAIVideoSora2 even though the node source sets is_deprecated=True, so a registry generator must not rely on that flag alone. Second mismatch: OpenAI's current video guide describes 16 and 20 second clips and 1920x1080 / 1080x1920 exports, while the v2 API reference the node targets allows only 4, 8 or 12 seconds and the four sizes below. The node matches the v2 reference; the guide describes the API that replaces it. The node's prompt may be empty when an image is attached, so the builder must still require a prompt for text to video.",
+    "hidden": true,
+    "hiddenReason": "The node is marked DEPRECATED and OpenAI stops serving the Sora v2 API in September 2026, which is now. Any generation may start failing without notice.",
+    "recommended": false,
+    "sources": [
+      "https://platform.openai.com/docs/guides/video-generation",
+      "https://developers.openai.com/api/reference/resources/videos/methods/create",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_sora.py"
+    ]
+  },
+  "sora-2-pro": {
+    "node": "OpenAIVideoSora2",
+    "nodes": [
+      "OpenAIVideoSora2"
+    ],
+    "registryKey": "OpenAIVideoSora2/sora-2-pro",
+    "supported": false,
+    "excludeReason": "Comfy Cloud dropped this node from its catalog by 2026-10-03, after OpenAI stopped serving the Sora 2 API in September 2026.",
+    "vendor": "OpenAI",
+    "label": "Sora 2 Pro",
+    "kind": "video",
+    "apiModelId": "sora-2-pro",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": [
+        "720x1280",
+        "1280x720",
+        "1024x1792",
+        "1792x1024"
+      ],
+      "aspects": [
+        "9:16",
+        "16:9"
+      ],
+      "durations": {
+        "min": 4,
+        "max": 12,
+        "allowed": [
+          4,
+          8,
+          12
+        ]
+      },
+      "audio": true,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": null,
+      "promptMaxChars": null
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.3,
+      "credits": 63.3,
+      "confidence": "published",
+      "by": {
+        "720x1280": {
+          "usd": 0.3,
+          "credits": 63.3
+        },
+        "1280x720": {
+          "usd": 0.3,
+          "credits": 63.3
+        },
+        "1024x1792": {
+          "usd": 0.5,
+          "credits": 105.5
+        },
+        "1792x1024": {
+          "usd": 0.5,
+          "credits": 105.5
+        }
+      },
+      "note": "Per second. A 12 second clip at 1792x1024 is $6.00, about 1,266 credits, the most expensive single generation in this vendor set."
+    },
+    "strengths": "Higher fidelity Sora at the larger 1024x1792 sizes",
+    "notes": "The node display name is 'OpenAI Sora - Video (DEPRECATED)' and its own description says 'OpenAI will stop serving the Sora v2 API in September 2026', which is this month. MISMATCH: the catalog's per-node 'deprecated' flag is false for OpenAIVideoSora2 even though the node source sets is_deprecated=True, so a registry generator must not rely on that flag alone. Second mismatch: OpenAI's current video guide describes 16 and 20 second clips and 1920x1080 / 1080x1920 exports, while the v2 API reference the node targets allows only 4, 8 or 12 seconds and the four sizes below. The node matches the v2 reference; the guide describes the API that replaces it.",
+    "hidden": true,
+    "hiddenReason": "Same as sora-2: deprecated node, API retirement in September 2026.",
+    "recommended": false,
+    "sources": [
+      "https://platform.openai.com/docs/guides/video-generation",
+      "https://developers.openai.com/api/reference/resources/videos/methods/create",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_sora.py"
+    ]
+  },
+  "grok-imagine-image-2.0": {
+    "node": "GrokImageNode",
+    "nodes": [
+      "GrokImageNode"
+    ],
+    "registryKey": "GrokImageNode/grok-imagine-image-2.0",
+    "vendor": "xAI",
+    "label": "Grok Imagine Image 2.0",
+    "kind": "image",
+    "apiModelId": "grok-imagine-image-2.0",
+    "capabilities": {
+      "resolutions": [
+        "1K",
+        "2K"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "1:1",
+        "2:3",
+        "3:2",
+        "3:4",
+        "4:3",
+        "9:16",
+        "16:9",
+        "9:19.5",
+        "19.5:9",
+        "9:20",
+        "20:9",
+        "1:2",
+        "2:1"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 10
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.04,
+      "credits": 8.44,
+      "confidence": "published",
+      "by": {
+        "1K": {
+          "low": {
+            "usd": 0.04,
+            "credits": 8.44
+          },
+          "medium": {
+            "usd": 0.06,
+            "credits": 12.66
+          }
+        },
+        "2K": {
+          "low": {
+            "usd": 0.06,
+            "credits": 12.66
+          },
+          "medium": {
+            "usd": 0.08,
+            "credits": 16.88
+          }
+        }
+      },
+      "note": "Multiplied by number_of_images (up to 10). quality is the price lever and only this model has it. xAI's own price list shows a single $0.04 per image, which is the 1K low rate."
+    },
+    "strengths": "Ten images per run, phone and banner aspect ratios",
+    "notes": "MISMATCH on aspect ratios: xAI documents 'auto', '21:9' and '5:2' in addition to the thirteen the node offers, and the node has no 'auto'. The narrower node list is recorded. MISMATCH on quality: xAI documents low, medium and auto; the node offers only medium and low and defaults to medium in code, so a Comfy request is never the cheaper 'auto'. This is the model xAI recommends and the redirect target for the two retiring slugs, so it is the right Grok default.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://docs.x.ai/developers/model-capabilities/images/generation",
+      "https://docs.x.ai/developers/pricing",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_grok.py"
+    ]
+  },
+  "grok-imagine-image-quality": {
+    "node": "GrokImageNode",
+    "nodes": [
+      "GrokImageNode"
+    ],
+    "registryKey": "GrokImageNode/grok-imagine-image-quality",
+    "vendor": "xAI",
+    "label": "Grok Imagine Image Quality",
+    "kind": "image",
+    "apiModelId": "grok-imagine-image-quality",
+    "capabilities": {
+      "resolutions": [
+        "1K",
+        "2K"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "1:1",
+        "2:3",
+        "3:2",
+        "3:4",
+        "4:3",
+        "9:16",
+        "16:9",
+        "9:19.5",
+        "19.5:9",
+        "9:20",
+        "20:9",
+        "1:2",
+        "2:1"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 10
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.05,
+      "credits": 10.55,
+      "confidence": "published",
+      "by": {
+        "1K": {
+          "usd": 0.05,
+          "credits": 10.55
+        },
+        "2K": {
+          "usd": 0.07,
+          "credits": 14.77
+        }
+      },
+      "note": "Multiplied by number_of_images. The node sends no quality for this model."
+    },
+    "strengths": "One step above the base Grok image model",
+    "notes": "RETIRING: xAI retires this slug on 2 November 2026, after which requests are served by grok-imagine-image-2.0 at quality 'low', which Comfy prices $0.01 per image cheaper. The slug keeps resolving, so nothing breaks, but from that date you pay the quality rate for a 2.0-low image. Hide it on or before 2026-11-02. MISMATCH on aspect ratios: xAI documents 'auto', '21:9' and '5:2' in addition to the thirteen the node offers, and the node has no 'auto'. The narrower node list is recorded. MISMATCH on quality: xAI documents low, medium and auto; the node offers only medium and low and defaults to medium in code, so a Comfy request is never the cheaper 'auto'.",
+    "hidden": false,
+    "recommended": false,
+    "sources": [
+      "https://docs.x.ai/developers/model-capabilities/images/generation",
+      "https://docs.x.ai/developers/pricing",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_grok.py",
+      "https://docs.x.ai/developers/migration/imagine-image-quality-nov-2"
+    ]
+  },
+  "grok-imagine-image-pro": {
+    "node": "GrokImageNode",
+    "nodes": [
+      "GrokImageNode"
+    ],
+    "registryKey": "GrokImageNode/grok-imagine-image-pro",
+    "vendor": "xAI",
+    "label": "Grok Imagine Image Pro",
+    "kind": "image",
+    "apiModelId": "grok-imagine-image-pro",
+    "capabilities": {
+      "resolutions": [
+        "1K",
+        "2K"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "1:1",
+        "2:3",
+        "3:2",
+        "3:4",
+        "4:3",
+        "9:16",
+        "16:9",
+        "9:19.5",
+        "19.5:9",
+        "9:20",
+        "20:9",
+        "1:2",
+        "2:1"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 10
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.07,
+      "credits": 14.77,
+      "confidence": "published",
+      "note": "What Comfy charges. xAI no longer lists this model in its price table because it is retired, so you are paying 14.77 credits for an image another slug serves for 10.55 or 8.44."
+    },
+    "strengths": "None left: the slug redirects to another model",
+    "notes": "RETIRED at xAI on 15 May 2026. Requests to grok-imagine-image-pro are served by grok-imagine-image-quality, and from 2 November 2026 they follow that slug to grok-imagine-image-2.0 at quality 'low'. Comfy still charges the old pro rate, so choosing it is strictly worse than choosing the model that actually serves it.",
+    "hidden": true,
+    "hiddenReason": "Retired upstream on 2026-05-15 and redirected, while Comfy still bills the higher pro rate.",
+    "recommended": false,
+    "sources": [
+      "https://docs.x.ai/developers/model-capabilities/images/generation",
+      "https://docs.x.ai/developers/pricing",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_grok.py",
+      "https://docs.x.ai/developers/migration/may-15-retirement"
+    ]
+  },
+  "grok-imagine-image": {
+    "node": "GrokImageNode",
+    "nodes": [
+      "GrokImageNode"
+    ],
+    "registryKey": "GrokImageNode/grok-imagine-image",
+    "vendor": "xAI",
+    "label": "Grok Imagine Image 1.0",
+    "kind": "image",
+    "apiModelId": "grok-imagine-image",
+    "capabilities": {
+      "resolutions": [
+        "1K",
+        "2K"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "1:1",
+        "2:3",
+        "3:2",
+        "3:4",
+        "4:3",
+        "9:16",
+        "16:9",
+        "9:19.5",
+        "19.5:9",
+        "9:20",
+        "20:9",
+        "1:2",
+        "2:1"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 10
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.02,
+      "credits": 4.22,
+      "confidence": "published",
+      "note": "Flat at 1K and 2K, and unaffected by quality. 4.22 credits ($0.02) per 1K image, matching both the node badge and xAI's price list. This is the cheapest image model of the four vendors in this file."
+    },
+    "strengths": "Ten images from one run at 4.22 credits each",
+    "notes": "xAI confirms this model is not affected by the November 2026 retirement. Quality is visibly below 2.0 but at 4.22 credits it is the right default for drafts and for batches. MISMATCH on aspect ratios: xAI documents 'auto', '21:9' and '5:2' in addition to the thirteen the node offers, and the node has no 'auto'. The narrower node list is recorded. MISMATCH on quality: xAI documents low, medium and auto; the node offers only medium and low and defaults to medium in code, so a Comfy request is never the cheaper 'auto'.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://docs.x.ai/developers/model-capabilities/images/generation",
+      "https://docs.x.ai/developers/pricing",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_grok.py"
+    ]
+  },
+  "grok-imagine-video": {
+    "node": "GrokVideoNode",
+    "nodes": [
+      "GrokVideoNode"
+    ],
+    "registryKey": "GrokVideoNode/grok-imagine-video",
+    "vendor": "xAI",
+    "label": "Grok Imagine Video 1.0",
+    "kind": "video",
+    "apiModelId": "grok-imagine-video",
+    "capabilities": {
+      "resolutions": [
+        "480p",
+        "720p"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "auto",
+        "16:9",
+        "4:3",
+        "3:2",
+        "1:1",
+        "2:3",
+        "3:4",
+        "9:16"
+      ],
+      "durations": {
+        "min": 1,
+        "max": 15,
+        "allowed": null
+      },
+      "audio": true,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null
+    },
+    "constraints": [
+      {
+        "when": {
+          "model": "grok-imagine-video"
+        },
+        "then": {
+          "resolution": [
+            "480p",
+            "720p"
+          ]
+        },
+        "note": "1080p needs Grok Imagine Video 1.5. This one tops out at 720p."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.05,
+      "credits": 10.55,
+      "confidence": "published",
+      "by": {
+        "480p": {
+          "usd": 0.05,
+          "credits": 10.55
+        },
+        "720p": {
+          "usd": 0.07,
+          "credits": 14.77
+        }
+      },
+      "note": "Per second of output. A 6 second 480p clip is $0.30, about 63 credits. xAI publishes a flat $0.050 per second; Comfy charges a higher rate at 720p, so the resolution matters to the bill even though the vendor's own list does not tier it."
+    },
+    "strengths": "Sound on every clip, 480p and 720p, 10.55 credits a second",
+    "notes": "MISMATCH on audio: xAI documents 'Generated videos include an audio track by default. Pass generate_audio=False to request a silent video', but the node has no such input, so every Comfy generation has sound and there is no cheaper silent option. MISMATCH on duration: the node allows 1 to 15 seconds for both models, while Comfy's own reference-to-video node uses 2 to 10 for grok-imagine-video and 1 to 15 for 1.5; xAI documents 1 to 15 for the API, so the wider range is recorded, though Comfy's own reference node stops at 10 seconds for grok-imagine-video.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://docs.x.ai/developers/model-capabilities/video/generation",
+      "https://docs.x.ai/developers/pricing",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_grok.py"
+    ]
+  },
+  "grok-imagine-video-1.5": {
+    "node": "GrokVideoNode",
+    "nodes": [
+      "GrokVideoNode",
+      "GrokVideoReferenceNode"
+    ],
+    "registryKey": "GrokVideoNode/grok-imagine-video-1.5",
+    "vendor": "xAI",
+    "label": "Grok Imagine Video 1.5",
+    "kind": "video",
+    "apiModelId": "grok-imagine-video-1.5",
+    "capabilities": {
+      "resolutions": [
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "auto",
+        "16:9",
+        "4:3",
+        "3:2",
+        "1:1",
+        "2:3",
+        "3:4",
+        "9:16"
+      ],
+      "durations": {
+        "min": 1,
+        "max": 15,
+        "allowed": null
+      },
+      "audio": true,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.1144,
+      "credits": 24.14,
+      "confidence": "published",
+      "by": {
+        "480p": {
+          "usd": 0.1144,
+          "credits": 24.14
+        },
+        "720p": {
+          "usd": 0.2002,
+          "credits": 42.24
+        },
+        "1080p": {
+          "usd": 0.3575,
+          "credits": 75.43
+        }
+      },
+      "note": "Per second of output. Comfy applies a 1.43x markup to xAI's list rate ($0.080 / $0.14 / $0.25 per second becomes $0.1144 / $0.2002 / $0.3575), the same multiplier Comfy applies to Seedance 2.x. A 10 second 1080p clip is $3.58, about 754 credits."
+    },
+    "strengths": "Native 1080p text to video with sound",
+    "notes": "MISMATCH on audio: xAI documents 'Generated videos include an audio track by default. Pass generate_audio=False to request a silent video', but the node has no such input, so every Comfy generation has sound and there is no cheaper silent option. MISMATCH on duration: the node allows 1 to 15 seconds for both models, while Comfy's own reference-to-video node uses 2 to 10 for grok-imagine-video and 1 to 15 for 1.5; xAI documents 1 to 15 for the API, so the wider range is recorded, though Comfy's own reference node stops at 10 seconds for grok-imagine-video. Text to video on this model runs text to image and then image to video internally, so the first frame is generated for you; the intermediate image is not returned. The reference-to-video node adds preset voices, but it requires at least one reference image so it is not a text to video entry.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://docs.x.ai/developers/model-capabilities/video/generation",
+      "https://docs.x.ai/developers/pricing",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_grok.py"
+    ]
+  },
+  "photon-flash-1": {
+    "node": "LumaImageNode",
+    "nodes": [
+      "LumaImageNode"
+    ],
+    "registryKey": "LumaImageNode/photon-flash-1",
+    "vendor": "Luma",
+    "label": "Photon Flash 1",
+    "kind": "image",
+    "apiModelId": "photon-flash-1",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": null,
+      "aspects": [
+        "1:1",
+        "16:9",
+        "9:16",
+        "4:3",
+        "3:4",
+        "21:9",
+        "9:21"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 3,
+      "promptMaxChars": null,
+      "outputSize": "about 1536x1536 at 1:1; no resolution control"
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.0027,
+      "credits": 0.57,
+      "confidence": "published",
+      "note": "Comfy's published flat figure per image. Luma's badge branches on the model alone and carries no size term, so every frame costs the same."
+    },
+    "strengths": "Luma's quick tier, and the ratio is the only size control",
+    "notes": "No resolution or size control at all: the aspect ratio is the only geometry input, and the model picks the pixel size. The node requires style_image_weight even with no style image attached, and validates a prompt of at least 3 characters. Luma's legacy Dream Machine docs list exactly the seven aspect ratios the node offers.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://docs.lumalabs.ai/docs/image-generation",
+      "https://docs.lumalabs.ai/docs/video-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_luma.py"
+    ]
+  },
+  "photon-1": {
+    "node": "LumaImageNode",
+    "nodes": [
+      "LumaImageNode"
+    ],
+    "registryKey": "LumaImageNode/photon-1",
+    "vendor": "Luma",
+    "label": "Photon 1",
+    "kind": "image",
+    "apiModelId": "photon-1",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": null,
+      "aspects": [
+        "1:1",
+        "16:9",
+        "9:16",
+        "4:3",
+        "3:4",
+        "21:9",
+        "9:21"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 3,
+      "promptMaxChars": null,
+      "outputSize": "about 1536x1536 at 1:1; no resolution control"
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.0104,
+      "credits": 2.19,
+      "confidence": "published",
+      "note": "Comfy's published flat figure per image. Luma's badge branches on the model alone and carries no size term, so every frame costs the same."
+    },
+    "strengths": "Photon quality, and the ratio is the only size control",
+    "notes": "Same shape as photon-flash-1, roughly four times the price and better output. No resolution control.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://docs.lumalabs.ai/docs/image-generation",
+      "https://docs.lumalabs.ai/docs/video-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_luma.py"
+    ]
+  },
+  "uni-1": {
+    "node": "LumaImageNode2",
+    "nodes": [
+      "LumaImageNode2"
+    ],
+    "registryKey": "LumaImageNode2/uni-1",
+    "vendor": "Luma",
+    "label": "Luma UNI-1",
+    "kind": "image",
+    "apiModelId": "uni-1",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": null,
+      "aspects": [
+        "auto",
+        "3:1",
+        "2:1",
+        "16:9",
+        "3:2",
+        "1:1",
+        "2:3",
+        "9:16",
+        "1:2",
+        "1:3"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": 6000,
+      "outputSize": "always 2048 pixels on the long edge (2K)"
+    },
+    "constraints": [
+      {
+        "when": {
+          "style": "manga"
+        },
+        "then": {
+          "aspect": [
+            "auto",
+            "2:3",
+            "9:16",
+            "1:2",
+            "1:3"
+          ]
+        },
+        "note": "The manga style needs a portrait ratio; anything else is refused."
+      }
+    ],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.0404,
+      "credits": 8.52,
+      "confidence": "published",
+      "note": "Luma's own pay-as-you-go table gives $0.0404 for text to image, and Comfy's badge is the same number, so there is no markup. Reference images add $0.0030 each, which text to image does not use. The node's price badge is $base + 0.003 * $refs, so every reference is billed, including the first, at 0.63 credits.",
+      "perReferenceImageUsd": 0.003,
+      "referencesIncluded": 0
+    },
+    "strengths": "Always 2K output, readable text, optional web search grounding",
+    "notes": "Every request outputs at 2048 pixels, so there is nothing to choose: no resolution input exists. Two extras: style (auto or manga) and web_search (boolean), which searches the web for visual references before generating. Prompt is 1 to 6,000 characters and the node enforces it.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://docs.agents.lumalabs.ai/guides/images/generation/",
+      "https://docs.agents.lumalabs.ai/guides/videos/generation/",
+      "https://docs.agents.lumalabs.ai/guides/pricing/",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_luma.py"
+    ]
+  },
+  "uni-1-max": {
+    "node": "LumaImageNode2",
+    "nodes": [
+      "LumaImageNode2"
+    ],
+    "registryKey": "LumaImageNode2/uni-1-max",
+    "vendor": "Luma",
+    "label": "Luma UNI-1 Max",
+    "kind": "image",
+    "apiModelId": "uni-1-max",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": null,
+      "aspects": [
+        "auto",
+        "3:1",
+        "2:1",
+        "16:9",
+        "3:2",
+        "1:1",
+        "2:3",
+        "9:16",
+        "1:2",
+        "1:3"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": 6000,
+      "outputSize": "always 2048 pixels on the long edge (2K)"
+    },
+    "constraints": [
+      {
+        "when": {
+          "style": "manga"
+        },
+        "then": {
+          "aspect": [
+            "auto",
+            "2:3",
+            "9:16",
+            "1:2",
+            "1:3"
+          ]
+        },
+        "note": "The manga style needs a portrait ratio; anything else is refused."
+      }
+    ],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.1,
+      "credits": 21.1,
+      "confidence": "published",
+      "note": "Luma's own table and Comfy's badge agree at $0.1000 per image, no markup. Reference images add $0.0030 each. The node's price badge is $base + 0.003 * $refs, so every reference is billed, including the first, at 0.63 credits.",
+      "perReferenceImageUsd": 0.003,
+      "referencesIncluded": 0
+    },
+    "strengths": "Higher quality UNI-1, same parameters, 2K output",
+    "notes": "A drop-in replacement for uni-1 at two and a half times the price. Same wire format, same 2K output, same manga constraint.",
+    "hidden": false,
+    "recommended": false,
+    "sources": [
+      "https://docs.agents.lumalabs.ai/guides/images/generation/",
+      "https://docs.agents.lumalabs.ai/guides/videos/generation/",
+      "https://docs.agents.lumalabs.ai/guides/pricing/",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_luma.py"
+    ]
+  },
+  "ray-3.2": {
+    "node": "LumaRay32TextToVideoNode",
+    "nodes": [
+      "LumaRay32TextToVideoNode"
+    ],
+    "registryKey": "LumaRay32TextToVideoNode",
+    "vendor": "Luma",
+    "label": "Luma Ray 3.2",
+    "kind": "video",
+    "apiModelId": "ray-3.2",
+    "capabilities": {
+      "resolutions": [
+        "360p",
+        "540p",
+        "720p",
+        "1080p"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "16:9",
+        "9:16",
+        "1:1",
+        "4:3",
+        "3:4",
+        "21:9"
+      ],
+      "durations": {
+        "min": 5,
+        "max": 10,
+        "allowed": [
+          5,
+          10
+        ],
+        "unit": "s",
+        "wireValues": [
+          "5s",
+          "10s"
+        ]
+      },
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": 6000
+    },
+    "constraints": [
+      {
+        "when": {
+          "loop": true
+        },
+        "then": {
+          "duration": [
+            5
+          ]
+        },
+        "note": "A looping clip has to be 5 seconds."
+      }
+    ],
+    "price": {
+      "unit": "per-video",
+      "usd": 0.3,
+      "credits": 63.3,
+      "confidence": "published",
+      "by": {
+        "360p": {
+          "5s": {
+            "usd": 0.06,
+            "credits": 12.66
+          },
+          "10s": {
+            "usd": 0.18,
+            "credits": 37.98
+          }
+        },
+        "540p": {
+          "5s": {
+            "usd": 0.15,
+            "credits": 31.65
+          },
+          "10s": {
+            "usd": 0.45,
+            "credits": 94.95
+          }
+        },
+        "720p": {
+          "5s": {
+            "usd": 0.3,
+            "credits": 63.3
+          },
+          "10s": {
+            "usd": 0.9,
+            "credits": 189.9
+          }
+        },
+        "1080p": {
+          "5s": {
+            "usd": 1.2,
+            "credits": 253.2
+          },
+          "10s": {
+            "usd": 3.6,
+            "credits": 759.6
+          }
+        }
+      },
+      "note": "A flat price per run, not per second, and 10 seconds costs three times 5 seconds rather than twice. Luma's own pay-as-you-go table and Comfy's badge agree to the cent, so there is no markup. A 360p 5 second draft is 12.66 credits, which makes this the cheapest way to see a video idea."
+    },
+    "strengths": "360p drafts for 13 credits, silent, seamless looping",
+    "notes": "No audio at all: the Ray 3.2 documentation never mentions it. The node exposes loop and validates the 5 second rule itself. Luma also documents hdr and exr_export for this model, which the Comfy node does not expose, and its Extend, Keyframes and Image to Video siblings need an input we cannot supply from a text prompt.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://docs.agents.lumalabs.ai/guides/images/generation/",
+      "https://docs.agents.lumalabs.ai/guides/videos/generation/",
+      "https://docs.agents.lumalabs.ai/guides/pricing/",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_luma.py"
+    ]
+  },
+  "ray-2": {
+    "node": "LumaVideoNode",
+    "nodes": [
+      "LumaVideoNode"
+    ],
+    "registryKey": "LumaVideoNode/ray-2",
+    "vendor": "Luma",
+    "label": "Luma Ray 2",
+    "kind": "video",
+    "apiModelId": "ray-2",
+    "capabilities": {
+      "resolutions": [
+        "540p",
+        "720p",
+        "1080p",
+        "4k"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "1:1",
+        "16:9",
+        "9:16",
+        "4:3",
+        "3:4",
+        "21:9",
+        "9:21"
+      ],
+      "durations": {
+        "min": 5,
+        "max": 9,
+        "allowed": [
+          5,
+          9
+        ],
+        "unit": "s",
+        "wireValues": [
+          "5s",
+          "9s"
+        ]
+      },
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 3,
+      "promptMaxChars": null
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-video",
+      "usd": 1.02,
+      "credits": 215.22,
+      "confidence": "published",
+      "by": {
+        "540p": {
+          "5s": {
+            "usd": 0.57,
+            "credits": 120.27
+          },
+          "9s": {
+            "usd": 1.03,
+            "credits": 217.33
+          }
+        },
+        "720p": {
+          "5s": {
+            "usd": 1.02,
+            "credits": 215.22
+          },
+          "9s": {
+            "usd": 1.83,
+            "credits": 386.13
+          }
+        },
+        "1080p": {
+          "5s": {
+            "usd": 2.27,
+            "credits": 478.97
+          },
+          "9s": {
+            "usd": 4.1,
+            "credits": 865.1
+          }
+        },
+        "4k": {
+          "5s": {
+            "usd": 9.11,
+            "credits": 1922.21
+          },
+          "9s": {
+            "usd": 16.4,
+            "credits": 3460.4
+          }
+        }
+      },
+      "note": "Flat per run. A 9 second 4k clip is $16.40, about 3,460 credits, which is the single most expensive generation available through this plugin. The picker must show this before the click."
+    },
+    "strengths": "Luma's quality tier, silent, 540p to 4k",
+    "notes": "The legacy Dream Machine model. No audio. loop is an extra the node exposes. luma_concepts (camera moves) is an optional custom input we do not supply.",
+    "hidden": false,
+    "recommended": false,
+    "sources": [
+      "https://docs.lumalabs.ai/docs/image-generation",
+      "https://docs.lumalabs.ai/docs/video-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_luma.py"
+    ]
+  },
+  "ray-flash-2": {
+    "node": "LumaVideoNode",
+    "nodes": [
+      "LumaVideoNode"
+    ],
+    "registryKey": "LumaVideoNode/ray-flash-2",
+    "vendor": "Luma",
+    "label": "Luma Ray Flash 2",
+    "kind": "video",
+    "apiModelId": "ray-flash-2",
+    "capabilities": {
+      "resolutions": [
+        "540p",
+        "720p",
+        "1080p",
+        "4k"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "1:1",
+        "16:9",
+        "9:16",
+        "4:3",
+        "3:4",
+        "21:9",
+        "9:21"
+      ],
+      "durations": {
+        "min": 5,
+        "max": 9,
+        "allowed": [
+          5,
+          9
+        ],
+        "unit": "s",
+        "wireValues": [
+          "5s",
+          "9s"
+        ]
+      },
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 3,
+      "promptMaxChars": null
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-video",
+      "usd": 0.34,
+      "credits": 71.74,
+      "confidence": "published",
+      "by": {
+        "540p": {
+          "5s": {
+            "usd": 0.2,
+            "credits": 42.2
+          },
+          "9s": {
+            "usd": 0.36,
+            "credits": 75.96
+          }
+        },
+        "720p": {
+          "5s": {
+            "usd": 0.34,
+            "credits": 71.74
+          },
+          "9s": {
+            "usd": 0.61,
+            "credits": 128.71
+          }
+        },
+        "1080p": {
+          "5s": {
+            "usd": 0.79,
+            "credits": 166.69
+          },
+          "9s": {
+            "usd": 1.42,
+            "credits": 299.62
+          }
+        },
+        "4k": {
+          "5s": {
+            "usd": 3.13,
+            "credits": 660.43
+          },
+          "9s": {
+            "usd": 5.65,
+            "credits": 1192.15
+          }
+        }
+      },
+      "note": "Flat per run, about a third of ray-2 at every shape."
+    },
+    "strengths": "Ray 2 shapes including 4k at a third of the price",
+    "notes": "Same inputs and same silent output as ray-2. Cheaper than ray-1-6 at 540p and 720p while giving you a resolution and duration choice, which ray-1-6 does not.",
+    "hidden": false,
+    "recommended": true,
+    "sources": [
+      "https://docs.lumalabs.ai/docs/image-generation",
+      "https://docs.lumalabs.ai/docs/video-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_luma.py"
+    ]
+  },
+  "ray-1-6": {
+    "node": "LumaVideoNode",
+    "nodes": [
+      "LumaVideoNode"
+    ],
+    "registryKey": "LumaVideoNode/ray-1-6",
+    "vendor": "Luma",
+    "label": "Luma Ray 1.6",
+    "kind": "video",
+    "apiModelId": "ray-1-6",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": null,
+      "aspects": [
+        "1:1",
+        "16:9",
+        "9:16",
+        "4:3",
+        "3:4",
+        "21:9",
+        "9:21"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 3,
+      "promptMaxChars": null
+    },
+    "constraints": [
+      {
+        "when": {
+          "model": "ray-1-6"
+        },
+        "then": {
+          "resolution": null,
+          "duration": null
+        },
+        "note": "Luma chooses the size and the length for this model, so neither control changes what comes back."
+      }
+    ],
+    "price": {
+      "unit": "per-video",
+      "usd": 0.5,
+      "credits": 105.5,
+      "confidence": "published",
+      "note": "Flat per run whatever the settings, 105.5 credits. That is more than ray-flash-2 at 540p or 720p, and you cannot choose the resolution or the length, so there is no shape where this model is the right buy."
+    },
+    "strengths": "The oldest Ray, one fixed clip for a flat price",
+    "notes": "The node's resolution and duration inputs are visible but ignored for this model: the code sets both to None before the request. The picker must hide or disable those two controls when ray-1-6 is chosen, or the user will believe they picked a 1080p 9 second clip and get something else at the same price.",
+    "hidden": false,
+    "recommended": false,
+    "sources": [
+      "https://docs.lumalabs.ai/docs/image-generation",
+      "https://docs.lumalabs.ai/docs/video-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_luma.py"
+    ]
+  },
+  "Nano Banana 2 (Gemini 3.1 Flash Image) on the Nano Banana Pro node": {
+    "registryKey": "GeminiImage2Node/Nano Banana 2 (Gemini 3.1 Flash Image)",
+    "node": "GeminiImage2Node",
+    "vendor": "Google",
+    "kind": "image",
+    "hidden": true,
+    "notes": "The same model as GeminiNanoBanana2V2 offers, at the same price, but through the Nano Banana Pro node, which exposes ten aspect ratios instead of fourteen. Two picker rows with one name, one price and no visible difference cannot be chosen between, so this copy is hidden and the dedicated node's row is the one on offer. Still listed by `bb comfy models --all`.",
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/image-generation",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_gemini.py"
+    ]
+  },
+  "OpenAIGPTImageNodeV2/gpt-image-2.5-flare": {
+    "node": "OpenAIGPTImageNodeV2",
+    "vendor": "OpenAI",
+    "modelId": "gpt-image-2.5-flare",
+    "label": "GPT Image 2.5 Flare",
+    "kind": "image",
+    "apiModelId": "gpt-image-2.5-flare",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": [
+        "1024x1024",
+        "1024x1536",
+        "1536x1024",
+        "2048x2048",
+        "2048x1152",
+        "1152x2048",
+        "3840x2160",
+        "2160x3840"
+      ],
+      "aspects": null,
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 10
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false,
+      "outputSize": "Eight pixel presets from 1024x1024 to 3840x2160, plus auto and a custom size"
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": null,
+      "credits": null,
+      "confidence": "published",
+      "usdRange": [
+        0.006682,
+        0.612322
+      ],
+      "creditsRange": [
+        1.41,
+        129.2
+      ],
+      "by": {
+        "low": {
+          "1024x1024": {
+            "usd": 0.008389,
+            "credits": 1.77,
+            "creditsRange": [
+              1.77,
+              5.97
+            ]
+          },
+          "1024x1536": {
+            "usd": 0.0068,
+            "credits": 1.43,
+            "creditsRange": [
+              1.43,
+              5.97
+            ]
+          },
+          "1536x1024": {
+            "usd": 0.0068,
+            "credits": 1.43,
+            "creditsRange": [
+              1.43,
+              5.97
+            ]
+          },
+          "2048x2048": {
+            "usd": 0.017,
+            "credits": 3.59,
+            "creditsRange": [
+              3.59,
+              5.97
+            ]
+          },
+          "2048x1152": {
+            "usd": 0.0067,
+            "credits": 1.41,
+            "creditsRange": [
+              1.41,
+              5.97
+            ]
+          },
+          "1152x2048": {
+            "usd": 0.0067,
+            "credits": 1.41,
+            "creditsRange": [
+              1.41,
+              5.97
+            ]
+          },
+          "3840x2160": {
+            "usd": 0.0159,
+            "credits": 3.35,
+            "creditsRange": [
+              3.35,
+              5.97
+            ]
+          },
+          "2160x3840": {
+            "usd": 0.0159,
+            "credits": 3.35,
+            "creditsRange": [
+              3.35,
+              5.97
+            ]
+          }
+        },
+        "medium": {
+          "1024x1024": {
+            "usd": 0.0188,
+            "credits": 3.97,
+            "creditsRange": [
+              3.97,
+              13.42
+            ]
+          },
+          "1024x1536": {
+            "usd": 0.0147,
+            "credits": 3.1,
+            "creditsRange": [
+              3.1,
+              13.42
+            ]
+          },
+          "1536x1024": {
+            "usd": 0.0147,
+            "credits": 3.1,
+            "creditsRange": [
+              3.1,
+              13.42
+            ]
+          },
+          "2048x2048": {
+            "usd": 0.0383,
+            "credits": 8.08,
+            "creditsRange": [
+              8.08,
+              13.42
+            ]
+          },
+          "2048x1152": {
+            "usd": 0.0157,
+            "credits": 3.31,
+            "creditsRange": [
+              3.31,
+              13.42
+            ]
+          },
+          "1152x2048": {
+            "usd": 0.0157,
+            "credits": 3.31,
+            "creditsRange": [
+              3.31,
+              13.42
+            ]
+          },
+          "3840x2160": {
+            "usd": 0.0371,
+            "credits": 7.83,
+            "creditsRange": [
+              7.83,
+              13.42
+            ]
+          },
+          "2160x3840": {
+            "usd": 0.0371,
+            "credits": 7.83,
+            "creditsRange": [
+              7.83,
+              13.42
+            ]
+          }
+        },
+        "high": {
+          "1024x1024": {
+            "usd": 0.0753,
+            "credits": 15.89,
+            "creditsRange": [
+              15.89,
+              53.68
+            ]
+          },
+          "1024x1536": {
+            "usd": 0.0589,
+            "credits": 12.43,
+            "creditsRange": [
+              12.43,
+              53.68
+            ]
+          },
+          "1536x1024": {
+            "usd": 0.0589,
+            "credits": 12.43,
+            "creditsRange": [
+              12.43,
+              53.68
+            ]
+          },
+          "2048x2048": {
+            "usd": 0.1531,
+            "credits": 32.3,
+            "creditsRange": [
+              32.3,
+              53.68
+            ]
+          },
+          "2048x1152": {
+            "usd": 0.0606,
+            "credits": 12.79,
+            "creditsRange": [
+              12.79,
+              53.68
+            ]
+          },
+          "1152x2048": {
+            "usd": 0.0606,
+            "credits": 12.79,
+            "creditsRange": [
+              12.79,
+              53.68
+            ]
+          },
+          "3840x2160": {
+            "usd": 0.1431,
+            "credits": 30.19,
+            "creditsRange": [
+              30.19,
+              53.68
+            ]
+          },
+          "2160x3840": {
+            "usd": 0.1431,
+            "credits": 30.19,
+            "creditsRange": [
+              30.19,
+              53.68
+            ]
+          }
+        },
+        "xhigh": {
+          "1024x1024": {
+            "usd": 0.1339,
+            "credits": 28.25,
+            "creditsRange": [
+              28.25,
+              95.44
+            ]
+          },
+          "1024x1536": {
+            "usd": 0.1055,
+            "credits": 22.26,
+            "creditsRange": [
+              22.26,
+              95.44
+            ]
+          },
+          "1536x1024": {
+            "usd": 0.1055,
+            "credits": 22.26,
+            "creditsRange": [
+              22.26,
+              95.44
+            ]
+          },
+          "2048x2048": {
+            "usd": 0.2721,
+            "credits": 57.41,
+            "creditsRange": [
+              57.41,
+              95.44
+            ]
+          },
+          "2048x1152": {
+            "usd": 0.1077,
+            "credits": 22.72,
+            "creditsRange": [
+              22.72,
+              95.44
+            ]
+          },
+          "1152x2048": {
+            "usd": 0.1077,
+            "credits": 22.72,
+            "creditsRange": [
+              22.72,
+              95.44
+            ]
+          },
+          "3840x2160": {
+            "usd": 0.2544,
+            "credits": 53.68,
+            "creditsRange": [
+              53.68,
+              95.44
+            ]
+          },
+          "2160x3840": {
+            "usd": 0.2544,
+            "credits": 53.68,
+            "creditsRange": [
+              53.68,
+              95.44
+            ]
+          }
+        },
+        "max": {
+          "1024x1024": {
+            "usd": 0.3013,
+            "credits": 63.57,
+            "creditsRange": [
+              63.57,
+              214.69
+            ]
+          },
+          "1024x1536": {
+            "usd": 0.2354,
+            "credits": 49.67,
+            "creditsRange": [
+              49.67,
+              214.69
+            ]
+          },
+          "1536x1024": {
+            "usd": 0.2354,
+            "credits": 49.67,
+            "creditsRange": [
+              49.67,
+              214.69
+            ]
+          },
+          "2048x2048": {
+            "usd": 0.6123,
+            "credits": 129.2,
+            "creditsRange": [
+              129.2,
+              214.69
+            ]
+          },
+          "2048x1152": {
+            "usd": 0.2424,
+            "credits": 51.15,
+            "creditsRange": [
+              51.15,
+              214.69
+            ]
+          },
+          "1152x2048": {
+            "usd": 0.2424,
+            "credits": 51.15,
+            "creditsRange": [
+              51.15,
+              214.69
+            ]
+          },
+          "3840x2160": {
+            "usd": 0.5724,
+            "credits": 120.78,
+            "creditsRange": [
+              120.78,
+              214.69
+            ]
+          },
+          "2160x3840": {
+            "usd": 0.5724,
+            "credits": 120.78,
+            "creditsRange": [
+              120.78,
+              214.69
+            ]
+          }
+        }
+      },
+      "note": "Exact per size and per quality, read out of the node's own price_badge table rather than typed: forty figures, so they come from the machine. GPT Image bills on tokens and the token count follows the size the model actually returns, so every figure here is a floor. Each one therefore carries a span from the preset up to the top of that quality's own published range (low runs to 5.97 credits, max to 214.69), which is what makes every surface say \"about\" rather than quote a preset as if it were a bill. A reference image adds 0.0117 to 0.0176 US dollars each on top, which estimateCredits does not model yet. The node's price badge bills every reference image, including the first, at 0.0117 to 0.0176 US dollars each (2.47 to 3.71 credits).",
+      "perReferenceImageUsd": [
+        0.0117,
+        0.0176
+      ],
+      "referencesIncluded": 0
+    },
+    "strengths": "Two quality tiers above high, and a transparent background",
+    "notes": "New in the 2026-09-11 catalog; the node's display name became \"OpenAI GPT Image 2.5\". flare and sunburst share one price table and one input set and are told apart only by the model id, so the picker shows both. Quality runs low, medium, high, xhigh, max, two rungs above anything gpt-image-2 offers, and `background` offers auto, opaque and transparent, as gpt-image-2 does since the 2026-09-24 catalog. Up to 16 reference images through the same dotted group Seedream uses, and an optional mask. The size list carries auto and Custom beside the eight pixel presets, which `looksLikeSize` already counts correctly.",
+    "sources": [
+      "object_info price_badge",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "OpenAIGPTImageNodeV2/gpt-image-2.5-sunburst": {
+    "node": "OpenAIGPTImageNodeV2",
+    "vendor": "OpenAI",
+    "modelId": "gpt-image-2.5-sunburst",
+    "label": "GPT Image 2.5 Sunburst",
+    "kind": "image",
+    "apiModelId": "gpt-image-2.5-sunburst",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": [
+        "1024x1024",
+        "1024x1536",
+        "1536x1024",
+        "2048x2048",
+        "2048x1152",
+        "1152x2048",
+        "3840x2160",
+        "2160x3840"
+      ],
+      "aspects": null,
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 10
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false,
+      "outputSize": "Eight pixel presets from 1024x1024 to 3840x2160, plus auto and a custom size"
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": null,
+      "credits": null,
+      "confidence": "published",
+      "usdRange": [
+        0.006682,
+        0.612322
+      ],
+      "creditsRange": [
+        1.41,
+        129.2
+      ],
+      "by": {
+        "low": {
+          "1024x1024": {
+            "usd": 0.008389,
+            "credits": 1.77,
+            "creditsRange": [
+              1.77,
+              5.97
+            ]
+          },
+          "1024x1536": {
+            "usd": 0.0068,
+            "credits": 1.43,
+            "creditsRange": [
+              1.43,
+              5.97
+            ]
+          },
+          "1536x1024": {
+            "usd": 0.0068,
+            "credits": 1.43,
+            "creditsRange": [
+              1.43,
+              5.97
+            ]
+          },
+          "2048x2048": {
+            "usd": 0.017,
+            "credits": 3.59,
+            "creditsRange": [
+              3.59,
+              5.97
+            ]
+          },
+          "2048x1152": {
+            "usd": 0.0067,
+            "credits": 1.41,
+            "creditsRange": [
+              1.41,
+              5.97
+            ]
+          },
+          "1152x2048": {
+            "usd": 0.0067,
+            "credits": 1.41,
+            "creditsRange": [
+              1.41,
+              5.97
+            ]
+          },
+          "3840x2160": {
+            "usd": 0.0159,
+            "credits": 3.35,
+            "creditsRange": [
+              3.35,
+              5.97
+            ]
+          },
+          "2160x3840": {
+            "usd": 0.0159,
+            "credits": 3.35,
+            "creditsRange": [
+              3.35,
+              5.97
+            ]
+          }
+        },
+        "medium": {
+          "1024x1024": {
+            "usd": 0.0188,
+            "credits": 3.97,
+            "creditsRange": [
+              3.97,
+              13.42
+            ]
+          },
+          "1024x1536": {
+            "usd": 0.0147,
+            "credits": 3.1,
+            "creditsRange": [
+              3.1,
+              13.42
+            ]
+          },
+          "1536x1024": {
+            "usd": 0.0147,
+            "credits": 3.1,
+            "creditsRange": [
+              3.1,
+              13.42
+            ]
+          },
+          "2048x2048": {
+            "usd": 0.0383,
+            "credits": 8.08,
+            "creditsRange": [
+              8.08,
+              13.42
+            ]
+          },
+          "2048x1152": {
+            "usd": 0.0157,
+            "credits": 3.31,
+            "creditsRange": [
+              3.31,
+              13.42
+            ]
+          },
+          "1152x2048": {
+            "usd": 0.0157,
+            "credits": 3.31,
+            "creditsRange": [
+              3.31,
+              13.42
+            ]
+          },
+          "3840x2160": {
+            "usd": 0.0371,
+            "credits": 7.83,
+            "creditsRange": [
+              7.83,
+              13.42
+            ]
+          },
+          "2160x3840": {
+            "usd": 0.0371,
+            "credits": 7.83,
+            "creditsRange": [
+              7.83,
+              13.42
+            ]
+          }
+        },
+        "high": {
+          "1024x1024": {
+            "usd": 0.0753,
+            "credits": 15.89,
+            "creditsRange": [
+              15.89,
+              53.68
+            ]
+          },
+          "1024x1536": {
+            "usd": 0.0589,
+            "credits": 12.43,
+            "creditsRange": [
+              12.43,
+              53.68
+            ]
+          },
+          "1536x1024": {
+            "usd": 0.0589,
+            "credits": 12.43,
+            "creditsRange": [
+              12.43,
+              53.68
+            ]
+          },
+          "2048x2048": {
+            "usd": 0.1531,
+            "credits": 32.3,
+            "creditsRange": [
+              32.3,
+              53.68
+            ]
+          },
+          "2048x1152": {
+            "usd": 0.0606,
+            "credits": 12.79,
+            "creditsRange": [
+              12.79,
+              53.68
+            ]
+          },
+          "1152x2048": {
+            "usd": 0.0606,
+            "credits": 12.79,
+            "creditsRange": [
+              12.79,
+              53.68
+            ]
+          },
+          "3840x2160": {
+            "usd": 0.1431,
+            "credits": 30.19,
+            "creditsRange": [
+              30.19,
+              53.68
+            ]
+          },
+          "2160x3840": {
+            "usd": 0.1431,
+            "credits": 30.19,
+            "creditsRange": [
+              30.19,
+              53.68
+            ]
+          }
+        },
+        "xhigh": {
+          "1024x1024": {
+            "usd": 0.1339,
+            "credits": 28.25,
+            "creditsRange": [
+              28.25,
+              95.44
+            ]
+          },
+          "1024x1536": {
+            "usd": 0.1055,
+            "credits": 22.26,
+            "creditsRange": [
+              22.26,
+              95.44
+            ]
+          },
+          "1536x1024": {
+            "usd": 0.1055,
+            "credits": 22.26,
+            "creditsRange": [
+              22.26,
+              95.44
+            ]
+          },
+          "2048x2048": {
+            "usd": 0.2721,
+            "credits": 57.41,
+            "creditsRange": [
+              57.41,
+              95.44
+            ]
+          },
+          "2048x1152": {
+            "usd": 0.1077,
+            "credits": 22.72,
+            "creditsRange": [
+              22.72,
+              95.44
+            ]
+          },
+          "1152x2048": {
+            "usd": 0.1077,
+            "credits": 22.72,
+            "creditsRange": [
+              22.72,
+              95.44
+            ]
+          },
+          "3840x2160": {
+            "usd": 0.2544,
+            "credits": 53.68,
+            "creditsRange": [
+              53.68,
+              95.44
+            ]
+          },
+          "2160x3840": {
+            "usd": 0.2544,
+            "credits": 53.68,
+            "creditsRange": [
+              53.68,
+              95.44
+            ]
+          }
+        },
+        "max": {
+          "1024x1024": {
+            "usd": 0.3013,
+            "credits": 63.57,
+            "creditsRange": [
+              63.57,
+              214.69
+            ]
+          },
+          "1024x1536": {
+            "usd": 0.2354,
+            "credits": 49.67,
+            "creditsRange": [
+              49.67,
+              214.69
+            ]
+          },
+          "1536x1024": {
+            "usd": 0.2354,
+            "credits": 49.67,
+            "creditsRange": [
+              49.67,
+              214.69
+            ]
+          },
+          "2048x2048": {
+            "usd": 0.6123,
+            "credits": 129.2,
+            "creditsRange": [
+              129.2,
+              214.69
+            ]
+          },
+          "2048x1152": {
+            "usd": 0.2424,
+            "credits": 51.15,
+            "creditsRange": [
+              51.15,
+              214.69
+            ]
+          },
+          "1152x2048": {
+            "usd": 0.2424,
+            "credits": 51.15,
+            "creditsRange": [
+              51.15,
+              214.69
+            ]
+          },
+          "3840x2160": {
+            "usd": 0.5724,
+            "credits": 120.78,
+            "creditsRange": [
+              120.78,
+              214.69
+            ]
+          },
+          "2160x3840": {
+            "usd": 0.5724,
+            "credits": 120.78,
+            "creditsRange": [
+              120.78,
+              214.69
+            ]
+          }
+        }
+      },
+      "note": "Exact per size and per quality, read out of the node's own price_badge table rather than typed: forty figures, so they come from the machine. GPT Image bills on tokens and the token count follows the size the model actually returns, so every figure here is a floor. Each one therefore carries a span from the preset up to the top of that quality's own published range (low runs to 5.97 credits, max to 214.69), which is what makes every surface say \"about\" rather than quote a preset as if it were a bill. A reference image adds 0.0117 to 0.0176 US dollars each on top, which estimateCredits does not model yet. The node's price badge bills every reference image, including the first, at 0.0117 to 0.0176 US dollars each (2.47 to 3.71 credits).",
+      "perReferenceImageUsd": [
+        0.0117,
+        0.0176
+      ],
+      "referencesIncluded": 0
+    },
+    "strengths": "Two quality tiers above high, and a transparent background",
+    "notes": "New in the 2026-09-11 catalog; the node's display name became \"OpenAI GPT Image 2.5\". flare and sunburst share one price table and one input set and are told apart only by the model id, so the picker shows both. Quality runs low, medium, high, xhigh, max, two rungs above anything gpt-image-2 offers, and `background` offers auto, opaque and transparent, as gpt-image-2 does since the 2026-09-24 catalog. Up to 16 reference images through the same dotted group Seedream uses, and an optional mask. The size list carries auto and Custom beside the eight pixel presets, which `looksLikeSize` already counts correctly.",
+    "sources": [
+      "object_info price_badge",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "Gemini Nano Banana 2.1": {
+    "node": "GeminiNanoBanana2V2",
+    "registryKey": "GeminiNanoBanana2V2/Gemini Nano Banana 2.1",
+    "vendor": "Google",
+    "label": "Nano Banana 2.1",
+    "kind": "image",
+    "supported": true,
+    "capabilities": {
+      "resolutions": [
+        "1K",
+        "2K",
+        "4K"
+      ],
+      "aspects": [
+        "auto",
+        "1:1",
+        "2:3",
+        "3:2",
+        "3:4",
+        "4:3",
+        "4:5",
+        "5:4",
+        "9:16",
+        "16:9",
+        "21:9",
+        "1:4",
+        "4:1",
+        "8:1"
+      ],
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "price": {
+      "unit": "per-image",
+      "usd": 0.058773,
+      "credits": 12.4,
+      "confidence": "published",
+      "by": {
+        "1K": {
+          "usd": 0.058773,
+          "credits": 12.4
+        },
+        "2K": {
+          "usd": 0.082797,
+          "credits": 17.47
+        },
+        "4K": {
+          "usd": 0.172887,
+          "credits": 36.48
+        }
+      },
+      "note": "At the node's default thinking level, medium, from its price badge. Minimal thinking takes 2.26 credits off and high adds 1.47, at every size. The badge marks the figure approximate, because Google bills on tokens.",
+      "perReferenceImageCredits": 0,
+      "referencesIncluded": 14
+    },
+    "strengths": "Newer than Nano Banana 2 and cheaper at every size, 1K to 4K",
+    "notes": "New in the 2026-10-03 catalog, on the same node as Nano Banana 2 and its Lite version. thinking_level (minimal, medium, high) is an extra and moves the price a little. Up to 14 reference images.",
+    "sources": [
+      "object_info price_badge"
+    ]
+  },
+  "grok-imagine-video-1.5-lite": {
+    "node": "GrokVideoNode",
+    "registryKey": "GrokVideoNode/grok-imagine-video-1.5-lite",
+    "vendor": "xAI",
+    "label": "Grok Imagine Video 1.5 Lite",
+    "kind": "video",
+    "supported": true,
+    "capabilities": {
+      "resolutions": [
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "aspects": [
+        "auto",
+        "16:9",
+        "4:3",
+        "3:2",
+        "1:1",
+        "2:3",
+        "3:4",
+        "9:16"
+      ],
+      "durations": {
+        "min": 1,
+        "max": 15
+      },
+      "audio": true,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "price": {
+      "unit": "per-second",
+      "usd": 0.02,
+      "credits": 4.22,
+      "confidence": "published",
+      "by": {
+        "480p": {
+          "usd": 0.02,
+          "credits": 4.22
+        },
+        "720p": {
+          "usd": 0.03,
+          "credits": 6.33
+        },
+        "1080p": {
+          "usd": 0.14,
+          "credits": 29.54
+        }
+      },
+      "note": "Per second of output, from the node's price badge: 36.21 credits for 6 s at 480p. Unlike Grok 1.5, the badge applies no markup to Lite."
+    },
+    "strengths": "The cheapest Grok video, 4.22 credits a second at 480p",
+    "notes": "New in the 2026-10-03 catalog. Same node and inputs as Grok Imagine Video 1.5; every clip has sound and there is no switch for it.",
+    "sources": [
+      "object_info price_badge"
+    ]
+  }
+}

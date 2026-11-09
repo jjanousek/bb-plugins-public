@@ -1,0 +1,32 @@
+{
+  "name": "bb-plugin-screen-share",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "bb": ">=0.41",
+    "bbPluginSdk": ">=0.4.34"
+  },
+  "bb": {
+    "name": "Screen Share",
+    "description": "One-click view of the agent browser on its X display, in a bb panel or a new tab, for logging into sites by hand.",
+    "branding": {
+      "icon": "./assets/icon.svg"
+    },
+    "server": "./server.ts",
+    "app": "./app.tsx"
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@get-bb/plugin-sdk": "0.4.34",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.7.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sonner": "^1.7.4"
+  }
+}

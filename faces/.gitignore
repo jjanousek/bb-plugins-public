@@ -1,0 +1,4 @@
+dist/
+node_modules/
+# Screenshots taken while checking the plugin in a test bb. Evidence, not source.
+screenshots/

@@ -1,0 +1,101 @@
+{
+  "create_time": 1931059800000,
+  "execution_end_time": 1931059831000,
+  "execution_meta": {
+    "2": {
+      "display_node": "2",
+      "node_id": "2",
+      "parent_node": null,
+      "real_node_id": "2"
+    }
+  },
+  "execution_start_time": 1931059801000,
+  "execution_status": {
+    "completed": true,
+    "messages": [
+      [
+        "execution_start",
+        {
+          "prompt_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaabab",
+          "timestamp": 1931059801000
+        }
+      ],
+      [
+        "execution_cached",
+        {
+          "nodes": [],
+          "prompt_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaabab",
+          "timestamp": 1931059802000
+        }
+      ],
+      [
+        "execution_success",
+        {
+          "prompt_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaabab",
+          "timestamp": 1931059830000
+        }
+      ]
+    ],
+    "status_str": "success"
+  },
+  "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaabab",
+  "outputs": {
+    "2": {
+      "images": [
+        {
+          "asset_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaabbb",
+          "display_name": "bbtest_00001_.png",
+          "filename": "ababababababababababababababababababababababababababababababaaab.png",
+          "mime_type": "",
+          "size_bytes": 0,
+          "subfolder": "",
+          "type": "output"
+        }
+      ]
+    }
+  },
+  "outputs_count": 1,
+  "preview_output": {
+    "filename": "ababababababababababababababababababababababababababababababaaab.png",
+    "mediaType": "images",
+    "nodeId": "2",
+    "subfolder": "",
+    "type": "output"
+  },
+  "previewable_outputs_count": 1,
+  "status": "completed",
+  "update_time": 1931059831000,
+  "user_id": "exampleUserIdAAAAAAAAAAAAAAA",
+  "workflow": {
+    "extra_data": {
+      "api_key_comfy_org": "REDACTED"
+    },
+    "prompt": {
+      "1": {
+        "class_type": "ByteDanceSeedreamNodeV2",
+        "inputs": {
+          "model": "seedream 5.0 pro",
+          "model.fail_on_partial": false,
+          "model.height": 1024,
+          "model.max_images": 1,
+          "model.size_preset": "(1K) 1024x1024 (1:1)",
+          "model.width": 1024,
+          "prompt": "a brass compass on a folded map, overhead photo",
+          "seed": 7,
+          "watermark": false
+        }
+      },
+      "2": {
+        "class_type": "SaveImage",
+        "inputs": {
+          "filename_prefix": "bbtest",
+          "images": [
+            "1",
+            0
+          ]
+        }
+      }
+    }
+  },
+  "workspace_id": "w-aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaba"
+}

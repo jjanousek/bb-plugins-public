@@ -1,0 +1,4628 @@
+{
+  "Flux2ImageNode/Flux.2 [pro]": {
+    "node": "Flux2ImageNode",
+    "vendor": "BFL",
+    "modelId": "Flux.2 [pro]",
+    "label": "FLUX.2 [pro]",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "dimensions": {
+        "widthMin": 256,
+        "widthMax": 2048,
+        "heightMin": 256,
+        "heightMax": 2048,
+        "step": 32,
+        "widthDefault": 1024,
+        "heightDefault": 768
+      },
+      "sizes": null,
+      "durations": null,
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.03,
+      "credits": 6.33,
+      "confidence": "published",
+      "basis": "one image up to 1 megapixel; add 3.17 credits ($0.015) per whole extra megapixel",
+      "formula": "credits = 6.33 + 3.17 * (max(1, floor((width*height + 1048575) / 1048576)) - 1)"
+    },
+    "strengths": "Production text to image with hex-code colour control",
+    "notes": "The node's width and height are free integers, so the size is not a preset list: clamp to 256-2048 in steps of 32. BFL documents up to 4 MP output; 2048x2048 is 4.19 MP, so the node's own max is the binding limit. Cost rises with output megapixels, which is unusual among image models and should be visible in the size control. No documented prompt length limit on either side.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_bfl.py",
+      "https://docs.bfl.ml/flux_2/flux2_text_to_image.md",
+      "https://docs.bfl.ml/flux_2/flux2_overview.md",
+      "https://docs.bfl.ml/quick_start/pricing.md",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "Flux2ImageNode/Flux.2 [max]": {
+    "node": "Flux2ImageNode",
+    "vendor": "BFL",
+    "modelId": "Flux.2 [max]",
+    "label": "FLUX.2 [max]",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "dimensions": {
+        "widthMin": 256,
+        "widthMax": 2048,
+        "heightMin": 256,
+        "heightMax": 2048,
+        "step": 32,
+        "widthDefault": 1024,
+        "heightDefault": 768
+      },
+      "sizes": null,
+      "durations": null,
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.07,
+      "credits": 14.77,
+      "confidence": "published",
+      "basis": "one image up to 1 megapixel; add 6.33 credits ($0.03) per whole extra megapixel",
+      "formula": "credits = 14.77 + 6.33 * (max(1, floor((width*height + 1048575) / 1048576)) - 1)"
+    },
+    "strengths": "Highest quality FLUX.2, with web grounding for real-world facts",
+    "notes": "Same node and same size rules as Flux.2 [pro], at 2.3x the price. BFL documents grounding search on [max] only: it can look up real-time facts when the prompt asks for them. A 2048x2048 image is 4 megapixels and costs 33.76 credits, not 14.77.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_bfl.py",
+      "https://docs.bfl.ml/flux_2/flux2_text_to_image.md",
+      "https://docs.bfl.ml/flux_2/flux2_overview.md",
+      "https://docs.bfl.ml/quick_start/pricing.md",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "FluxProUltraImageNode": {
+    "node": "FluxProUltraImageNode",
+    "vendor": "BFL",
+    "modelId": null,
+    "label": "FLUX 1.1 [pro] Ultra",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "aspectFormat": "free W:H string, default 16:9",
+      "dimensions": null,
+      "sizes": null,
+      "durations": null,
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false,
+      "fixedOutputMegapixels": 4.0
+    },
+    "constraints": [
+      {
+        "when": {
+          "aspect": "*"
+        },
+        "then": {
+          "aspectRange": [
+            "1:4",
+            "4:1"
+          ]
+        },
+        "note": "The ratio has to be between 1:4 and 4:1."
+      }
+    ],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.06,
+      "credits": 12.66,
+      "confidence": "published",
+      "basis": "flat, every aspect ratio"
+    },
+    "strengths": "4 megapixel output at one flat price, with a raw photographic mode",
+    "notes": "Output is always about 4 MP; there is no size control, only an aspect ratio typed as a free string (default 16:9). The `raw` boolean is a real capability, not a style preset: BFL documents it as candid-photography output with more subject diversity. BFL's own price is $0.06 and Comfy resells at cost. There is no resolution or size input on this node at all: the output is always about 4 MP and only the aspect ratio can be set, so the form must not draw a size control.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_bfl.py",
+      "https://docs.bfl.ml/flux_models/flux_1_1_pro_ultra_raw.md",
+      "https://docs.bfl.ml/quick_start/pricing.md",
+      "https://docs.comfy.org/tutorials/partner-nodes/black-forest-labs/flux-1-1-pro-ultra-image",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "FluxKontextProImageNode": {
+    "node": "FluxKontextProImageNode",
+    "vendor": "BFL",
+    "modelId": null,
+    "label": "FLUX.1 Kontext [pro]",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "aspectFormat": "free W:H string, default 16:9",
+      "dimensions": null,
+      "sizes": null,
+      "durations": null,
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false,
+      "fixedOutputMegapixels": 1.0
+    },
+    "constraints": [
+      {
+        "when": {
+          "aspect": "*"
+        },
+        "then": {
+          "aspectRange": [
+            "3:7",
+            "7:3"
+          ]
+        },
+        "note": "The ratio has to be between 3:7 and 7:3. A wider one is sent but refused."
+      }
+    ],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.04,
+      "credits": 8.44,
+      "confidence": "published",
+      "basis": "flat"
+    },
+    "strengths": "Character-consistent generation and editing",
+    "notes": "Kontext is primarily an image editing model; text to image works because `input_image` is optional. BFL now recommends FLUX.2 for new text-to-image work. All outputs are about 1 MP, 1024x1024 at 1:1. This node has no price badge in the ComfyUI source, so the price comes from the Comfy pricing page and BFL's own table, which agree exactly. There is no resolution or size input on this node at all: the output is always about 1 MP and only the aspect ratio can be set, so the form must not draw a size control.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_bfl.py",
+      "https://docs.bfl.ml/kontext/kontext_text_to_image.md",
+      "https://docs.bfl.ml/quick_start/pricing.md",
+      "https://docs.comfy.org/tutorials/partner-nodes/black-forest-labs/flux-1-kontext",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "FluxKontextMaxImageNode": {
+    "node": "FluxKontextMaxImageNode",
+    "vendor": "BFL",
+    "modelId": null,
+    "label": "FLUX.1 Kontext [max]",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "aspectFormat": "free W:H string, default 16:9",
+      "dimensions": null,
+      "sizes": null,
+      "durations": null,
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false,
+      "fixedOutputMegapixels": 1.0
+    },
+    "constraints": [
+      {
+        "when": {
+          "aspect": "*"
+        },
+        "then": {
+          "aspectRange": [
+            "3:7",
+            "7:3"
+          ]
+        },
+        "note": "The ratio has to be between 3:7 and 7:3. A wider one is sent but refused."
+      }
+    ],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.08,
+      "credits": 16.88,
+      "confidence": "published",
+      "basis": "flat"
+    },
+    "strengths": "Kontext at maximum quality, best for typography",
+    "notes": "Kontext is primarily an image editing model; text to image works because `input_image` is optional. BFL now recommends FLUX.2 for new text-to-image work. All outputs are about 1 MP, 1024x1024 at 1:1. This node has no price badge in the ComfyUI source, so the price comes from the Comfy pricing page and BFL's own table, which agree exactly. There is no resolution or size input on this node at all: the output is always about 1 MP and only the aspect ratio can be set, so the form must not draw a size control.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_bfl.py",
+      "https://docs.bfl.ml/kontext/kontext_text_to_image.md",
+      "https://docs.bfl.ml/quick_start/pricing.md",
+      "https://docs.comfy.org/tutorials/partner-nodes/black-forest-labs/flux-1-kontext",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "Flux3TextToVideoNode": {
+    "node": "Flux3TextToVideoNode",
+    "vendor": "BFL",
+    "modelId": null,
+    "label": "FLUX 3 Text to Video",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "720p",
+        "1080p"
+      ],
+      "aspects": [
+        "auto",
+        "21:9",
+        "2:1",
+        "16:9",
+        "4:3",
+        "1:1",
+        "3:4",
+        "9:16"
+      ],
+      "durations": {
+        "min": 5,
+        "max": 20,
+        "allowed": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        "auto": true,
+        "default": "auto"
+      },
+      "audio": true,
+      "audioDefault": true,
+      "audioFree": true,
+      "dimensions": null,
+      "sizes": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.2431,
+      "credits": 51.29,
+      "confidence": "published",
+      "basis": "720p; audio is included at no extra charge",
+      "table": [
+        {
+          "when": {
+            "resolution": "720p"
+          },
+          "usd": 0.2431,
+          "credits": 51.29
+        },
+        {
+          "when": {
+            "resolution": "1080p"
+          },
+          "usd": 0.4147,
+          "credits": 87.5
+        }
+      ]
+    },
+    "strengths": "Long clips, up to 20 s, with synchronised speech and ambience",
+    "notes": "Expensive: a 10 s 1080p clip is 875 credits, about $4.15. `duration` may be the string 'auto', in which case the total cannot be estimated in advance, only the per-second rate; the picker should say so. BFL documents a `draft` mode that renders at hd for about a third of the price, and the ComfyUI node does not expose it, so the cheap preview path is unavailable here. `safety_tolerance` 0 to 4 is an extra with a schema default of 2.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_bfl.py",
+      "https://docs.bfl.ml/flux_3/flux3_video.md",
+      "https://docs.comfy.org/tutorials/partner-nodes/black-forest-labs/flux-3-video",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "IdeogramV4": {
+    "node": "IdeogramV4",
+    "vendor": "Ideogram",
+    "modelId": null,
+    "label": "Ideogram 4.0",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "sizes": [
+        "Auto",
+        "2048x2048 (1:1)",
+        "1440x2880 (1:2)",
+        "2880x1440 (2:1)",
+        "1664x2496 (2:3)",
+        "2496x1664 (3:2)",
+        "1792x2240 (4:5)",
+        "2240x1792 (5:4)",
+        "1440x2560 (9:16)",
+        "2560x1440 (16:9)",
+        "1600x2560 (5:8)",
+        "2560x1600 (8:5)",
+        "1728x2304 (3:4)",
+        "2304x1728 (4:3)",
+        "1296x3168 (9:22)",
+        "3168x1296 (22:9)",
+        "1152x2944 (9:23)",
+        "2944x1152 (23:9)",
+        "1248x3328 (3:8)",
+        "3328x1248 (8:3)",
+        "1280x3072 (5:12)",
+        "3072x1280 (12:5)"
+      ],
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false,
+      "qualityTiers": [
+        "TURBO",
+        "DEFAULT",
+        "QUALITY"
+      ]
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.0858,
+      "credits": 18.1,
+      "confidence": "published",
+      "basis": "rendering_speed DEFAULT",
+      "table": [
+        {
+          "when": {
+            "rendering_speed": "TURBO"
+          },
+          "usd": 0.0429,
+          "credits": 9.05
+        },
+        {
+          "when": {
+            "rendering_speed": "DEFAULT"
+          },
+          "usd": 0.0858,
+          "credits": 18.1
+        },
+        {
+          "when": {
+            "rendering_speed": "QUALITY"
+          },
+          "usd": 0.143,
+          "credits": 30.17
+        }
+      ]
+    },
+    "strengths": "Literal text rendering, and structured JSON prompts for exact layout",
+    "notes": "One image per run: Ideogram's V4 endpoint has no num_images field, so no batch. `rendering_speed` is the price control and belongs beside the price, not buried in More options. The node exposes only the 2K-class sizes plus Auto; Ideogram's API also offers 1024x1024, 1280x720, 512x1536 and 14 other smaller sizes that this node cannot reach, and it does not offer FLASH or BALANCED rendering speeds. Ideogram documents that negative prompts are unnecessary on 4.0 and the node has no negative prompt input.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_ideogram.py",
+      "https://api.ideogram.ai/openapi.json",
+      "https://docs.comfy.org/tutorials/partner-nodes/ideogram/ideogram-v4",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "IdeogramV3": {
+    "node": "IdeogramV3",
+    "vendor": "Ideogram",
+    "modelId": null,
+    "label": "Ideogram 3.0",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "durations": null,
+      "audio": false,
+      "dimensions": null,
+      "aspects": [
+        "1:3",
+        "3:1",
+        "1:2",
+        "2:1",
+        "9:16",
+        "16:9",
+        "10:16",
+        "16:10",
+        "2:3",
+        "3:2",
+        "3:4",
+        "4:3",
+        "4:5",
+        "5:4",
+        "1:1"
+      ],
+      "sizes": [
+        "Auto",
+        "512x1536",
+        "576x1408",
+        "576x1472",
+        "576x1536",
+        "640x1344",
+        "640x1408",
+        "640x1472",
+        "640x1536",
+        "704x1152",
+        "704x1216",
+        "704x1280",
+        "704x1344",
+        "704x1408",
+        "704x1472",
+        "736x1312",
+        "768x1088",
+        "768x1216",
+        "768x1280",
+        "768x1344",
+        "800x1280",
+        "832x960",
+        "832x1024",
+        "832x1088",
+        "832x1152",
+        "832x1216",
+        "832x1248",
+        "864x1152",
+        "896x960",
+        "896x1024",
+        "896x1088",
+        "896x1120",
+        "896x1152",
+        "960x832",
+        "960x896",
+        "960x1024",
+        "960x1088",
+        "1024x832",
+        "1024x896",
+        "1024x960",
+        "1024x1024",
+        "1088x768",
+        "1088x832",
+        "1088x896",
+        "1088x960",
+        "1120x896",
+        "1152x704",
+        "1152x832",
+        "1152x864",
+        "1152x896",
+        "1216x704",
+        "1216x768",
+        "1216x832",
+        "1248x832",
+        "1280x704",
+        "1280x768",
+        "1280x800",
+        "1312x736",
+        "1344x640",
+        "1344x704",
+        "1344x768",
+        "1408x576",
+        "1408x640",
+        "1408x704",
+        "1472x576",
+        "1472x640",
+        "1472x704",
+        "1536x512",
+        "1536x576",
+        "1536x640"
+      ],
+      "batch": {
+        "min": 1,
+        "max": 8
+      },
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": true,
+      "qualityTiers": [
+        "TURBO",
+        "DEFAULT",
+        "QUALITY"
+      ]
+    },
+    "constraints": [
+      {
+        "when": {
+          "sizePreset": "not Auto"
+        },
+        "then": {
+          "aspect": "ignored"
+        },
+        "note": "The ratio is ignored once a size is named: the size decides the shape."
+      }
+    ],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.0858,
+      "credits": 18.1,
+      "confidence": "published",
+      "basis": "rendering_speed DEFAULT, multiplied by num_images",
+      "table": [
+        {
+          "when": {
+            "rendering_speed": "TURBO"
+          },
+          "usd": 0.0429,
+          "credits": 9.05
+        },
+        {
+          "when": {
+            "rendering_speed": "DEFAULT"
+          },
+          "usd": 0.0858,
+          "credits": 18.1
+        },
+        {
+          "when": {
+            "rendering_speed": "QUALITY"
+          },
+          "usd": 0.1287,
+          "credits": 27.16
+        }
+      ]
+    },
+    "strengths": "Up to 8 images per run, with a real negative prompt",
+    "notes": "Ideogram V3 has no row on the Comfy pricing page at all; these figures come from the node's own price_badge, which is the same source the pricing page is written from for every other Ideogram row. Note that V3 QUALITY (27.16 credits) is cheaper than V4 QUALITY (30.17). Attaching a character_image roughly triples the price (turbo 30.17, default 45.26, quality 60.35 credits per image), but that input is out of scope for text to image. Ideogram's API also offers FLASH and BALANCED rendering speeds that the node does not expose.",
+    "sources": [
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_ideogram.py",
+      "https://api.ideogram.ai/openapi.json",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "IdeogramPImage": {
+    "node": "IdeogramPImage",
+    "vendor": "Ideogram",
+    "modelId": null,
+    "label": "Ideogram P-Image",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": [
+        "1K",
+        "2K"
+      ],
+      "aspects": [
+        "1:3",
+        "3:1",
+        "1:2",
+        "2:1",
+        "9:16",
+        "16:9",
+        "10:16",
+        "16:10",
+        "2:3",
+        "3:2",
+        "3:4",
+        "4:3",
+        "4:5",
+        "5:4",
+        "1:1"
+      ],
+      "dimensions": null,
+      "sizes": null,
+      "durations": null,
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false,
+      "qualityTiers": [
+        "VERY_LOW",
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.0143,
+      "credits": 3.02,
+      "confidence": "published",
+      "basis": "quality MEDIUM at 1K; 2K is exactly double at every tier",
+      "table": [
+        {
+          "when": {
+            "quality": "VERY_LOW",
+            "resolution": "1K"
+          },
+          "usd": 0.00429,
+          "credits": 0.91
+        },
+        {
+          "when": {
+            "quality": "VERY_LOW",
+            "resolution": "2K"
+          },
+          "usd": 0.00858,
+          "credits": 1.81
+        },
+        {
+          "when": {
+            "quality": "LOW",
+            "resolution": "1K"
+          },
+          "usd": 0.010725,
+          "credits": 2.26
+        },
+        {
+          "when": {
+            "quality": "LOW",
+            "resolution": "2K"
+          },
+          "usd": 0.02145,
+          "credits": 4.53
+        },
+        {
+          "when": {
+            "quality": "MEDIUM",
+            "resolution": "1K"
+          },
+          "usd": 0.0143,
+          "credits": 3.02
+        },
+        {
+          "when": {
+            "quality": "MEDIUM",
+            "resolution": "2K"
+          },
+          "usd": 0.0286,
+          "credits": 6.03
+        },
+        {
+          "when": {
+            "quality": "HIGH",
+            "resolution": "1K"
+          },
+          "usd": 0.02145,
+          "credits": 4.53
+        },
+        {
+          "when": {
+            "quality": "HIGH",
+            "resolution": "2K"
+          },
+          "usd": 0.0429,
+          "credits": 9.05
+        }
+      ]
+    },
+    "strengths": "Ideogram's budget tier, 0.91 credits at 1K on the lowest quality setting",
+    "notes": "At 0.91 credits a 1K VERY_LOW image is about a tenth of a Seedream 5.0 Pro image, which makes P-Image the right default for drafts and for any automated batch. The node's own tooltip warns that text renders poorly below MEDIUM. The node outputs (IMAGE, STRING); the STRING is the rewritten final_prompt, which is how a run is reproduced: reuse it with prompt_upsampling OFF and the same seed. Ideogram's API has a VERY_HIGH quality tier and custom_width/custom_height that the node does not expose.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_ideogram.py",
+      "https://api.ideogram.ai/openapi.json",
+      "https://docs.comfy.org/tutorials/partner-nodes/ideogram/ideogram-p-image",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "KlingImageGenerationNode/kling-v3": {
+    "node": "KlingImageGenerationNode",
+    "vendor": "Kling",
+    "modelId": "kling-v3",
+    "label": "Kling 3.0 Image",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "sizes": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "aspects": [
+        "16:9",
+        "9:16",
+        "1:1",
+        "4:3",
+        "3:4",
+        "3:2",
+        "2:3",
+        "21:9"
+      ],
+      "batch": {
+        "min": 1,
+        "max": 9
+      },
+      "promptMaxChars": 2500,
+      "seed": true,
+      "negativePrompt": true
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.028,
+      "credits": 5.91,
+      "confidence": "published",
+      "basis": "per image, multiplied by n (1 to 9)"
+    },
+    "strengths": "Nine images a run at 5.91 credits each, with native text rendering",
+    "notes": "`negative_prompt` is a required STRING on this node, so the builder must always send it, empty if unused. `image_type`, `image_fidelity` and `human_fidelity` are required but only matter when a reference image is attached; keep their schema defaults. No output size control at all, only an aspect ratio.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_kling.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/kling/kling-3-0",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model_name"
+  },
+  "KlingOmniProImageNode/kling-v3-omni": {
+    "node": "KlingOmniProImageNode",
+    "vendor": "Kling",
+    "modelId": "kling-v3-omni",
+    "label": "Kling 3.0 Omni Image",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": [
+        "1K",
+        "2K",
+        "4K"
+      ],
+      "aspects": [
+        "16:9",
+        "9:16",
+        "1:1",
+        "4:3",
+        "3:4",
+        "3:2",
+        "2:3",
+        "21:9"
+      ],
+      "sizes": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 9
+      },
+      "batchInput": "series_amount",
+      "promptMaxChars": 2500,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.028,
+      "credits": 5.91,
+      "confidence": "published",
+      "basis": "1K or 2K, multiplied by series_amount",
+      "table": [
+        {
+          "when": {
+            "resolution": "1K"
+          },
+          "usd": 0.028,
+          "credits": 5.91
+        },
+        {
+          "when": {
+            "resolution": "2K"
+          },
+          "usd": 0.028,
+          "credits": 5.91
+        },
+        {
+          "when": {
+            "resolution": "4K"
+          },
+          "usd": 0.056,
+          "credits": 11.82
+        }
+      ]
+    },
+    "strengths": "4K output, and a series of up to nine consistent images in one run",
+    "notes": "2K costs the same as 1K, which is worth telling the user in the size control. Batch is spelled `series_amount` and its values are the strings 'disabled','2'..'9', not an integer. The prompt takes both positive and negative description in one field; there is no separate negative prompt.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_kling.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/kling/kling-3-0",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model_name"
+  },
+  "KlingOmniProImageNode/kling-image-o1": {
+    "node": "KlingOmniProImageNode",
+    "vendor": "Kling",
+    "modelId": "kling-image-o1",
+    "label": "Kling Image O1",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": [
+        "1K",
+        "2K"
+      ],
+      "aspects": [
+        "16:9",
+        "9:16",
+        "1:1",
+        "4:3",
+        "3:4",
+        "3:2",
+        "2:3",
+        "21:9"
+      ],
+      "sizes": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2500,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {
+          "model": "kling-image-o1"
+        },
+        "then": {
+          "resolution": [
+            "1K",
+            "2K"
+          ]
+        },
+        "note": "Kling Image O1 has no 4K: it makes 1K and 2K images."
+      },
+      {
+        "when": {
+          "model": "kling-image-o1"
+        },
+        "then": {
+          "count": 1
+        },
+        "note": "Kling Image O1 makes one image per run, never a series."
+      },
+      {
+        "when": {
+          "model": "kling-image-o1"
+        },
+        "then": {
+          "series_amount": "disabled"
+        },
+        "note": "Kling Image O1 cannot make a series, so it returns one image per run."
+      }
+    ],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.028,
+      "credits": 5.91,
+      "confidence": "published",
+      "basis": "flat at 1K and 2K"
+    },
+    "strengths": "Kling's reasoning image model, one image at a time",
+    "notes": "Shares a node with kling-v3-omni, so the schema offers 4K and series_amount for it; both are refused at execute time. That is the clearest example in this vendor set of why the picker must carry constraints rather than trust the combo lists.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_kling.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/kling/kling-3-0",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model_name"
+  },
+  "KlingOmniProTextToVideoNode/kling-v3-omni": {
+    "node": "KlingOmniProTextToVideoNode",
+    "vendor": "Kling",
+    "modelId": "kling-v3-omni",
+    "label": "Kling 3.0 Omni Text to Video",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "720p",
+        "1080p",
+        "4k"
+      ],
+      "aspects": [
+        "16:9",
+        "9:16",
+        "1:1"
+      ],
+      "durations": {
+        "min": 3,
+        "max": 15,
+        "allowed": null,
+        "default": 5
+      },
+      "audio": true,
+      "audioDefault": false,
+      "audioFree": false,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2500,
+      "seed": false,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.084,
+      "credits": 17.72,
+      "confidence": "published",
+      "basis": "720p, audio off",
+      "table": [
+        {
+          "when": {
+            "resolution": "720p",
+            "audio": false
+          },
+          "usd": 0.084,
+          "credits": 17.72
+        },
+        {
+          "when": {
+            "resolution": "720p",
+            "audio": true
+          },
+          "usd": 0.112,
+          "credits": 23.63
+        },
+        {
+          "when": {
+            "resolution": "1080p",
+            "audio": false
+          },
+          "usd": 0.112,
+          "credits": 23.63
+        },
+        {
+          "when": {
+            "resolution": "1080p",
+            "audio": true
+          },
+          "usd": 0.14,
+          "credits": 29.54
+        },
+        {
+          "when": {
+            "resolution": "4k",
+            "audio": false
+          },
+          "usd": 0.42,
+          "credits": 88.62
+        },
+        {
+          "when": {
+            "resolution": "4k",
+            "audio": true
+          },
+          "usd": 0.42,
+          "credits": 88.62
+        }
+      ]
+    },
+    "strengths": "4K video with multilingual dialogue and lip sync",
+    "notes": "4K is five times the 1080p rate: a 5 s 4K clip is 443 credits, about $2.10. Audio is free at 4K and adds a third at 720p and 1080p. The `storyboards` dynamic combo (up to six segments, each with its own prompt and duration) is a real multi-shot feature; the node requires the segment durations to sum to the global `duration`, and each segment prompt is capped at 512 characters. Treat storyboards as an extra, not a role.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_kling.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/kling/kling-3-0",
+      "https://kling.ai/document-api/apiReference/model/textToVideo",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model_name"
+  },
+  "KlingOmniProTextToVideoNode/kling-video-o1": {
+    "node": "KlingOmniProTextToVideoNode",
+    "vendor": "Kling",
+    "modelId": "kling-video-o1",
+    "label": "Kling Video O1",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "720p",
+        "1080p"
+      ],
+      "aspects": [
+        "16:9",
+        "9:16",
+        "1:1"
+      ],
+      "durations": {
+        "min": 5,
+        "max": 10,
+        "allowed": [
+          5,
+          10
+        ],
+        "default": 5
+      },
+      "audio": false,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2500,
+      "seed": false,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {
+          "model": "kling-video-o1"
+        },
+        "then": {
+          "duration": [
+            5,
+            10
+          ]
+        },
+        "note": "Kling Video O1 makes 5 and 10 second clips only."
+      },
+      {
+        "when": {
+          "model": "kling-video-o1"
+        },
+        "then": {
+          "audio": false
+        },
+        "note": "Kling Video O1 has no sound."
+      },
+      {
+        "when": {
+          "model": "kling-video-o1"
+        },
+        "then": {
+          "resolution": [
+            "720p",
+            "1080p"
+          ]
+        },
+        "note": "Kling Video O1 has no 4K: it tops out at 1080p."
+      },
+      {
+        "when": {
+          "model": "kling-video-o1"
+        },
+        "then": {
+          "storyboards": "disabled"
+        },
+        "note": "Kling Video O1 does not take storyboards."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.084,
+      "credits": 17.72,
+      "confidence": "published",
+      "basis": "720p",
+      "table": [
+        {
+          "when": {
+            "resolution": "720p"
+          },
+          "usd": 0.084,
+          "credits": 17.72
+        },
+        {
+          "when": {
+            "resolution": "1080p"
+          },
+          "usd": 0.112,
+          "credits": 23.63
+        }
+      ]
+    },
+    "strengths": "Kling's reasoning video model at the plain 720p rate",
+    "notes": "Four hard constraints that the node schema does not express: duration, audio, 4k and storyboards are all rejected at execute time. This entry is the strongest argument in the vendor set for machine-usable constraints in the picker.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_kling.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/kling/kling-3-0",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model_name"
+  },
+  "KlingVideoNode/kling-v3": {
+    "node": "KlingVideoNode",
+    "vendor": "Kling",
+    "modelId": "kling-v3",
+    "label": "Kling 3.0 Video",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "720p",
+        "1080p",
+        "4k"
+      ],
+      "aspects": [
+        "16:9",
+        "9:16",
+        "1:1"
+      ],
+      "durations": {
+        "min": 3,
+        "max": 15,
+        "allowed": null,
+        "default": 5
+      },
+      "audio": true,
+      "audioDefault": true,
+      "audioFree": false,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2500,
+      "seed": false,
+      "negativePrompt": true
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.084,
+      "credits": 17.72,
+      "confidence": "published",
+      "basis": "720p, audio off",
+      "table": [
+        {
+          "when": {
+            "resolution": "720p",
+            "audio": false
+          },
+          "usd": 0.084,
+          "credits": 17.72
+        },
+        {
+          "when": {
+            "resolution": "720p",
+            "audio": true
+          },
+          "usd": 0.126,
+          "credits": 26.59
+        },
+        {
+          "when": {
+            "resolution": "1080p",
+            "audio": false
+          },
+          "usd": 0.112,
+          "credits": 23.63
+        },
+        {
+          "when": {
+            "resolution": "1080p",
+            "audio": true
+          },
+          "usd": 0.168,
+          "credits": 35.45
+        },
+        {
+          "when": {
+            "resolution": "4k",
+            "audio": false
+          },
+          "usd": 0.42,
+          "credits": 88.62
+        },
+        {
+          "when": {
+            "resolution": "4k",
+            "audio": true
+          },
+          "usd": 0.42,
+          "credits": 88.62
+        }
+      ]
+    },
+    "strengths": "Multi-shot video with locked subject identity across shots",
+    "notes": "STRUCTURAL WARNING for the generator: the prompt, the negative prompt and the duration are NOT top-level inputs on this node. They live inside the `multi_shot` dynamic combo under its 'disabled' key (multi_shot.prompt, multi_shot.negative_prompt, multi_shot.duration), and the resolution and aspect live inside the `model` combo. A role mapper that only looks at top-level inputs will mark this node unsupported. Audio costs 50 percent more at 720p and 1080p and nothing at 4K.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_kling.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/kling/kling-3-0",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "KlingVideoNode/kling-3.0-turbo": {
+    "node": "KlingVideoNode",
+    "vendor": "Kling",
+    "modelId": "kling-3.0-turbo",
+    "label": "Kling 3.0 Turbo Video",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "720p",
+        "1080p"
+      ],
+      "aspects": [
+        "16:9",
+        "9:16",
+        "1:1"
+      ],
+      "durations": {
+        "min": 3,
+        "max": 15,
+        "allowed": null,
+        "default": 5
+      },
+      "audio": true,
+      "audioAlways": true,
+      "audioFree": true,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2500,
+      "seed": false,
+      "negativePrompt": true
+    },
+    "constraints": [
+      {
+        "when": {
+          "model": "kling-3.0-turbo"
+        },
+        "then": {
+          "audio": true
+        },
+        "note": "Kling 3.0 Turbo always comes with sound, at the same price, and it cannot be turned off."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.112,
+      "credits": 23.63,
+      "confidence": "published",
+      "basis": "720p, audio always included",
+      "table": [
+        {
+          "when": {
+            "resolution": "720p"
+          },
+          "usd": 0.112,
+          "credits": 23.63
+        },
+        {
+          "when": {
+            "resolution": "1080p"
+          },
+          "usd": 0.14,
+          "credits": 29.54
+        }
+      ]
+    },
+    "strengths": "Faster Kling 3.0 with audio always on",
+    "notes": "No 4K on turbo. Same nested-input structure as kling-v3 on this node: prompt and duration live under `multi_shot`. Turbo is dearer than kling-v3 with audio off and cheaper than kling-v3 with audio on, so 'cheapest' sorting has to know whether sound is wanted.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_kling.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/kling/kling-3-0",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "KlingTextToVideoWithAudio/kling-v2-6": {
+    "node": "KlingTextToVideoWithAudio",
+    "vendor": "Kling",
+    "modelId": "kling-v2-6",
+    "label": "Kling 2.6 Text to Video with Audio",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": [
+        "16:9",
+        "9:16",
+        "1:1"
+      ],
+      "durations": {
+        "min": 5,
+        "max": 10,
+        "allowed": [
+          5,
+          10
+        ],
+        "default": 5
+      },
+      "audio": true,
+      "audioDefault": true,
+      "audioFree": false,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2500,
+      "seed": false,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {
+          "mode": "pro"
+        },
+        "then": {},
+        "note": "Kling 2.6 runs in pro mode only, because that is the mode that carries sound."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.07,
+      "credits": 14.77,
+      "confidence": "published",
+      "basis": "audio off; audio exactly doubles the rate",
+      "table": [
+        {
+          "when": {
+            "audio": false
+          },
+          "usd": 0.07,
+          "credits": 14.77
+        },
+        {
+          "when": {
+            "audio": true
+          },
+          "usd": 0.14,
+          "credits": 29.54
+        }
+      ]
+    },
+    "strengths": "Kling's lowest rate, 14.77 credits a second silent",
+    "notes": "No resolution control at all, so the picker's capability line should say 'no size choice'. Audio doubles the price, which is the single largest audio surcharge in this vendor set and must be visible at the click.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_kling.py",
+      "https://kling.ai/document-api/apiReference/model/textToVideo",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model_name"
+  },
+  "KlingTextToVideoNode": {
+    "node": "KlingTextToVideoNode",
+    "vendor": "Kling",
+    "modelId": "kling-v2-5-turbo",
+    "label": "Kling 2.5 Turbo Text to Video",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": [
+        "16:9",
+        "9:16",
+        "1:1"
+      ],
+      "durations": {
+        "min": 5,
+        "max": 10,
+        "allowed": [
+          5,
+          10
+        ],
+        "default": 5
+      },
+      "audio": false,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2500,
+      "seed": false,
+      "negativePrompt": true
+    },
+    "constraints": [
+      {
+        "when": {
+          "duration": 5
+        },
+        "then": {
+          "mode": "pro mode / 5s duration / kling-v2-5-turbo"
+        },
+        "note": "This model offers a 5 second and a 10 second clip, and the length is part of the mode it runs in."
+      }
+    ],
+    "price": {
+      "unit": "per-run",
+      "usd": 0.35,
+      "credits": 73.85,
+      "confidence": "published",
+      "basis": "5 s; 10 s is exactly double",
+      "table": [
+        {
+          "when": {
+            "duration": 5
+          },
+          "usd": 0.35,
+          "credits": 73.85
+        },
+        {
+          "when": {
+            "duration": 10
+          },
+          "usd": 0.7,
+          "credits": 147.7
+        }
+      ]
+    },
+    "strengths": "Steady 2.5 Turbo motion, billed per run rather than per second",
+    "notes": "Billed per run, not per second, which is why a 5 s clip costs 73.85 credits where kling-v2-6 silent costs 73.85 for the same 5 s and kling-v3 at 720p costs 88.6. The node has three outputs (VIDEO, STRING, STRING); the strings are the Kling video_id and url, and the video_id is what the Video Extend node needs. `cfg_scale` 0 to 1 is a required extra. The model id above is what the node sends upstream; it is NOT a selectable input on this node, so the builder must not try to write a `model` field.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_kling.py",
+      "https://kling.ai/document-api/apiReference/model/textToVideo",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "Krea2ImageNode/Krea 2 Medium Turbo": {
+    "node": "Krea2ImageNode",
+    "vendor": "Krea",
+    "modelId": "Krea 2 Medium Turbo",
+    "label": "Krea 2 Medium Turbo",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": [
+        "1K"
+      ],
+      "aspects": [
+        "1:1",
+        "4:3",
+        "3:2",
+        "16:9",
+        "2.35:1",
+        "4:5",
+        "2:3",
+        "9:16"
+      ],
+      "sizes": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {},
+        "then": {
+          "resolution": [
+            "1K"
+          ]
+        },
+        "note": "All three Krea models make one size, so there is nothing to choose."
+      }
+    ],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.015,
+      "credits": 3.17,
+      "confidence": "published",
+      "basis": "text only, no style reference and no moodboard",
+      "table": [
+        {
+          "when": {
+            "styleReference": false,
+            "moodboard": false
+          },
+          "usd": 0.015,
+          "credits": 3.17
+        },
+        {
+          "when": {
+            "styleReference": true
+          },
+          "usd": 0.0175,
+          "credits": 3.69
+        },
+        {
+          "when": {
+            "moodboard": true
+          },
+          "usd": 0.02,
+          "credits": 4.22
+        }
+      ]
+    },
+    "strengths": "Krea's fast tier at 3.17 credits an image",
+    "notes": "`creativity` (raw, low, medium, high) is the one control that matters and belongs in the form, not in More options: raw stays closest to the prompt. `moodboard_id` must be a Krea website UUID and the node validates the format; `style_reference` needs the Krea 2 Style Reference node, which takes an image, so neither is reachable from a text-only form. Prices rise slightly when either is used, which the estimator should ignore for text-only runs.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_krea.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/krea2/krea2-t2i",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "Krea2ImageNode/Krea 2 Medium": {
+    "node": "Krea2ImageNode",
+    "vendor": "Krea",
+    "modelId": "Krea 2 Medium",
+    "label": "Krea 2 Medium",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": [
+        "1K"
+      ],
+      "aspects": [
+        "1:1",
+        "4:3",
+        "3:2",
+        "16:9",
+        "2.35:1",
+        "4:5",
+        "2:3",
+        "9:16"
+      ],
+      "sizes": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {},
+        "then": {
+          "resolution": [
+            "1K"
+          ]
+        },
+        "note": "All three Krea models make one size, so there is nothing to choose."
+      }
+    ],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.03,
+      "credits": 6.33,
+      "confidence": "published",
+      "basis": "text only, no style reference and no moodboard",
+      "table": [
+        {
+          "when": {
+            "styleReference": false,
+            "moodboard": false
+          },
+          "usd": 0.03,
+          "credits": 6.33
+        },
+        {
+          "when": {
+            "styleReference": true
+          },
+          "usd": 0.035,
+          "credits": 7.39
+        },
+        {
+          "when": {
+            "moodboard": true
+          },
+          "usd": 0.04,
+          "credits": 8.44
+        }
+      ]
+    },
+    "strengths": "Expressive illustration, per Krea's own guidance",
+    "notes": "`creativity` (raw, low, medium, high) is the one control that matters and belongs in the form, not in More options: raw stays closest to the prompt. `moodboard_id` must be a Krea website UUID and the node validates the format; `style_reference` needs the Krea 2 Style Reference node, which takes an image, so neither is reachable from a text-only form. Prices rise slightly when either is used, which the estimator should ignore for text-only runs.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_krea.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/krea2/krea2-t2i",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "Krea2ImageNode/Krea 2 Large": {
+    "node": "Krea2ImageNode",
+    "vendor": "Krea",
+    "modelId": "Krea 2 Large",
+    "label": "Krea 2 Large",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": [
+        "1K"
+      ],
+      "aspects": [
+        "1:1",
+        "4:3",
+        "3:2",
+        "16:9",
+        "2.35:1",
+        "4:5",
+        "2:3",
+        "9:16"
+      ],
+      "sizes": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {},
+        "then": {
+          "resolution": [
+            "1K"
+          ]
+        },
+        "note": "All three Krea models make one size, so there is nothing to choose."
+      }
+    ],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.06,
+      "credits": 12.66,
+      "confidence": "published",
+      "basis": "text only, no style reference and no moodboard",
+      "table": [
+        {
+          "when": {
+            "styleReference": false,
+            "moodboard": false
+          },
+          "usd": 0.06,
+          "credits": 12.66
+        },
+        {
+          "when": {
+            "styleReference": true
+          },
+          "usd": 0.065,
+          "credits": 13.71
+        },
+        {
+          "when": {
+            "moodboard": true
+          },
+          "usd": 0.07,
+          "credits": 14.77
+        }
+      ]
+    },
+    "strengths": "Expressive photorealism, Krea's top tier",
+    "notes": "`creativity` (raw, low, medium, high) is the one control that matters and belongs in the form, not in More options: raw stays closest to the prompt. `moodboard_id` must be a Krea website UUID and the node validates the format; `style_reference` needs the Krea 2 Style Reference node, which takes an image, so neither is reachable from a text-only form. Prices rise slightly when either is used, which the estimator should ignore for text-only runs.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_krea.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/krea2/krea2-t2i",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "LtxApi25TextToVideo/LTX-2.5 (Fast)": {
+    "node": "LtxApi25TextToVideo",
+    "vendor": "LTXV",
+    "modelId": "LTX-2.5 (Fast)",
+    "label": "LTX-2.5 Fast",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "1280x720",
+        "720x1280",
+        "1920x1080",
+        "1080x1920",
+        "2560x1440",
+        "1440x2560",
+        "3840x2160",
+        "2160x3840"
+      ],
+      "aspects": null,
+      "sizes": null,
+      "dimensions": null,
+      "durations": {
+        "min": 2,
+        "max": 20,
+        "allowed": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          10,
+          12,
+          14,
+          16,
+          18,
+          20
+        ],
+        "default": 8
+      },
+      "audio": true,
+      "audioDefault": true,
+      "audioFree": true,
+      "fps": [
+        24,
+        25,
+        48,
+        50
+      ],
+      "fpsDefault": 25,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 10000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {
+          "duration": ">10"
+        },
+        "then": {
+          "resolution": [
+            "1280x720",
+            "720x1280",
+            "1920x1080",
+            "1080x1920"
+          ],
+          "fps": [
+            24,
+            25
+          ]
+        },
+        "note": "A clip longer than 10 seconds has to be 720p or 1080p at 24 or 25 frames a second."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.1287,
+      "credits": 27.16,
+      "confidence": "published",
+      "basis": "720p; the rate is the same with or without audio",
+      "table": [
+        {
+          "when": {
+            "resolution": "720p"
+          },
+          "usd": 0.1287,
+          "credits": 27.16
+        },
+        {
+          "when": {
+            "resolution": "1080p"
+          },
+          "usd": 0.1859,
+          "credits": 39.22
+        },
+        {
+          "when": {
+            "resolution": "1440p"
+          },
+          "usd": 0.2717,
+          "credits": 57.33
+        },
+        {
+          "when": {
+            "resolution": "4K"
+          },
+          "usd": 0.429,
+          "credits": 90.52
+        }
+      ]
+    },
+    "strengths": "Up to 4K and 20 s, with synchronised audio at no extra charge",
+    "notes": "Sizes are explicit WxH strings including portrait pairs, so this is a sizePreset role, not a resolution tier plus an aspect. A 20 s 1080p clip is 784 credits, about $3.72. Audio is on by default and free.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_ltxv.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/lightricks/ltx-2-5",
+      "https://ltx.io/model/ltx-2-5",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "LtxApi25TextToVideo/LTX-2.5 (Pro)": {
+    "node": "LtxApi25TextToVideo",
+    "vendor": "LTXV",
+    "modelId": "LTX-2.5 (Pro)",
+    "label": "LTX-2.5 Pro",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "1280x720",
+        "720x1280",
+        "1920x1080",
+        "1080x1920"
+      ],
+      "aspects": null,
+      "sizes": null,
+      "dimensions": null,
+      "durations": {
+        "min": 2,
+        "max": 10,
+        "allowed": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          10
+        ],
+        "default": 8
+      },
+      "audio": true,
+      "audioDefault": true,
+      "audioFree": true,
+      "fps": [
+        24,
+        25,
+        50
+      ],
+      "fpsDefault": 25,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 10000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.1716,
+      "credits": 36.21,
+      "confidence": "published",
+      "basis": "720p; the rate is the same with or without audio",
+      "table": [
+        {
+          "when": {
+            "resolution": "720p"
+          },
+          "usd": 0.1716,
+          "credits": 36.21
+        },
+        {
+          "when": {
+            "resolution": "1080p"
+          },
+          "usd": 0.2431,
+          "credits": 51.29
+        }
+      ]
+    },
+    "strengths": "LTX's quality tier, with native multishot scenes",
+    "notes": "Pro caps at 10 s and 1080p, so the Fast tier's over-10s rule never applies here. Pro offers 24, 25 and 50 fps but not 48.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_ltxv.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/lightricks/ltx-2-5",
+      "https://ltx.io/model/ltx-2-5",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "LtxvApiTextToVideo/LTX-2 (Fast)": {
+    "node": "LtxvApiTextToVideo",
+    "vendor": "LTXV",
+    "modelId": "LTX-2 (Fast)",
+    "label": "LTX-2 Fast",
+    "kind": "video",
+    "deprecated": true,
+    "capabilities": {
+      "resolutions": [
+        "1920x1080",
+        "2560x1440",
+        "3840x2160"
+      ],
+      "aspects": null,
+      "sizes": null,
+      "dimensions": null,
+      "durations": {
+        "min": 6,
+        "max": 20,
+        "allowed": [
+          6,
+          8,
+          10,
+          12,
+          14,
+          16,
+          18,
+          20
+        ],
+        "default": 8
+      },
+      "audio": true,
+      "audioDefault": false,
+      "audioFree": true,
+      "fps": [
+        25,
+        50
+      ],
+      "fpsDefault": 25,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 10000,
+      "seed": false,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {
+          "duration": ">10"
+        },
+        "then": {
+          "model": "LTX-2 (Fast)",
+          "resolution": [
+            "1920x1080"
+          ],
+          "fps": [
+            25
+          ]
+        },
+        "note": "Only LTX-2 Fast goes past 10 seconds, and only at 1920x1080 and 25 frames a second. LTX-2 Pro stops at 10 seconds."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.04,
+      "credits": 8.44,
+      "confidence": "published",
+      "basis": "1080p; the rate is the same with or without audio",
+      "table": [
+        {
+          "when": {
+            "resolution": "1920x1080"
+          },
+          "usd": 0.04,
+          "credits": 8.44
+        },
+        {
+          "when": {
+            "resolution": "2560x1440"
+          },
+          "usd": 0.08,
+          "credits": 16.88
+        },
+        {
+          "when": {
+            "resolution": "3840x2160"
+          },
+          "usd": 0.16,
+          "credits": 33.76
+        }
+      ]
+    },
+    "strengths": "The lowest 1080p rate in the catalog, 8.44 credits a second",
+    "notes": "The node is flagged deprecated in the catalog and is_deprecated in the ComfyUI source, superseded by LTX-2.5. It still works and is three to five times cheaper than LTX-2.5, so hiding it purely for being deprecated would remove the cheapest video option there is. Recommend showing it with a 'previous generation' note rather than hiding it. There is no 720p tier; the cheapest shape is 6 s at 1920x1080. `generate_audio` is optional and defaults to false here, the opposite of LTX-2.5.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_ltxv.py",
+      "https://ltx.io/model/ltx-2-5",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "LtxvApiTextToVideo/LTX-2 (Pro)": {
+    "node": "LtxvApiTextToVideo",
+    "vendor": "LTXV",
+    "modelId": "LTX-2 (Pro)",
+    "label": "LTX-2 Pro",
+    "kind": "video",
+    "deprecated": true,
+    "capabilities": {
+      "resolutions": [
+        "1920x1080",
+        "2560x1440",
+        "3840x2160"
+      ],
+      "aspects": null,
+      "sizes": null,
+      "dimensions": null,
+      "durations": {
+        "min": 6,
+        "max": 20,
+        "allowed": [
+          6,
+          8,
+          10,
+          12,
+          14,
+          16,
+          18,
+          20
+        ],
+        "default": 8
+      },
+      "audio": true,
+      "audioDefault": false,
+      "audioFree": true,
+      "fps": [
+        25,
+        50
+      ],
+      "fpsDefault": 25,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 10000,
+      "seed": false,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {
+          "duration": ">10"
+        },
+        "then": {
+          "model": "LTX-2 (Fast)",
+          "resolution": [
+            "1920x1080"
+          ],
+          "fps": [
+            25
+          ]
+        },
+        "note": "Only LTX-2 Fast goes past 10 seconds, and only at 1920x1080 and 25 frames a second. LTX-2 Pro stops at 10 seconds."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.06,
+      "credits": 12.66,
+      "confidence": "published",
+      "basis": "1080p; the rate is the same with or without audio",
+      "table": [
+        {
+          "when": {
+            "resolution": "1920x1080"
+          },
+          "usd": 0.06,
+          "credits": 12.66
+        },
+        {
+          "when": {
+            "resolution": "2560x1440"
+          },
+          "usd": 0.12,
+          "credits": 25.32
+        },
+        {
+          "when": {
+            "resolution": "3840x2160"
+          },
+          "usd": 0.24,
+          "credits": 50.64
+        }
+      ]
+    },
+    "strengths": "LTX-2 quality tier at a third of the LTX-2.5 rate",
+    "notes": "The node is flagged deprecated in the catalog and is_deprecated in the ComfyUI source, superseded by LTX-2.5. It still works and is three to five times cheaper than LTX-2.5, so hiding it purely for being deprecated would remove the cheapest video option there is. Recommend showing it with a 'previous generation' note rather than hiding it. There is no 720p tier; the cheapest shape is 6 s at 1920x1080. `generate_audio` is optional and defaults to false here, the opposite of LTX-2.5.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_ltxv.py",
+      "https://ltx.io/model/ltx-2-5",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "MinimaxHailuo03TextToVideoNode/MiniMax H3": {
+    "node": "MinimaxHailuo03TextToVideoNode",
+    "vendor": "MiniMax",
+    "modelId": "MiniMax H3",
+    "label": "MiniMax H3 (Hailuo 3)",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "768P",
+        "2K"
+      ],
+      "aspects": [
+        "16:9",
+        "4:3",
+        "1:1",
+        "3:4",
+        "9:16",
+        "21:9"
+      ],
+      "durations": {
+        "min": 4,
+        "max": 15,
+        "allowed": null,
+        "default": 5
+      },
+      "audio": true,
+      "audioAlways": true,
+      "audioFree": true,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 7000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.1287,
+      "credits": 27.16,
+      "confidence": "published",
+      "basis": "768P",
+      "table": [
+        {
+          "when": {
+            "resolution": "768P"
+          },
+          "usd": 0.1287,
+          "credits": 27.16
+        },
+        {
+          "when": {
+            "resolution": "2K"
+          },
+          "usd": 0.1859,
+          "credits": 39.22
+        }
+      ]
+    },
+    "strengths": "Native stereo audio modelled with the picture, up to 2K",
+    "notes": "Audio is always generated and there is no toggle, so the form must not show a sound control. Duration is a genuine disagreement: the node's slider and tooltip say 4 to 15, MiniMax's own V2 API documents 4 to 15, and the Comfy tutorial prose says 5 to 15; 4 is recorded here because two of the three sources allow it, but a 4 s run is the one to watch for a rejection. Prompt limit 7000 characters from MiniMax's API; the node itself only checks that the prompt is non-empty. STRUCTURAL WARNING: prompt, resolution, ratio and duration all live inside the `model` dynamic combo, not at the top level. The aspect role here is spelled `ratio`, not `aspect_ratio`. `watermark` is supported on this model only.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_minimax.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/minimax/minimax-h3",
+      "https://www.minimax.io/blog/minimax-h3",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "MinimaxHailuo03TextToVideoNode/MiniMax H3 Max": {
+    "node": "MinimaxHailuo03TextToVideoNode",
+    "vendor": "MiniMax",
+    "modelId": "MiniMax H3 Max",
+    "label": "MiniMax H3 Max",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "480P",
+        "768P"
+      ],
+      "aspects": [
+        "16:9",
+        "4:3",
+        "1:1",
+        "3:4",
+        "9:16",
+        "21:9"
+      ],
+      "durations": {
+        "min": 5,
+        "max": 15,
+        "allowed": null,
+        "default": 5
+      },
+      "audio": true,
+      "audioAlways": true,
+      "audioFree": true,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 50000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {
+          "model": "MiniMax H3 Max"
+        },
+        "then": {
+          "watermark": false
+        },
+        "note": "Only MiniMax H3 can add a watermark. H3 Max cannot."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.0715,
+      "credits": 15.09,
+      "confidence": "published",
+      "basis": "480P; from the node's price badge only, this model has no row on the Comfy pricing page",
+      "table": [
+        {
+          "when": {
+            "resolution": "480P"
+          },
+          "usd": 0.0715,
+          "credits": 15.09
+        },
+        {
+          "when": {
+            "resolution": "768P"
+          },
+          "usd": 0.1144,
+          "credits": 24.14
+        }
+      ]
+    },
+    "strengths": "Hailuo 3 Max at 480P or 768P, 15.09 credits a second",
+    "notes": "MiniMax H3 Max has no row on docs.comfy.org/tutorials/partner-nodes/pricing at all; the rates above come from the node's own price_badge expression, which is the source every other MiniMax row on that page agrees with to the cent. The 480P tier exists only on Max and 2K only on plain H3, so the two are not a simple quality ladder. `prompt_expansion_mode` (balanced or quality) is a required extra with no equivalent on H3. Prompt limit 50000 characters, enforced by the node.",
+    "sources": [
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_minimax.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://docs.comfy.org/tutorials/partner-nodes/minimax/minimax-h3",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "MinimaxHailuoVideoNode": {
+    "node": "MinimaxHailuoVideoNode",
+    "vendor": "MiniMax",
+    "modelId": "MiniMax-Hailuo-02",
+    "label": "MiniMax Hailuo 02",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "768P",
+        "1080P"
+      ],
+      "aspects": null,
+      "durations": {
+        "min": 6,
+        "max": 10,
+        "allowed": [
+          6,
+          10
+        ],
+        "default": 6
+      },
+      "audio": false,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {
+          "resolution": "1080P"
+        },
+        "then": {
+          "duration": [
+            6
+          ]
+        },
+        "note": "At 1080p this model only makes 6 second clips."
+      }
+    ],
+    "price": {
+      "unit": "per-run",
+      "usd": 0.28,
+      "credits": 59.08,
+      "confidence": "published",
+      "basis": "768P at 6 s",
+      "table": [
+        {
+          "when": {
+            "resolution": "768P",
+            "duration": 6
+          },
+          "usd": 0.28,
+          "credits": 59.08
+        },
+        {
+          "when": {
+            "resolution": "768P",
+            "duration": 10
+          },
+          "usd": 0.56,
+          "credits": 118.16
+        },
+        {
+          "when": {
+            "resolution": "1080P",
+            "duration": 6
+          },
+          "usd": 0.49,
+          "credits": 103.39
+        }
+      ]
+    },
+    "strengths": "Silent Hailuo 02, billed per run at two fixed lengths",
+    "notes": "No audio and no aspect ratio control: the output shape follows the resolution (768P is 1366x768, 1080P is 1920x1080 per the node's tooltip). The prompt input is named `prompt_text`, not `prompt`, which a name-based role mapper will miss. MiniMax documents a 2000 character prompt limit for the Hailuo line; the node does not enforce it. `prompt_optimizer` defaults to true. The model id above is what the node sends upstream; it is NOT a selectable input on this node, so the builder must not try to write a `model` field.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_minimax.py",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "MinimaxTextToVideoNode/T2V-01": {
+    "node": "MinimaxTextToVideoNode",
+    "vendor": "MiniMax",
+    "modelId": "T2V-01",
+    "label": "MiniMax T2V-01",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "durations": null,
+      "audio": false,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-run",
+      "usd": 0.43,
+      "credits": 90.73,
+      "confidence": "published",
+      "basis": "flat, one fixed clip"
+    },
+    "strengths": "MiniMax's original text to video",
+    "notes": "The node exposes nothing but a prompt, a model and a seed: no resolution, no aspect, no duration. The output is a fixed 6 s 720p clip. At 90.73 credits a run this is poor value against Hailuo 02 (59.08 for 6 s at 768P) and should sit low in a recommended list. The prompt input is named `prompt_text`.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_minimax.py",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "MinimaxTextToVideoNode/T2V-01-Director": {
+    "node": "MinimaxTextToVideoNode",
+    "vendor": "MiniMax",
+    "modelId": "T2V-01-Director",
+    "label": "MiniMax T2V-01 Director",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "durations": null,
+      "audio": false,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-run",
+      "usd": 0.43,
+      "credits": 90.73,
+      "confidence": "published",
+      "basis": "flat, one fixed clip"
+    },
+    "strengths": "Camera-move control through director prompt syntax",
+    "notes": "The node exposes nothing but a prompt, a model and a seed: no resolution, no aspect, no duration. The output is a fixed 6 s 720p clip. At 90.73 credits a run this is poor value against Hailuo 02 (59.08 for 6 s at 768P) and should sit low in a recommended list. The prompt input is named `prompt_text`.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_minimax.py",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "PixverseV6TextToVideoNode/PixVerse V6": {
+    "node": "PixverseV6TextToVideoNode",
+    "vendor": "PixVerse",
+    "modelId": "PixVerse V6",
+    "label": "PixVerse V6",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "360p",
+        "540p",
+        "720p",
+        "1080p"
+      ],
+      "aspects": [
+        "16:9",
+        "4:3",
+        "1:1",
+        "3:4",
+        "9:16",
+        "2:3",
+        "3:2",
+        "21:9"
+      ],
+      "durations": {
+        "min": 1,
+        "max": 15,
+        "allowed": null,
+        "default": 5
+      },
+      "audio": true,
+      "audioDefault": true,
+      "audioFree": false,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 5000,
+      "seed": true,
+      "negativePrompt": true
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.0715,
+      "credits": 15.09,
+      "confidence": "published",
+      "basis": "360p, audio off",
+      "table": [
+        {
+          "when": {
+            "resolution": "360p",
+            "audio": false
+          },
+          "usd": 0.0715,
+          "credits": 15.09
+        },
+        {
+          "when": {
+            "resolution": "360p",
+            "audio": true
+          },
+          "usd": 0.1001,
+          "credits": 21.12
+        },
+        {
+          "when": {
+            "resolution": "540p",
+            "audio": false
+          },
+          "usd": 0.1001,
+          "credits": 21.12
+        },
+        {
+          "when": {
+            "resolution": "540p",
+            "audio": true
+          },
+          "usd": 0.1287,
+          "credits": 27.16
+        },
+        {
+          "when": {
+            "resolution": "720p",
+            "audio": false
+          },
+          "usd": 0.1287,
+          "credits": 27.16
+        },
+        {
+          "when": {
+            "resolution": "720p",
+            "audio": true
+          },
+          "usd": 0.1716,
+          "credits": 36.21
+        },
+        {
+          "when": {
+            "resolution": "1080p",
+            "audio": false
+          },
+          "usd": 0.2574,
+          "credits": 54.31
+        },
+        {
+          "when": {
+            "resolution": "1080p",
+            "audio": true
+          },
+          "usd": 0.3289,
+          "credits": 69.4
+        }
+      ]
+    },
+    "strengths": "One to fifteen seconds at any length, from 360p up, with a style preset",
+    "notes": "The only model in this vendor set with a true 1 second minimum, which makes it the cheapest way to test a prompt: 1 s at 360p silent is 15.09 credits. PixVerse's own API documents a 5000 character prompt limit and the same aspect set for v6. STRUCTURAL WARNING: prompt, aspect_ratio, quality, duration_seconds, generate_audio, seed, negative_prompt and style all live inside the `model` dynamic combo. The resolution role is spelled `quality`, not `resolution`. `multi_clip` lets the model cut several shots; `style` (anime, 3d_animation, clay, comic, cyberpunk, realistic) is an extra worth surfacing.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_pixverse.py",
+      "https://docs.platform.pixverse.ai/text-to-video-generation-13016634e0.md",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "PixverseTextToVideoNode": {
+    "node": "PixverseTextToVideoNode",
+    "vendor": "PixVerse",
+    "modelId": "v3.5",
+    "label": "PixVerse v3.5",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "360p",
+        "540p",
+        "720p",
+        "1080p"
+      ],
+      "aspects": [
+        "16:9",
+        "4:3",
+        "1:1",
+        "3:4",
+        "9:16"
+      ],
+      "durations": {
+        "min": 5,
+        "max": 8,
+        "allowed": [
+          5,
+          8
+        ],
+        "default": 5
+      },
+      "audio": false,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 5000,
+      "seed": true,
+      "negativePrompt": true
+    },
+    "constraints": [
+      {
+        "when": {
+          "resolution": "1080p"
+        },
+        "then": {
+          "duration": [
+            5
+          ]
+        },
+        "note": "At 1080p this model only makes 5 second clips, and asking for 8 quietly returns 5."
+      },
+      {
+        "when": {
+          "resolution": "1080p"
+        },
+        "then": {
+          "motion_mode": "normal"
+        },
+        "note": "At 1080p the motion is always normal."
+      },
+      {
+        "when": {
+          "duration": 8
+        },
+        "then": {
+          "motion_mode": "normal"
+        },
+        "note": "An 8 second clip is always normal motion."
+      }
+    ],
+    "price": {
+      "unit": "per-run",
+      "usd": 0.6435,
+      "credits": 135.78,
+      "confidence": "published",
+      "basis": "5 s, 360p or 540p, normal motion. WARNING: the two official sources disagree, see notes",
+      "table": [
+        {
+          "when": {
+            "duration": 5,
+            "resolution": "360p",
+            "motion_mode": "normal"
+          },
+          "usd": 0.6435,
+          "credits": 135.78
+        },
+        {
+          "when": {
+            "duration": 5,
+            "resolution": "540p",
+            "motion_mode": "normal"
+          },
+          "usd": 0.6435,
+          "credits": 135.78
+        },
+        {
+          "when": {
+            "duration": 5,
+            "resolution": "720p",
+            "motion_mode": "normal"
+          },
+          "usd": 0.858,
+          "credits": 181.04
+        },
+        {
+          "when": {
+            "duration": 5,
+            "resolution": "1080p",
+            "motion_mode": "normal"
+          },
+          "usd": 1.716,
+          "credits": 362.08
+        },
+        {
+          "when": {
+            "duration": 5,
+            "resolution": "360p",
+            "motion_mode": "fast"
+          },
+          "usd": 1.287,
+          "credits": 271.56
+        },
+        {
+          "when": {
+            "duration": 5,
+            "resolution": "540p",
+            "motion_mode": "fast"
+          },
+          "usd": 1.287,
+          "credits": 271.56
+        },
+        {
+          "when": {
+            "duration": 5,
+            "resolution": "720p",
+            "motion_mode": "fast"
+          },
+          "usd": 1.716,
+          "credits": 362.08
+        },
+        {
+          "when": {
+            "duration": 8,
+            "resolution": "360p",
+            "motion_mode": "normal"
+          },
+          "usd": 1.287,
+          "credits": 271.56
+        },
+        {
+          "when": {
+            "duration": 8,
+            "resolution": "540p",
+            "motion_mode": "normal"
+          },
+          "usd": 1.287,
+          "credits": 271.56
+        },
+        {
+          "when": {
+            "duration": 8,
+            "resolution": "720p",
+            "motion_mode": "normal"
+          },
+          "usd": 1.716,
+          "credits": 362.08
+        }
+      ]
+    },
+    "strengths": "Legacy PixVerse with a fast motion mode; expensive, prefer V6",
+    "notes": "PRICE MISMATCH, the only one in this vendor set. The Comfy pricing page lists 94.95, 126.6, 189.9 and 253.2 credits for these shapes; the node's own price_badge lists USD figures that are exactly 1.43 times higher (Comfy's usual reseller markup), which is what is recorded above. Every other price point across these twelve vendors has the two sources agreeing to the cent, so the page's PixVerse v3.5 table looks like the un-marked-up list price. The higher figure is recorded because under-quoting is the worse failure; the plugin's cost_samples path replaces it with the billed figure. Either way this model is poor value against PixVerse V6 (a 5 s 540p V6 clip with audio is 135.8 credits against v3.5's 135.78 to 271.56 silent), so it belongs low in a recommended list. The model id v3.5 is fixed in the node and not selectable. The model id above is what the node sends upstream; it is NOT a selectable input on this node, so the builder must not try to write a `model` field.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_pixverse.py",
+      "https://docs.platform.pixverse.ai/text-to-video-generation-13016634e0.md",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "RecraftTextToImageNode": {
+    "node": "RecraftTextToImageNode",
+    "vendor": "Recraft",
+    "modelId": "recraftv3",
+    "label": "Recraft V3",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "sizes": [
+        "1024x1024",
+        "1365x1024",
+        "1024x1365",
+        "1536x1024",
+        "1024x1536",
+        "1820x1024",
+        "1024x1820",
+        "1024x2048",
+        "2048x1024",
+        "1434x1024",
+        "1024x1434",
+        "1024x1280",
+        "1280x1024",
+        "1024x1707",
+        "1707x1024"
+      ],
+      "batch": {
+        "min": 1,
+        "max": 6
+      },
+      "promptMaxChars": 1000,
+      "seed": true,
+      "negativePrompt": true
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.04,
+      "credits": 8.44,
+      "confidence": "published",
+      "basis": "per image, multiplied by n (1 to 6); every size costs the same"
+    },
+    "strengths": "Text placed at a chosen position, plus a large curated style library",
+    "notes": "Every size costs the same, so the widest one is free next to the square. Recraft's own price is $0.04 and Comfy resells it at cost. Without a style it draws in the realistic image style, which is the style the node falls back to, and a negative prompt typed into the form does reach the model. Prompt limit 1000 characters.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_recraft.py",
+      "https://www.recraft.ai/docs/recraft-models/recraft-V3.md",
+      "https://docs.comfy.org/tutorials/partner-nodes/recraft/recraft-text-to-image",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "RecraftV4TextToImageNode/recraftv4_1": {
+    "node": "RecraftV4TextToImageNode",
+    "vendor": "Recraft",
+    "modelId": "recraftv4_1",
+    "label": "Recraft V4.1",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "sizes": [
+        "1024x1024",
+        "1536x768",
+        "768x1536",
+        "1280x832",
+        "832x1280",
+        "1216x896",
+        "896x1216",
+        "1152x896",
+        "896x1152",
+        "832x1344",
+        "1280x896",
+        "896x1280",
+        "1344x768",
+        "768x1344"
+      ],
+      "batch": {
+        "min": 1,
+        "max": 6
+      },
+      "promptMaxChars": 10000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.035,
+      "credits": 7.39,
+      "confidence": "published",
+      "basis": "per image, multiplied by n (1 to 6); every size costs the same"
+    },
+    "strengths": "Recraft's newest model, good from a short prompt, at 7.39 credits",
+    "notes": "The `negative_prompt` input exists but the node's own tooltip says it is ignored on V4 and V4.1: do not offer it. Every size costs the same within a model, and the Pro variants differ from the base ones only by size list and price (2048-class against 1024-class). Recraft's published per-image prices match Comfy's exactly, so Comfy resells Recraft at cost. Prompt limit 10000 characters, enforced by the node. Attaching style_references adds 1.06 credits ($0.005) per run, but that needs images and is out of scope here.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_recraft.py",
+      "https://www.recraft.ai/docs/recraft-models/recraft-V4.md",
+      "https://www.recraft.ai/docs/recraft-models/recraft-v4-1.md",
+      "https://docs.comfy.org/tutorials/partner-nodes/recraft/recraft-v4",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "RecraftV4TextToImageNode/recraftv4_1_utility": {
+    "node": "RecraftV4TextToImageNode",
+    "vendor": "Recraft",
+    "modelId": "recraftv4_1_utility",
+    "label": "Recraft V4.1 Utility",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "sizes": [
+        "1024x1024",
+        "1536x768",
+        "768x1536",
+        "1280x832",
+        "832x1280",
+        "1216x896",
+        "896x1216",
+        "1152x896",
+        "896x1152",
+        "832x1344",
+        "1280x896",
+        "896x1280",
+        "1344x768",
+        "768x1344"
+      ],
+      "batch": {
+        "min": 1,
+        "max": 6
+      },
+      "promptMaxChars": 10000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.035,
+      "credits": 7.39,
+      "confidence": "published",
+      "basis": "per image, multiplied by n (1 to 6); every size costs the same"
+    },
+    "strengths": "Predictable output for mockups and product listings",
+    "notes": "The `negative_prompt` input exists but the node's own tooltip says it is ignored on V4 and V4.1: do not offer it. Every size costs the same within a model, and the Pro variants differ from the base ones only by size list and price (2048-class against 1024-class). Recraft's published per-image prices match Comfy's exactly, so Comfy resells Recraft at cost. Prompt limit 10000 characters, enforced by the node. Attaching style_references adds 1.06 credits ($0.005) per run, but that needs images and is out of scope here. Recraft describes the Utility models as the ones to pick when simplicity matters more than creative surprise.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_recraft.py",
+      "https://www.recraft.ai/docs/recraft-models/recraft-V4.md",
+      "https://www.recraft.ai/docs/recraft-models/recraft-v4-1.md",
+      "https://docs.comfy.org/tutorials/partner-nodes/recraft/recraft-v4",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "RecraftV4TextToImageNode/recraftv4_1_pro": {
+    "node": "RecraftV4TextToImageNode",
+    "vendor": "Recraft",
+    "modelId": "recraftv4_1_pro",
+    "label": "Recraft V4.1 Pro",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "sizes": [
+        "2048x2048",
+        "3072x1536",
+        "1536x3072",
+        "2560x1664",
+        "1664x2560",
+        "2432x1792",
+        "1792x2432",
+        "2304x1792",
+        "1792x2304",
+        "1664x2688",
+        "2560x1792",
+        "1792x2560",
+        "2688x1536",
+        "1536x2688"
+      ],
+      "batch": {
+        "min": 1,
+        "max": 6
+      },
+      "promptMaxChars": 10000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.21,
+      "credits": 44.31,
+      "confidence": "published",
+      "basis": "per image, multiplied by n (1 to 6); every size costs the same"
+    },
+    "strengths": "V4.1 at 2048x2048 for print",
+    "notes": "The `negative_prompt` input exists but the node's own tooltip says it is ignored on V4 and V4.1: do not offer it. Every size costs the same within a model, and the Pro variants differ from the base ones only by size list and price (2048-class against 1024-class). Recraft's published per-image prices match Comfy's exactly, so Comfy resells Recraft at cost. Prompt limit 10000 characters, enforced by the node. Attaching style_references adds 1.06 credits ($0.005) per run, but that needs images and is out of scope here.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_recraft.py",
+      "https://www.recraft.ai/docs/recraft-models/recraft-V4.md",
+      "https://www.recraft.ai/docs/recraft-models/recraft-v4-1.md",
+      "https://docs.comfy.org/tutorials/partner-nodes/recraft/recraft-v4",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "RecraftV4TextToImageNode/recraftv4_1_utility_pro": {
+    "node": "RecraftV4TextToImageNode",
+    "vendor": "Recraft",
+    "modelId": "recraftv4_1_utility_pro",
+    "label": "Recraft V4.1 Utility Pro",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "sizes": [
+        "2048x2048",
+        "3072x1536",
+        "1536x3072",
+        "2560x1664",
+        "1664x2560",
+        "2432x1792",
+        "1792x2432",
+        "2304x1792",
+        "1792x2304",
+        "1664x2688",
+        "2560x1792",
+        "1792x2560",
+        "2688x1536",
+        "1536x2688"
+      ],
+      "batch": {
+        "min": 1,
+        "max": 6
+      },
+      "promptMaxChars": 10000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.21,
+      "credits": 44.31,
+      "confidence": "published",
+      "basis": "per image, multiplied by n (1 to 6); every size costs the same"
+    },
+    "strengths": "Utility output at print resolution",
+    "notes": "The `negative_prompt` input exists but the node's own tooltip says it is ignored on V4 and V4.1: do not offer it. Every size costs the same within a model, and the Pro variants differ from the base ones only by size list and price (2048-class against 1024-class). Recraft's published per-image prices match Comfy's exactly, so Comfy resells Recraft at cost. Prompt limit 10000 characters, enforced by the node. Attaching style_references adds 1.06 credits ($0.005) per run, but that needs images and is out of scope here.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_recraft.py",
+      "https://www.recraft.ai/docs/recraft-models/recraft-V4.md",
+      "https://www.recraft.ai/docs/recraft-models/recraft-v4-1.md",
+      "https://docs.comfy.org/tutorials/partner-nodes/recraft/recraft-v4",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "RecraftV4TextToImageNode/recraftv4": {
+    "node": "RecraftV4TextToImageNode",
+    "vendor": "Recraft",
+    "modelId": "recraftv4",
+    "label": "Recraft V4",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "sizes": [
+        "1024x1024",
+        "1536x768",
+        "768x1536",
+        "1280x832",
+        "832x1280",
+        "1216x896",
+        "896x1216",
+        "1152x896",
+        "896x1152",
+        "832x1344",
+        "1280x896",
+        "896x1280",
+        "1344x768",
+        "768x1344"
+      ],
+      "batch": {
+        "min": 1,
+        "max": 6
+      },
+      "promptMaxChars": 10000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.04,
+      "credits": 8.44,
+      "confidence": "published",
+      "basis": "per image, multiplied by n (1 to 6); every size costs the same"
+    },
+    "strengths": "Design-led composition, colour and material realism",
+    "notes": "The `negative_prompt` input exists but the node's own tooltip says it is ignored on V4 and V4.1: do not offer it. Every size costs the same within a model, and the Pro variants differ from the base ones only by size list and price (2048-class against 1024-class). Recraft's published per-image prices match Comfy's exactly, so Comfy resells Recraft at cost. Prompt limit 10000 characters, enforced by the node. Attaching style_references adds 1.06 credits ($0.005) per run, but that needs images and is out of scope here.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_recraft.py",
+      "https://www.recraft.ai/docs/recraft-models/recraft-V4.md",
+      "https://www.recraft.ai/docs/recraft-models/recraft-v4-1.md",
+      "https://docs.comfy.org/tutorials/partner-nodes/recraft/recraft-v4",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "RecraftV4TextToImageNode/recraftv4_pro": {
+    "node": "RecraftV4TextToImageNode",
+    "vendor": "Recraft",
+    "modelId": "recraftv4_pro",
+    "label": "Recraft V4 Pro",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "sizes": [
+        "2048x2048",
+        "3072x1536",
+        "1536x3072",
+        "2560x1664",
+        "1664x2560",
+        "2432x1792",
+        "1792x2432",
+        "2304x1792",
+        "1792x2304",
+        "1664x2688",
+        "2560x1792",
+        "1792x2560",
+        "2688x1536",
+        "1536x2688"
+      ],
+      "batch": {
+        "min": 1,
+        "max": 6
+      },
+      "promptMaxChars": 10000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.25,
+      "credits": 52.75,
+      "confidence": "published",
+      "basis": "per image, multiplied by n (1 to 6); every size costs the same"
+    },
+    "strengths": "V4 at 2048x2048, the highest fidelity Recraft raster",
+    "notes": "The `negative_prompt` input exists but the node's own tooltip says it is ignored on V4 and V4.1: do not offer it. Every size costs the same within a model, and the Pro variants differ from the base ones only by size list and price (2048-class against 1024-class). Recraft's published per-image prices match Comfy's exactly, so Comfy resells Recraft at cost. Prompt limit 10000 characters, enforced by the node. Attaching style_references adds 1.06 credits ($0.005) per run, but that needs images and is out of scope here.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_recraft.py",
+      "https://www.recraft.ai/docs/recraft-models/recraft-V4.md",
+      "https://www.recraft.ai/docs/recraft-models/recraft-v4-1.md",
+      "https://docs.comfy.org/tutorials/partner-nodes/recraft/recraft-v4",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "RunwayTextToImageNode": {
+    "node": "RunwayTextToImageNode",
+    "vendor": "Runway",
+    "modelId": "gen4_image",
+    "label": "Runway Gen-4 Image",
+    "kind": "image",
+    "capabilities": {
+      "resolutions": null,
+      "aspects": null,
+      "dimensions": null,
+      "durations": null,
+      "audio": false,
+      "sizes": [
+        "1920:1080",
+        "1080:1920",
+        "1024:1024",
+        "1360:768",
+        "1080:1080",
+        "1168:880",
+        "1440:1080",
+        "1080:1440",
+        "1808:768",
+        "2112:912"
+      ],
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 1000,
+      "seed": false,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.1144,
+      "credits": 24.14,
+      "confidence": "published",
+      "basis": "flat, every ratio"
+    },
+    "strengths": "Runway's Gen-4 look, with reference-image support",
+    "notes": "Sizes are written with a colon, '1920:1080', not an 'x', and they are exact pixel sizes rather than aspect ratios: parse them as a sizePreset. Runway's own API accepts sixteen ratios for gen4_image; the ComfyUI node exposes only these ten, missing 1280:720, 720:1280, 720:720, 960:720, 720:960 and 1680:720. The node has no seed input at all. Runway charges 5 credits for a 720p image and 8 for 1080p at $0.01 a Runway credit; Comfy bills a flat 24.14 credits ($0.1144), which is 1.43 times Runway's 1080p rate, so a small image costs the same as a large one here. Small discrepancy worth knowing: the node's own price badge says $0.11 while the Comfy pricing page says 24.14 credits ($0.1144); the page figure is recorded. The model id above is what the node sends upstream; it is NOT a selectable input on this node, so the builder must not try to write a `model` field.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_runway.py",
+      "https://docs.dev.runwayml.com/api.md",
+      "https://docs.dev.runwayml.com/guides/pricing.md",
+      "https://docs.comfy.org/tutorials/partner-nodes/runway/image-generation",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "Vidu3TextToVideoNode/viduq3-turbo": {
+    "node": "Vidu3TextToVideoNode",
+    "vendor": "Vidu",
+    "modelId": "viduq3-turbo",
+    "label": "Vidu Q3 Turbo",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "720p",
+        "1080p"
+      ],
+      "aspects": [
+        "16:9",
+        "9:16",
+        "3:4",
+        "4:3",
+        "1:1"
+      ],
+      "durations": {
+        "min": 1,
+        "max": 16,
+        "allowed": null,
+        "default": 5
+      },
+      "audio": true,
+      "audioDefault": false,
+      "audioFree": true,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.06,
+      "credits": 12.66,
+      "confidence": "published",
+      "basis": "720p; audio does not change the rate",
+      "table": [
+        {
+          "when": {
+            "resolution": "720p"
+          },
+          "usd": 0.06,
+          "credits": 12.66
+        },
+        {
+          "when": {
+            "resolution": "1080p"
+          },
+          "usd": 0.08,
+          "credits": 16.88
+        }
+      ]
+    },
+    "strengths": "Vidu's fast tier with audio at no extra charge, clips to 16 s",
+    "notes": "Audio, including dialogue and sound effects, is a free boolean on Q3. Up to 16 s in one clip. Vidu's Q3 API also has a 540p tier and a 2K tier; the ComfyUI text-to-video node offers neither (2K is documented as image-to-video with viduq3-pro only), so 720p is the floor here. Prompt limit 2000 characters, enforced by the node. STRUCTURAL WARNING: aspect_ratio, resolution, duration and audio live inside the `model` dynamic combo while the prompt stays at the top level.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_vidu.py",
+      "https://platform.vidu.com/",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "Vidu3TextToVideoNode/viduq3-pro": {
+    "node": "Vidu3TextToVideoNode",
+    "vendor": "Vidu",
+    "modelId": "viduq3-pro",
+    "label": "Vidu Q3 Pro",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "720p",
+        "1080p"
+      ],
+      "aspects": [
+        "16:9",
+        "9:16",
+        "3:4",
+        "4:3",
+        "1:1"
+      ],
+      "durations": {
+        "min": 1,
+        "max": 16,
+        "allowed": null,
+        "default": 5
+      },
+      "audio": true,
+      "audioDefault": false,
+      "audioFree": true,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.15,
+      "credits": 31.65,
+      "confidence": "published",
+      "basis": "720p; audio does not change the rate",
+      "table": [
+        {
+          "when": {
+            "resolution": "720p"
+          },
+          "usd": 0.15,
+          "credits": 31.65
+        },
+        {
+          "when": {
+            "resolution": "1080p"
+          },
+          "usd": 0.16,
+          "credits": 33.76
+        }
+      ]
+    },
+    "strengths": "Vidu's quality tier, with free audio and clips to 16 s",
+    "notes": "Two and a half times the turbo rate at 720p but only twice at 1080p, so 1080p pro is relatively better value than 720p pro. The Comfy pricing page lists a 2K tier for viduq3-pro at 42.2 credits a second, but it says explicitly that 2K exists only on the image-to-video node, and the text-to-video node's resolution combo confirms this by offering only 720p and 1080p.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_vidu.py",
+      "https://platform.vidu.com/",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "Vidu2TextToVideoNode/viduq2": {
+    "node": "Vidu2TextToVideoNode",
+    "vendor": "Vidu",
+    "modelId": "viduq2",
+    "label": "Vidu Q2",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "720p",
+        "1080p"
+      ],
+      "aspects": [
+        "16:9",
+        "9:16",
+        "3:4",
+        "4:3",
+        "1:1"
+      ],
+      "durations": {
+        "min": 1,
+        "max": 10,
+        "allowed": null,
+        "default": 5
+      },
+      "audio": true,
+      "audioInput": "background_music",
+      "audioDefault": false,
+      "audioFree": true,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-run-plus-per-second",
+      "usd": 0.075,
+      "credits": 15.825,
+      "confidence": "published",
+      "basis": "720p base for the first second, then 5.275 credits ($0.025) per further second",
+      "formula": "credits = base + perSecond * (duration - 1)",
+      "table": [
+        {
+          "when": {
+            "resolution": "720p"
+          },
+          "baseUsd": 0.075,
+          "baseCredits": 15.825,
+          "perSecondUsd": 0.025,
+          "perSecondCredits": 5.275
+        },
+        {
+          "when": {
+            "resolution": "1080p"
+          },
+          "baseUsd": 0.1,
+          "baseCredits": 21.1,
+          "perSecondUsd": 0.05,
+          "perSecondCredits": 10.55
+        }
+      ]
+    },
+    "strengths": "A base-plus-per-second rate, so long clips get cheaper per second",
+    "notes": "The only pricing shape in this vendor set that is not flat per run or flat per second: a base for the first second and a lower rate after it. A 10 s 720p clip is 63.3 credits, which is cheaper per second than any other video model here. The audio control is spelled `background_music` and only adds music, not dialogue; Q3's `audio` is the fuller feature. Prompt limit 2000 characters.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_vidu.py",
+      "https://platform.vidu.com/",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "ViduTextToVideoNode/viduq1": {
+    "node": "ViduTextToVideoNode",
+    "vendor": "Vidu",
+    "modelId": "viduq1",
+    "label": "Vidu Q1",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "1080p"
+      ],
+      "aspects": [
+        "16:9",
+        "9:16",
+        "1:1"
+      ],
+      "durations": {
+        "min": 5,
+        "max": 5,
+        "allowed": [
+          5
+        ],
+        "default": 5
+      },
+      "audio": false,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 2000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {},
+        "then": {
+          "duration": [
+            5
+          ],
+          "resolution": [
+            "1080p"
+          ]
+        },
+        "note": "One size and one length: 5 seconds at 1080p."
+      }
+    ],
+    "price": {
+      "unit": "per-run",
+      "usd": 0.4,
+      "credits": 84.4,
+      "confidence": "published",
+      "basis": "flat, the only shape"
+    },
+    "strengths": "Vidu's previous generation, one fixed 5 s 1080p clip",
+    "notes": "No choices at all beyond aspect ratio and movement amplitude: duration is pinned to 5 and the resolution combo has one option. At 84.4 credits it costs exactly the same as five seconds of Vidu Q3 Turbo at 1080p (16.88 a second), and half what five seconds of Vidu Q3 Pro at 1080p costs. Q3 Turbo gives audio and a length choice for the same money, so Q1 has no reason to be recommended.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_vidu.py",
+      "https://platform.vidu.com/",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "Flux2ProImageNode": {
+    "node": "Flux2ProImageNode",
+    "vendor": "BFL",
+    "modelId": null,
+    "label": "FLUX.2 [pro] Image (superseded)",
+    "kind": "image",
+    "supported": false,
+    "excludeReason": "Marked deprecated:true in object_info and is_deprecated in the ComfyUI source. It is the same model as Flux2ImageNode with model 'Flux.2 [pro]', which is not deprecated. Duplicate; hide.",
+    "capabilities": null,
+    "constraints": [],
+    "price": null,
+    "strengths": null,
+    "deprecated": true,
+    "notes": "Identical inputs and identical price to Flux2ImageNode/Flux.2 [pro]. Listing both would put the same model twice in the picker.",
+    "sources": [
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_bfl.py",
+      "object_info",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing"
+    ],
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "Flux2MaxImageNode": {
+    "node": "Flux2MaxImageNode",
+    "vendor": "BFL",
+    "modelId": null,
+    "label": "FLUX.2 [max] Image (superseded)",
+    "kind": "image",
+    "supported": false,
+    "excludeReason": "Marked deprecated:true in object_info and inherits is_deprecated from Flux2ProImageNode. Superseded by Flux2ImageNode with model 'Flux.2 [max]'. Duplicate; hide.",
+    "capabilities": null,
+    "constraints": [],
+    "price": null,
+    "strengths": null,
+    "deprecated": true,
+    "notes": "Identical inputs and identical price to Flux2ImageNode/Flux.2 [max].",
+    "sources": [
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_bfl.py",
+      "object_info",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing"
+    ],
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "Flux3ImageToVideoNode": {
+    "node": "Flux3ImageToVideoNode",
+    "vendor": "BFL",
+    "modelId": null,
+    "label": "FLUX 3 Image to Video",
+    "kind": "video",
+    "supported": false,
+    "excludeReason": "Needs an input we cannot supply: at least one keyframe IMAGE. The node raises 'Connect at least one keyframe image.'",
+    "capabilities": null,
+    "constraints": [],
+    "price": null,
+    "strengths": null,
+    "notes": "The model selection rule passes this node because its required `keyframes` input is typed COMFY_AUTOGROW_V3, not IMAGE. The generator should also reject a required AUTOGROW whose template input type is IMAGE, VIDEO or AUDIO, otherwise this node and three others in this vendor set slip through as text to video. Same price as Flux3TextToVideoNode.",
+    "sources": [
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_bfl.py",
+      "https://docs.bfl.ml/flux_3/flux3_video.md",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "object_info"
+    ],
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "HeyGenAvatarVideoNode": {
+    "node": "HeyGenAvatarVideoNode",
+    "vendor": "HeyGen",
+    "modelId": null,
+    "label": "HeyGen Avatar Video",
+    "kind": "video",
+    "supported": false,
+    "excludeReason": "Avatar node, out of scope for this plugin, and it has no prompt role: the text lives at speech.script.text inside a dynamic combo whose other branch requires an AUDIO input.",
+    "capabilities": null,
+    "constraints": [],
+    "price": null,
+    "strengths": null,
+    "notes": "For the record, the price is per second of output and depends on the engine and the avatar type: Avatar III 5.04 or 13.06 credits a second, Avatar IV 15.09 or 24.29, Avatar V 36.21. The node's `engine` dynamic combo has keys auto, avatar_iv, avatar_iii and avatar_v, but these are engines rather than model ids, and the input is named `engine`, not `model`, so a generator that only expands a `model` input will produce one entry for the node rather than four. HeyGen is the only vendor in this file with no text to image or text to video model at all.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_heygen.py",
+      "object_info"
+    ],
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "KlingVideoExtendNode": {
+    "node": "KlingVideoExtendNode",
+    "vendor": "Kling",
+    "modelId": null,
+    "label": "Kling Video Extend",
+    "kind": "video",
+    "supported": false,
+    "excludeReason": "Needs an input we cannot supply: `video_id` is a STRING with forceInput:true, obtainable only from another Kling node's second output. It is also an extend node, out of scope for this plugin.",
+    "capabilities": null,
+    "constraints": [],
+    "price": null,
+    "strengths": null,
+    "notes": "Price for the record: 59.08 credits a run.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_kling.py",
+      "object_info"
+    ],
+    "modelIdSelectable": false,
+    "modelInput": null
+  },
+  "MinimaxHailuo03ReferenceNode": {
+    "node": "MinimaxHailuo03ReferenceNode",
+    "vendor": "MiniMax",
+    "modelId": null,
+    "label": "MiniMax H3 Reference to Video",
+    "kind": "video",
+    "supported": false,
+    "excludeReason": "Needs an input we cannot supply: the node raises 'At least one reference image or video is required.'",
+    "capabilities": null,
+    "constraints": [],
+    "price": null,
+    "strengths": null,
+    "notes": "Passes the selection rule because its reference inputs are COMFY_AUTOGROW_V3 with min 0. Price for the record: the same per-second rate as MiniMax H3, plus 12.07 credits per reference image beyond five.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_minimax.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/minimax/minimax-h3",
+      "object_info"
+    ],
+    "modelIdSelectable": false,
+    "modelInput": "model"
+  },
+  "PixverseV6FusionVideoNode": {
+    "node": "PixverseV6FusionVideoNode",
+    "vendor": "PixVerse",
+    "modelId": null,
+    "label": "PixVerse V6 Fusion",
+    "kind": "video",
+    "supported": false,
+    "excludeReason": "Needs an input we cannot supply: the node raises 'Connect at least one subject, background or reference video.'",
+    "capabilities": null,
+    "constraints": [],
+    "price": null,
+    "strengths": null,
+    "notes": "Passes the selection rule because subjects, backgrounds and videos are all COMFY_AUTOGROW_V3 with min 0. Same per-second rates as PixVerse V6, except that a connected reference video is billed at twice the rate for each second of the reference rather than of the output.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_pixverse.py",
+      "object_info"
+    ],
+    "modelIdSelectable": false,
+    "modelInput": "model"
+  },
+  "RecraftV4TextToImageNode/recraftv4_styles": {
+    "node": "RecraftV4TextToImageNode",
+    "vendor": "Recraft",
+    "modelId": "recraftv4_styles",
+    "label": "Recraft V4 Styles",
+    "kind": "image",
+    "supported": false,
+    "excludeReason": "Needs an input we cannot supply: the node raises \"Model 'recraftv4_styles' always requires a style: connect style reference images or provide a style_id.\"",
+    "capabilities": null,
+    "constraints": [],
+    "price": null,
+    "strengths": null,
+    "notes": "The style_id is a Recraft UUID from their website or from a previous run's style_id output, and style_references need images. Price for the record: 7.39 credits an image.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_recraft.py",
+      "object_info"
+    ],
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "RecraftV4TextToImageNode/recraftv4_styles_pro": {
+    "node": "RecraftV4TextToImageNode",
+    "vendor": "Recraft",
+    "modelId": "recraftv4_styles_pro",
+    "label": "Recraft V4 Styles Pro",
+    "kind": "image",
+    "supported": false,
+    "excludeReason": "Same as recraftv4_styles: the node refuses without a style_id or style reference images.",
+    "capabilities": null,
+    "constraints": [],
+    "price": null,
+    "strengths": null,
+    "notes": "Price for the record: 21.1 credits an image.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_recraft.py",
+      "object_info"
+    ],
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "ReveImageCreateNode/reve-create@20250915": {
+    "node": "ReveImageCreateNode",
+    "vendor": "Reve",
+    "modelId": "reve-create@20250915",
+    "label": "Reve Image Create",
+    "kind": "image",
+    "supported": false,
+    "excludeReason": "Deprecated and very likely dead: the node is deprecated:true in object_info, and the Comfy pricing page carries a warning that Reve's public API wound down on 2026-08-14.",
+    "capabilities": null,
+    "constraints": [],
+    "price": null,
+    "strengths": null,
+    "deprecated": true,
+    "notes": "If it is kept at all it should be hidden by default. For the record it is a working text to image shape: aspect ratios 3:2, 16:9, 9:16, 2:3, 4:3, 3:4, 1:1, prompt limit 2560 characters enforced by the node, one image a run, base price 7.24 credits ($0.03432) rising to 16.08 credits at 4x upscale. `test_time_scaling` 1 to 5 raises quality and cost in a way the published table does not quantify, so any estimate here would be a guess.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_reve.py",
+      "https://docs.comfy.org/tutorials/partner-nodes/reve/reve-image",
+      "object_info"
+    ],
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "ReveImageRemixNode": {
+    "node": "ReveImageRemixNode",
+    "vendor": "Reve",
+    "modelId": null,
+    "label": "Reve Image Remix",
+    "kind": "image",
+    "supported": false,
+    "excludeReason": "Deprecated (same 2026-08-14 wind-down) and needs an input we cannot supply: `reference_images` is a required AUTOGROW with min 1, and the node raises 'At least one reference image is required.'",
+    "capabilities": null,
+    "constraints": [],
+    "price": null,
+    "strengths": null,
+    "deprecated": true,
+    "notes": "Two model keys, reve-remix@20250915 and reve-remix-fast@20251030, neither reachable from a text-only form.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_reve.py",
+      "object_info"
+    ],
+    "modelIdSelectable": false,
+    "modelInput": "model"
+  },
+  "Vidu2ReferenceVideoNode/viduq2": {
+    "node": "Vidu2ReferenceVideoNode",
+    "vendor": "Vidu",
+    "modelId": "viduq2",
+    "label": "Vidu Q2 Reference to Video",
+    "kind": "video",
+    "supported": false,
+    "excludeReason": "Needs an input we cannot supply: `subjects` is a required AUTOGROW with min 1 and the prompt refers to the references as @subject1 and so on.",
+    "capabilities": null,
+    "constraints": [],
+    "price": null,
+    "strengths": null,
+    "notes": "Price for the record: the viduq2 per-second rates with a higher base (26.375 credits at 720p, 79.125 at 1080p) plus 15.825 a run when audio is on.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_vidu.py",
+      "object_info"
+    ],
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "MinimaxHailuo03TextToVideoNode/MiniMax H3 Max Turbo": {
+    "node": "MinimaxHailuo03TextToVideoNode",
+    "vendor": "MiniMax",
+    "modelId": "MiniMax H3 Max Turbo",
+    "label": "MiniMax H3 Max Turbo",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "480P",
+        "768P"
+      ],
+      "aspects": [
+        "16:9",
+        "4:3",
+        "1:1",
+        "3:4",
+        "9:16",
+        "21:9"
+      ],
+      "durations": {
+        "min": 5,
+        "max": 15,
+        "allowed": null,
+        "default": 5
+      },
+      "audio": true,
+      "audioAlways": true,
+      "audioFree": true,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 50000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {
+          "model": "MiniMax H3 Max Turbo"
+        },
+        "then": {
+          "watermark": false
+        },
+        "note": "Only MiniMax H3 can add a watermark. H3 Max Turbo cannot."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.03575,
+      "credits": 7.54,
+      "confidence": "published",
+      "basis": "480P; from the node's price badge only, this model has no row on the Comfy pricing page",
+      "table": [
+        {
+          "when": {
+            "resolution": "480P"
+          },
+          "usd": 0.03575,
+          "credits": 7.54
+        },
+        {
+          "when": {
+            "resolution": "768P"
+          },
+          "usd": 0.0572,
+          "credits": 12.07
+        }
+      ]
+    },
+    "strengths": "The cheapest MiniMax video, half the H3 Max rate at the same two sizes",
+    "notes": "Added to ComfyUI 0.34.4 as the fast tier of H3 Max, and it shares the Max code path: the same /proxy/fal/minimax/h3-max-turbo endpoint style, the same 50000 character prompt limit, the same 5 to 15 second slider and the same refusal of a watermark, which the node raises as \"Watermark is only supported by MiniMax H3.\" It has no row on docs.comfy.org/tutorials/partner-nodes/pricing, so the rates come from the node's own price_badge expression, which reads 0.03575 at 480P and 0.0572 at 768P per second. Comfy's H3 tutorial independently calls Turbo about half the Max rate, and half of Max is exactly these two figures, so two sources agree. Audio is recorded the same way as H3 and H3 Max: the node declares no sound input at all, so there is nothing to switch and nothing extra to pay for. `prompt_expansion_mode` (balanced or quality) is a required extra, as on Max. At 480P, 0.03575 dollars a second is 7.54325 credits, so a 5 second clip is 37.72 credits.",
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/minimax/minimax-h3",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_minimax.py",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "MetaMuseImageTextToImageApi/muse-image-1.0": {
+    "node": "MetaMuseImageTextToImageApi",
+    "vendor": "Meta",
+    "modelId": "muse-image-1.0",
+    "label": "Muse Image 1.0",
+    "kind": "image",
+    "apiModelId": "muse-image-1.0",
+    "capabilities": {
+      "resolutions": null,
+      "sizePresets": null,
+      "aspects": [
+        "auto",
+        "1:1",
+        "3:2",
+        "2:3",
+        "4:3",
+        "3:4",
+        "5:4",
+        "4:5",
+        "16:9",
+        "9:16",
+        "21:9",
+        "9:21",
+        "2:1",
+        "1:2"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false,
+      "outputSize": "about 2.5 megapixels at every ratio: 1600x1600 at 1:1, 2048x1152 at 16:9; no size control"
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.0143,
+      "credits": 3.02,
+      "confidence": "published",
+      "note": "One flat rate at every ratio and every reasoning strength. Comfy's pricing page lists \"Meta Muse Image Text to Image, 3.017 / image\" and the node's own price badge reads a flat 0.0143 US dollars, which is 3.017 credits at 211 to the dollar. The two agree to the cent, so the figure is recorded at the usual two decimals as 3.02. The tooltip promises 1600x1600 at 1:1."
+    },
+    "strengths": "Plans and self-refines before it renders, and can search the web while it plans",
+    "notes": "New in the 2026-09-08 catalog. Everything lives inside the `model` dynamic combo, so the wire names are `model.prompt`, `model.aspect_ratio` and so on. There is no size or resolution control at all: aspect ratio is the only geometry input and the model renders every ratio at about 2.5 megapixels. `reasoning_strength` (high or low) changes how long it thinks, and the three advanced booleans (`enable_web_search`, `enable_image_search`, `enable_shell`) let it look things up and run code while planning; all three default to on and none of them changes the price. The seed input is decorative: the node's own tooltip says the API has no seed and results are nondeterministic regardless. The sibling MetaMuseImageEditApi is the same model behind an edit node that demands one to ten input images, so it is not a text to image model and is recorded as unsupported by the generator.",
+    "hidden": false,
+    "recommended": false,
+    "sources": [
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "OpenRouterImageNode/microsoft/mai-image-2.6": {
+    "node": "OpenRouterImageNode",
+    "vendor": "Microsoft",
+    "modelId": "microsoft/mai-image-2.6",
+    "label": "MAI Image 2.6",
+    "kind": "image",
+    "apiModelId": "microsoft/mai-image-2.6",
+    "capabilities": {
+      "resolutions": [
+        "1K",
+        "1.5K"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "1:1",
+        "16:9",
+        "9:16",
+        "3:2",
+        "2:3",
+        "4:3",
+        "3:4",
+        "auto"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false,
+      "outputSize": "1K or 1.5K on the short side, seven ratios plus auto"
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.056001659999999995,
+      "credits": 11.82,
+      "confidence": "published",
+      "usdRange": [
+        0.042091,
+        0.125557
+      ],
+      "creditsRange": [
+        8.88,
+        26.49
+      ],
+      "by": {
+        "1K": {
+          "usd": 0.056001659999999995,
+          "credits": 11.82,
+          "usdRange": [
+            0.042091,
+            0.056002
+          ],
+          "creditsRange": [
+            8.88,
+            11.82
+          ]
+        },
+        "1.5K": {
+          "usd": 0.12555686,
+          "credits": 26.49,
+          "usdRange": [
+            0.122894,
+            0.125557
+          ],
+          "creditsRange": [
+            25.93,
+            26.49
+          ]
+        }
+      },
+      "note": "Billed on tokens, not per image: the node's price_badge charges the prompt at 5 and the output at 38 US dollars per million tokens, times 1.43, and the output token count is fixed per resolution and ratio. The figures here are computed from that expression at a 200 character prompt, and the range covers every ratio, because 4:3 is 768 output tokens against 1024 at 1:1. The prompt is about half a percent of the total, so a long one barely moves it. A reference image adds its own tokens on top, which estimateCredits does not model."
+    },
+    "strengths": "Microsoft's own image model, 1K or 1.5K with seven ratios",
+    "notes": "New in the 2026-09-11 catalog, reached through OpenRouter rather than from Microsoft directly, which is why the model id carries a vendor prefix. Everything lives inside the `model` dynamic combo. Up to 5 reference images. The generated label reads \"Microsoft/mai Image 2.6\", so this record sets one.",
+    "sources": [
+      "object_info price_badge",
+      "https://openrouter.ai/microsoft/mai-image-2.6"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "OpenRouterImageNode/microsoft/mai-image-2.6-flash": {
+    "node": "OpenRouterImageNode",
+    "vendor": "Microsoft",
+    "modelId": "microsoft/mai-image-2.6-flash",
+    "label": "MAI Image 2.6 Flash",
+    "kind": "image",
+    "apiModelId": "microsoft/mai-image-2.6-flash",
+    "capabilities": {
+      "resolutions": [
+        "1K",
+        "1.5K"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "1:1",
+        "16:9",
+        "9:16",
+        "3:2",
+        "2:3",
+        "4:3",
+        "3:4",
+        "auto"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false,
+      "outputSize": "1K or 1.5K on the short side, seven ratios plus auto"
+    },
+    "constraints": [],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.027947205,
+      "credits": 5.9,
+      "confidence": "published",
+      "usdRange": [
+        0.020992,
+        0.062725
+      ],
+      "creditsRange": [
+        4.43,
+        13.23
+      ],
+      "by": {
+        "1K": {
+          "usd": 0.027947205,
+          "credits": 5.9,
+          "usdRange": [
+            0.020992,
+            0.027947
+          ],
+          "creditsRange": [
+            4.43,
+            5.9
+          ]
+        },
+        "1.5K": {
+          "usd": 0.062724805,
+          "credits": 13.23,
+          "usdRange": [
+            0.061393,
+            0.062725
+          ],
+          "creditsRange": [
+            12.95,
+            13.23
+          ]
+        }
+      },
+      "note": "Billed on tokens, not per image: the node's price_badge charges the prompt at 1.75 and the output at 19 US dollars per million tokens, times 1.43, and the output token count is fixed per resolution and ratio. The figures here are computed from that expression at a 200 character prompt, and the range covers every ratio, because 4:3 is 768 output tokens against 1024 at 1:1. The prompt is about half a percent of the total, so a long one barely moves it. A reference image adds its own tokens on top, which estimateCredits does not model."
+    },
+    "strengths": "Half the price of MAI Image 2.6 at the same sizes",
+    "notes": "New in the 2026-09-11 catalog, reached through OpenRouter rather than from Microsoft directly, which is why the model id carries a vendor prefix. Everything lives inside the `model` dynamic combo. Up to 5 reference images. The generated label reads \"Microsoft/mai Image 2.6 Flash\", so this record sets one.",
+    "sources": [
+      "object_info price_badge",
+      "https://openrouter.ai/microsoft/mai-image-2.6-flash"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "HunyuanImageTextToImageApi/hy-image-3.5-preview": {
+    "node": "HunyuanImageTextToImageApi",
+    "vendor": "Tencent",
+    "modelId": "hy-image-3.5-preview",
+    "label": "HY Image 3.5 Preview",
+    "kind": "image",
+    "apiModelId": "hy-image-v3.5-preview",
+    "capabilities": {
+      "resolutions": [
+        "1K",
+        "2K",
+        "4K"
+      ],
+      "sizePresets": null,
+      "aspects": [
+        "auto",
+        "1:1",
+        "3:2",
+        "2:3",
+        "4:3",
+        "3:4",
+        "16:9",
+        "9:16",
+        "21:9",
+        "9:21"
+      ],
+      "durations": null,
+      "audio": false,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMinChars": 1,
+      "promptMaxChars": null,
+      "seed": true,
+      "negativePrompt": false,
+      "outputSize": "1K is about 1 MP and 2K about 4 MP at the chosen ratio; 4K is rendered at 2K and upscaled by the model"
+    },
+    "constraints": [
+      {
+        "when": {
+          "resolution": "4K"
+        },
+        "then": {
+          "aspect": [
+            "1:1",
+            "3:2",
+            "2:3",
+            "4:3",
+            "3:4",
+            "16:9",
+            "9:16",
+            "21:9",
+            "9:21"
+          ]
+        },
+        "note": "At 4K the model cannot choose the shape itself, so pick a ratio."
+      }
+    ],
+    "price": {
+      "unit": "per-image",
+      "usd": 0.03432,
+      "credits": 7.24,
+      "confidence": "published",
+      "byTier": {
+        "1K, 2K": {
+          "usd": 0.03432,
+          "credits": 7.24
+        },
+        "4K": {
+          "usd": 0.04576,
+          "credits": 9.66
+        }
+      },
+      "note": "7.24 credits an image at 1K and 2K, 9.66 at 4K, which is a 2K render upscaled by the model. From the node's own price badge (0.03432 and 0.04576 US dollars, times 211), and the 7.24 agrees with the pricing row Comfy's docs added for this model. The node's custom size, which the plugin does not offer, pays the 4K rate above 4,194,304 pixels."
+    },
+    "strengths": "Multilingual text and typesetting for posters and infographics, 1K to 4K",
+    "notes": "New in the 2026-09-24 catalog (ComfyUI 0.37.1, 2026-09-22). Everything lives inside the model dynamic combo, so the wire names are model.prompt, model.aspect_ratio, model.resolution, model.width, model.height, model.seed and model.watermark. The resolution list also carries 'custom', which reads model.width and model.height (multiples of 16, up to 4096x4096 in area); the plugin drops Custom as it does everywhere and sizes by ratio and tier, and the builder still sends the node's default 2048x2048 because both inputs are required. Tencent documents 2K as the native size: 4K is rendered at 2K and upscaled. 'auto' lets the model pick the ratio from the prompt and the node refuses it at 4K. The model rewrites and expands the prompt before rendering, and the seed tooltip says results still vary between runs with the same seed. The sibling HunyuanImageEditApi is the same model behind an edit node that demands one to five reference images, so it is unsupported. This text to image node takes no reference image at all.",
+    "hidden": false,
+    "recommended": false,
+    "sources": [
+      "https://docs.comfy.org/changelog",
+      "https://github.com/Comfy-Org/ComfyUI/pull/16462",
+      "https://github.com/Comfy-Org/docs/pull/1772",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_hunyuan_image.py",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "PrunaTextToVideoNode/p-video-2": {
+    "node": "PrunaTextToVideoNode",
+    "vendor": "Pruna",
+    "modelId": "p-video-2",
+    "label": "P-Video-2",
+    "kind": "video",
+    "capabilities": {
+      "resolutions": [
+        "720p",
+        "1080p"
+      ],
+      "aspects": [
+        "16:9",
+        "9:16",
+        "4:3",
+        "3:4",
+        "3:2",
+        "2:3",
+        "1:1"
+      ],
+      "durations": {
+        "min": 1,
+        "max": 20,
+        "allowed": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        "auto": true,
+        "default": 5
+      },
+      "audio": true,
+      "audioDefault": true,
+      "audioFree": true,
+      "sizes": null,
+      "dimensions": null,
+      "batch": {
+        "min": 1,
+        "max": 1
+      },
+      "promptMaxChars": 5000,
+      "seed": true,
+      "negativePrompt": false
+    },
+    "constraints": [
+      {
+        "when": {
+          "resolution": "1080p",
+          "draft": true
+        },
+        "then": {
+          "fps": [
+            "24"
+          ]
+        },
+        "note": "A draft at 1080p only renders at 24 frames a second."
+      }
+    ],
+    "price": {
+      "unit": "per-second",
+      "usd": 0.03575,
+      "credits": 7.54,
+      "confidence": "published",
+      "note": "Per second of output: 7.54 credits at 720p and 15.09 at 1080p, and a draft is 60 percent of that, 4.53 and 9.05. The node's price badge (0.03575, 0.0715, 0.02145 and 0.0429 US dollars, times 211) and Comfy's pricing page agree to the cent. Sound and frame rate do not change the price. On 'auto' length the badge shows only the rate, and this plugin gives no figure.",
+      "table": [
+        {
+          "when": {
+            "resolution": "720p",
+            "draft": false
+          },
+          "usd": 0.03575,
+          "credits": 7.54
+        },
+        {
+          "when": {
+            "resolution": "720p",
+            "draft": true
+          },
+          "usd": 0.02145,
+          "credits": 4.53
+        },
+        {
+          "when": {
+            "resolution": "1080p",
+            "draft": false
+          },
+          "usd": 0.0715,
+          "credits": 15.09
+        },
+        {
+          "when": {
+            "resolution": "1080p",
+            "draft": true
+          },
+          "usd": 0.0429,
+          "credits": 9.05
+        }
+      ]
+    },
+    "strengths": "Clips of 1 to 20 seconds with native sound, and a draft mode at 60 percent of the price",
+    "notes": "New in the 2026-09-24 catalog (ComfyUI 0.36.0, 2026-09-15). Everything lives inside the model dynamic combo. Duration is a combo of 'auto' plus the strings '1' to '20', with a default of '5'; the plugin offers the numbers and not 'auto', because on 'auto' the model picks any length from 1 to 20 seconds from the prompt and a per second price then has no figure, so a graph sent through run_workflow with 'auto' is refused a quote rather than quoted at five seconds. fps is '24' or '48' and is sent as a string, since the catalog spells it that way. draft bills 60 percent of the standard rate and cannot be combined with 48 fps at 1080p. generate_audio defaults to on in the node and costs nothing extra; the plugin's own form starts it off, as it does for every model. enhance_prompt (on by default) rewrites the prompt before generating, and only with it off does the same seed reproduce a result. 720p renders 1280x704 and 1080p 1920x1088 at 16:9. The optional audio input, which would set the length itself, is not wired. The sibling PrunaImageToVideoNode needs a first frame and is unsupported.",
+    "hidden": false,
+    "recommended": false,
+    "sources": [
+      "https://docs.comfy.org/changelog",
+      "https://docs.comfy.org/tutorials/partner-nodes/pruna/p-video-2",
+      "https://docs.comfy.org/tutorials/partner-nodes/pricing",
+      "https://github.com/comfyanonymous/ComfyUI/blob/master/comfy_api_nodes/nodes_pruna.py",
+      "object_info"
+    ],
+    "supported": true,
+    "modelIdSelectable": true,
+    "modelInput": "model"
+  },
+  "Flux3ImageNode": {
+    "node": "Flux3ImageNode",
+    "modelId": null,
+    "vendor": "BFL",
+    "label": "FLUX.3",
+    "kind": "image",
+    "supported": true,
+    "modelIdSelectable": false,
+    "capabilities": {
+      "resolutions": [
+        "0.75K",
+        "1K",
+        "1.5K",
+        "2K",
+        "4K"
+      ],
+      "aspects": [
+        "auto",
+        "21:9",
+        "2:1",
+        "16:9",
+        "3:2",
+        "7:5",
+        "4:3",
+        "5:4",
+        "1:1",
+        "4:5",
+        "3:4",
+        "5:7",
+        "2:3",
+        "9:16"
+      ],
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "price": {
+      "unit": "per-image",
+      "usd": 0.143,
+      "credits": 30.17,
+      "confidence": "published",
+      "by": {
+        "0.75K": {
+          "usd": 0.05863,
+          "credits": 12.37
+        },
+        "1K": {
+          "usd": 0.06864,
+          "credits": 14.48
+        },
+        "1.5K": {
+          "usd": 0.1001,
+          "credits": 21.12
+        },
+        "2K": {
+          "usd": 0.143,
+          "credits": 30.17
+        },
+        "4K": {
+          "usd": 0.86801,
+          "credits": 183.15
+        }
+      },
+      "note": "Per image by resolution, from the node's price badge. The node opens at 2K. 4K is six times the 2K price. The badge adds nothing for reference images.",
+      "perReferenceImageCredits": 0,
+      "referencesIncluded": 10
+    },
+    "strengths": "BFL's newest model, 0.75K to 4K, with up to 10 reference images",
+    "notes": "New in the 2026-10-03 catalog. grounding (on by default) lets the model look things up before drawing; bounding_boxes is an array input the plugin does not send.",
+    "sources": [
+      "object_info price_badge"
+    ]
+  },
+  "HeyGenReferenceToVideoNode/heygen-video-1": {
+    "node": "HeyGenReferenceToVideoNode",
+    "modelId": "heygen-video-1",
+    "vendor": "HeyGen",
+    "label": "HeyGen Video 1.0",
+    "kind": "video",
+    "supported": true,
+    "capabilities": {
+      "resolutions": [
+        "480p",
+        "768p"
+      ],
+      "aspects": [
+        "auto",
+        "16:9",
+        "9:16",
+        "1:1",
+        "4:3",
+        "3:4",
+        "21:9"
+      ],
+      "durations": {
+        "min": 5,
+        "max": 15
+      },
+      "audio": true,
+      "audioToggle": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "price": {
+      "unit": "per-second",
+      "usd": 0.0143,
+      "credits": 3.02,
+      "confidence": "published",
+      "by": {
+        "480p": {
+          "usd": 0.0143,
+          "credits": 3.02
+        },
+        "768p": {
+          "usd": 0.02145,
+          "credits": 4.53
+        }
+      },
+      "note": "Per second, from the node's price badge: 15.09 credits for 5 s at 480p. Any reference image doubles the rate, to 6.03 a second at 480p and 9.05 at 768p, whatever the number of references.",
+      "perReferenceImageCredits": 15.09,
+      "referencesIncluded": 0
+    },
+    "strengths": "Spoken dialogue with sound from a prompt, 5 to 15 seconds",
+    "notes": "New in the 2026-10-03 catalog. The node also takes reference videos and voice clips, which this plugin does not send. A reference doubles the per second rate, so the plugin refuses to quote a run with a reference rather than guess at a length. The text prompt alone works.",
+    "sources": [
+      "object_info price_badge"
+    ]
+  },
+  "IdeogramTextToImageApi/ideogram-4.5": {
+    "node": "IdeogramTextToImageApi",
+    "modelId": "ideogram-4.5",
+    "vendor": "Ideogram",
+    "label": "Ideogram 4.5",
+    "kind": "image",
+    "supported": true,
+    "capabilities": {
+      "audio": false,
+      "batch": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "price": {
+      "unit": "per-image",
+      "usd": 0.0858,
+      "credits": 18.1,
+      "confidence": "published",
+      "table": [
+        {
+          "when": {
+            "quality": "low"
+          },
+          "usd": 0.0429,
+          "credits": 9.05
+        },
+        {
+          "when": {
+            "quality": "medium"
+          },
+          "usd": 0.0858,
+          "credits": 18.1
+        },
+        {
+          "when": {
+            "quality": "high"
+          },
+          "usd": 0.286,
+          "credits": 60.35
+        }
+      ],
+      "note": "Per image by quality, from the node's price badge. Medium is the default. The badge also prices a very low tier the node does not offer. Every size costs the same."
+    },
+    "strengths": "Ideogram's newest model, 1K and 2K sizes in 18 ratios, three quality tiers",
+    "notes": "New in the 2026-10-03 catalog. Quality and magic prompt are extras. Ideogram's edit nodes from the same catalog need an image and are not offered.",
+    "sources": [
+      "object_info price_badge"
+    ]
+  },
+  "RecraftV4TextToImageNode/recraftv4_1_flash": {
+    "node": "RecraftV4TextToImageNode",
+    "modelId": "recraftv4_1_flash",
+    "vendor": "Recraft",
+    "label": "Recraft V4.1 Flash",
+    "kind": "image",
+    "supported": true,
+    "capabilities": {
+      "audio": false,
+      "negativePrompt": false,
+      "batch": {
+        "min": 1,
+        "max": 6
+      }
+    },
+    "price": {
+      "unit": "per-image",
+      "usd": 0.01001,
+      "credits": 2.11,
+      "confidence": "published",
+      "note": "Per image, multiplied by n (1 to 6), from the node's price badge. The same badge now prices V4.1 at 10.56 and V4 at 12.07, above the 7.39 and 8.44 the recraftv4_1 and recraftv4 records hold, so those figures may be stale."
+    },
+    "strengths": "Recraft V4.1 at 2.11 credits an image, up to six at once",
+    "notes": "New in the 2026-10-03 catalog. The negative prompt input is ignored on V4 and V4.1, as the node's own tooltip says, so it is not offered.",
+    "sources": [
+      "object_info price_badge"
+    ]
+  }
+}

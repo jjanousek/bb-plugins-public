@@ -1,0 +1,21 @@
+dist/
+node_modules/
+.env
+.env.*
+!.env.example
+
+# QA screenshots are byproducts and are never tracked.
+qa/*.png
+qa/*.aria.txt
+qa/*.txt
+
+# Run logs are byproducts too, and they carry absolute paths and whatever the
+# browser printed.
+*.log
+
+# Never track a database, a WAL, or anything derived from the live store.
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3

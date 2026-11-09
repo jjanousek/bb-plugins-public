@@ -1,0 +1,9 @@
+{
+  "assigned_inference": "192.0.2.10:8080",
+  "created_at": "2031-03-12T06:45:00.000000Z",
+  "error_message": "{\"exception_message\": \"API Error: Requested model example-clip-model does not exist or you do not have access (status: not_found)\\n\", \"exception_type\": \"RuntimeError\", \"node_id\": \"1\", \"node_type\": \"ByteDanceTextToVideoNode\", \"traceback\": [\"  File \\\"/srv/example/runner.py\\\", line 12, in run_node\\n    raise err\\n\", \"  File \\\"/srv/example/partner_api.py\\\", line 34, in call_partner\\n    raise RuntimeError(text)\\n\"]}",
+  "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaabb",
+  "last_state_update": "2031-03-12T06:45:03.000000Z",
+  "status": "error",
+  "updated_at": "2031-03-12T06:45:03.000000Z"
+}

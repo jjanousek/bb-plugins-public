@@ -1,0 +1,41 @@
+{
+  "events": [
+    {
+      "createdAt": "2031-11-04T13:30:00.000000Z",
+      "event_type": "api_usage_completed",
+      "params": {
+        "api_name": "openai",
+        "credits_used": 3.1,
+        "endpoint": "v1/images/generations",
+        "job_id": "cccccccc-cccc-4ccc-8ccc-cccccccccaaa",
+        "model": "gpt-image-2",
+        "output_tier": "medium",
+        "prompt": "a lighthouse drawn in chalk on a slate"
+      }
+    },
+    {
+      "createdAt": "2031-11-03T08:45:00.000000Z",
+      "event_type": "cloud_workflow_executed",
+      "params": {
+        "gpu_seconds": 12,
+        "gpu_type": "example_gpu",
+        "job_id": "cccccccc-cccc-4ccc-8ccc-cccccccccbbb"
+      }
+    },
+    {
+      "createdAt": "2031-11-01T19:15:00.000000Z",
+      "event_type": "api_usage_completed",
+      "params": {
+        "api_name": "kling",
+        "credits_used": 18.4,
+        "endpoint": "v1/videos/text2video",
+        "job_id": "cccccccc-cccc-4ccc-8ccc-cccccccccddd",
+        "model": "kling-v2-5-turbo"
+      }
+    }
+  ],
+  "limit": 50,
+  "page": 2,
+  "total": 170,
+  "totalPages": 4
+}

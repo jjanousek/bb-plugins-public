@@ -1,0 +1,35 @@
+{
+  "$schema": "https://getbb.app/schemas/plugins.schema.json",
+  "schemaVersion": 1,
+  "name": "bb-plugins-public",
+  "plugins": [
+    {
+      "name": "chief-of-comms",
+      "source": "./chief-of-comms"
+    },
+    {
+      "name": "chief-of-staff",
+      "source": "./chief-of-staff"
+    },
+    {
+      "name": "comfy-cloud",
+      "source": "./comfy-cloud"
+    },
+    {
+      "name": "faces",
+      "source": "./faces"
+    },
+    {
+      "name": "proxy-usage",
+      "source": "./proxy-usage"
+    },
+    {
+      "name": "screen-share",
+      "source": "./screen-share"
+    },
+    {
+      "name": "usage",
+      "source": "./usage"
+    }
+  ]
+}

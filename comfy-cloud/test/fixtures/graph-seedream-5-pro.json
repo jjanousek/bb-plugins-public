@@ -1,0 +1,26 @@
+{
+  "1": {
+    "class_type": "ByteDanceSeedreamNodeV2",
+    "inputs": {
+      "prompt": "a brass compass on a folded map, overhead photo",
+      "model": "seedream 5.0 pro",
+      "model.size_preset": "(1K) 1024x1024 (1:1)",
+      "model.width": 1024,
+      "model.height": 1024,
+      "model.max_images": 1,
+      "model.fail_on_partial": false,
+      "seed": 7,
+      "watermark": false
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "1",
+        0
+      ],
+      "filename_prefix": "bb"
+    }
+  }
+}

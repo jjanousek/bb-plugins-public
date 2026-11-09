@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#202124">
+<link rel="icon" href="data:,">
+<title>Agent browser</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #202124; color: #e8eaed;
+               font: 14px system-ui, -apple-system, sans-serif; overscroll-behavior: none; }
+  #app { position: fixed; left: 0; top: 0; width: 100%; height: 100%; display: flex; flex-direction: column; }
+  #stage { position: relative; flex: 1; min-height: 0; overflow: hidden; background: #111; touch-action: none; }
+  #screen { position: absolute; left: 0; top: 0; }
+  #overlay { position: absolute; inset: 0; touch-action: none; }
+  #status { position: absolute; left: 0; right: 0; top: 0; padding: 10px 14px; text-align: center; font-size: 13px;
+            background: rgba(32,33,36,0.92); pointer-events: none; transition: opacity 0.3s; }
+  #status.hidden { opacity: 0; }
+  #bar { flex: 0 0 auto; display: flex; gap: 6px; touch-action: manipulation; padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+         background: #202124; border-top: 1px solid #3c4043; overflow-x: auto; scrollbar-width: none; }
+  #bar::-webkit-scrollbar { display: none; }
+  #bar button { flex: 0 0 auto; min-width: 46px; height: 44px; padding: 0 12px; border: 0; border-radius: 8px;
+                background: #303134; color: #e8eaed; font: inherit; font-weight: 500; }
+  #bar button.on { background: #8ab4f8; color: #202124; }
+  #bar button:active { background: #5f6368; }
+  #bar .sep { flex: 0 0 1px; background: #3c4043; margin: 6px 2px; }
+  #kbd { position: absolute; left: -1000px; top: 0; width: 10px; height: 10px; opacity: 0.01; font-size: 16px; }
+  #dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #f28b82; margin-right: 6px; vertical-align: middle; }
+  #dot.ok { background: #81c995; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="stage">
+    <div id="screen"></div>
+    <div id="overlay"></div>
+    <div id="status"><span id="dot"></span><span id="statusText">Connecting…</span></div>
+  </div>
+  <textarea id="kbd" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" tabindex="-1" aria-label="Type into the remote browser"></textarea>
+  <div id="bar">
+    <button id="bKbd" title="Keyboard">⌨︎</button>
+    <button data-key="Tab">Tab</button>
+    <button data-key="Return">↵</button>
+    <button data-key="BackSpace">⌫</button>
+    <button data-key="Escape">Esc</button>
+    <span class="sep"></span>
+    <button data-key="Left">←</button>
+    <button data-key="Right">→</button>
+    <button data-key="Up">↑</button>
+    <button data-key="Down">↓</button>
+    <span class="sep"></span>
+    <button id="bFit">Fit</button>
+    <button id="bZoomIn">＋</button>
+    <button id="bZoomOut">－</button>
+    <button id="bHelp">?</button>
+  </div>
+</div>
+
+<script type="module">
+import RFB from "./core/rfb.js";
+import { releaseCapture } from "./core/util/events.js";
+import KeyTable from "./core/input/keysym.js";
+import keysyms from "./core/input/keysymdef.js";
+
+const stage = document.getElementById("stage");
+const screen = document.getElementById("screen");
+const overlay = document.getElementById("overlay");
+const statusBox = document.getElementById("status");
+const statusText = document.getElementById("statusText");
+const dot = document.getElementById("dot");
+const kbd = document.getElementById("kbd");
+
+const params = new URLSearchParams(location.search);
+const wsPath = params.get("path") || "websockify";
+const wsUrl = new URL(wsPath, location.href);
+wsUrl.protocol = location.protocol === "https:" ? "wss:" : "ws:";
+
+// ---- remote display geometry -------------------------------------------------
+// noVNC scales its canvas to fit #screen. We size #screen to (fb * zoom) and move it
+// with translate(). Pinch changes zoom, one finger pans. The RFB object therefore
+// always sees correct canvas bounds and coordinates, and no CSS transform scaling.
+let fbW = 1920, fbH = 1080;
+let zoom = 1, panX = 0, panY = 0;
+let statusTimer = 0;
+
+function stageSize() { return { w: stage.clientWidth, h: stage.clientHeight }; }
+function fitZoom() { const s = stageSize(); return Math.min(s.w / fbW, s.h / fbH); }
+function fitHeightZoom() { return stageSize().h / fbH; }
+function clampPan() {
+  const s = stageSize(), w = fbW * zoom, h = fbH * zoom;
+  panX = w <= s.w ? (s.w - w) / 2 : Math.min(0, Math.max(s.w - w, panX));
+  panY = h <= s.h ? (s.h - h) / 2 : Math.min(0, Math.max(s.h - h, panY));
+}
+function apply() {
+  clampPan();
+  screen.style.width = `${fbW * zoom}px`;
+  screen.style.height = `${fbH * zoom}px`;
+  screen.style.transform = `translate(${panX}px, ${panY}px)`;
+}
+function setZoom(next, cx, cy) {
+  const min = fitZoom(), max = Math.max(3, min);
+  next = Math.min(max, Math.max(min, next));
+  // Keep the remote point under (cx, cy) fixed while zooming.
+  const rx = (cx - panX) / zoom, ry = (cy - panY) / zoom;
+  zoom = next;
+  panX = cx - rx * zoom;
+  panY = cy - ry * zoom;
+  apply();
+}
+function fit() { zoom = fitZoom(); apply(); }
+function initialView() {
+  const s = stageSize();
+  // Portrait: fill the height so a centred login form is readable. Landscape: whole screen.
+  zoom = s.h > s.w ? Math.max(fitZoom(), fitHeightZoom()) : fitZoom();
+  // Start at the top-left: that is where the agent's Chrome window opens. apply() centres
+  // whichever axis does not overflow.
+  panX = 0;
+  panY = 0;
+  apply();
+}
+
+// ---- status -------------------------------------------------------------------
+function showStatus(text, ok, ms) {
+  statusText.textContent = text;
+  dot.className = ok ? "ok" : "";
+  statusBox.classList.remove("hidden");
+  clearTimeout(statusTimer);
+  if (ms) statusTimer = setTimeout(() => statusBox.classList.add("hidden"), ms);
+}
+
+// ---- RFB ----------------------------------------------------------------------
+const rfb = new RFB(screen, wsUrl.href, { shared: true, wsProtocols: ["binary"] });
+rfb.scaleViewport = true;
+rfb.clipViewport = false;
+rfb.showDotCursor = true;
+rfb.focusOnClick = false;
+rfb.background = "#111";
+rfb.addEventListener("connect", () => {
+  fbW = rfb._display.width || fbW;
+  fbH = rfb._display.height || fbH;
+  initialView();
+  showStatus("Connected. Tap = click, one finger = pan, two fingers = scroll, pinch = zoom.", true, 4000);
+});
+rfb.addEventListener("disconnect", (e) => {
+  showStatus(e.detail.clean ? "Disconnected. Reload to reconnect." : "Connection lost. Reconnecting…", false);
+  if (!e.detail.clean) setTimeout(() => location.reload(), 2000);
+});
+rfb.addEventListener("desktopname", (e) => { document.title = e.detail.name || document.title; });
+rfb.addEventListener("securityfailure", (e) => showStatus(`Refused: ${e.detail.reason}`, false));
+
+// ---- pointer forwarding ------------------------------------------------------
+// The overlay swallows every touch so noVNC's own gesture handler never runs. Clicks
+// and drags are replayed to the canvas as synthetic mouse events, which noVNC maps to
+// remote coordinates using the canvas bounds and its own scale.
+const canvas = () => screen.querySelector("canvas");
+function mouse(type, x, y, buttons) {
+  const c = canvas();
+  if (!c) return;
+  c.dispatchEvent(new MouseEvent(type, { clientX: x, clientY: y, buttons, button: 0, bubbles: true, cancelable: true }));
+  // RFB stops propagation, so noVNC's capture proxy never sees the release and would
+  // keep a full-screen div over our UI. Release it ourselves.
+  if (type === "mouseup") releaseCapture();
+}
+function wheel(x, y, dx, dy) {
+  const c = canvas();
+  if (!c) return;
+  c.dispatchEvent(new WheelEvent("wheel", { clientX: x, clientY: y, deltaX: dx, deltaY: dy, deltaMode: 0, bubbles: true, cancelable: true }));
+}
+
+const TAP_MS = 350, TAP_PX = 12, HOLD_MS = 550, SCROLL_PX = 1.6;
+const touches = new Map();
+let gesture = null; // "tap" | "pan" | "drag" | "scroll" | "pinch" | "done"
+let start = null, holdTimer = 0, pinchDist = 0, pinchMid = null, scrollLast = null, dragLast = null;
+
+function point(t) { const r = stage.getBoundingClientRect(); return { x: t.clientX - r.left, y: t.clientY - r.top, cx: t.clientX, cy: t.clientY }; }
+function mid(a, b) { return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2, cx: (a.cx + b.cx) / 2, cy: (a.cy + b.cy) / 2 }; }
+function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+function canPan() { const s = stageSize(); return fbW * zoom > s.w + 1 || fbH * zoom > s.h + 1; }
+
+overlay.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  for (const t of e.changedTouches) touches.set(t.identifier, point(t));
+  const pts = [...touches.values()];
+  clearTimeout(holdTimer);
+  if (pts.length === 1) {
+    start = { ...pts[0], t: Date.now() };
+    dragLast = null;
+    gesture = "tap";
+    holdTimer = setTimeout(() => {
+      if (gesture !== "tap") return;
+      gesture = "drag";
+      mouse("mousemove", start.cx, start.cy, 0);
+      mouse("mousedown", start.cx, start.cy, 1);
+      if (navigator.vibrate) navigator.vibrate(15);
+    }, HOLD_MS);
+  } else if (pts.length === 2) {
+    if (gesture === "drag") { const r = dragLast || start; mouse("mouseup", r.cx, r.cy, 0); }
+    gesture = "two";
+    pinchDist = dist(pts[0], pts[1]);
+    pinchMid = mid(pts[0], pts[1]);
+    scrollLast = pinchMid;
+  } else {
+    gesture = "done";
+  }
+}, { passive: false });
+
+overlay.addEventListener("touchmove", (e) => {
+  e.preventDefault();
+  for (const t of e.changedTouches) if (touches.has(t.identifier)) touches.set(t.identifier, point(t));
+  const pts = [...touches.values()];
+  if (pts.length === 1 && start) {
+    const p = pts[0];
+    if (gesture === "tap" && dist(p, start) > TAP_PX) {
+      clearTimeout(holdTimer);
+      gesture = canPan() ? "pan" : "scroll";
+      scrollLast = p;
+    }
+    if (gesture === "pan") {
+      panX += p.x - (start.lx ?? start.x);
+      panY += p.y - (start.ly ?? start.y);
+      start.lx = p.x; start.ly = p.y;
+      apply();
+    } else if (gesture === "scroll") {
+      wheel(start.cx, start.cy, 0, (scrollLast.y - p.y) * SCROLL_PX);
+      scrollLast = p;
+    } else if (gesture === "drag") {
+      mouse("mousemove", p.cx, p.cy, 1);
+      dragLast = p;
+    }
+  } else if (pts.length === 2 && gesture !== "done") {
+    const d = dist(pts[0], pts[1]), m = mid(pts[0], pts[1]);
+    if (gesture === "two") gesture = Math.abs(d - pinchDist) > 12 ? "pinch" : (dist(m, pinchMid) > 10 ? "scroll2" : "two");
+    if (gesture === "pinch") {
+      setZoom(zoom * (d / pinchDist), m.x, m.y);
+      panX += m.x - pinchMid.x; panY += m.y - pinchMid.y; apply();
+      pinchDist = d; pinchMid = m;
+    } else if (gesture === "scroll2") {
+      wheel(pinchMid.cx, pinchMid.cy, (scrollLast.x - m.x) * SCROLL_PX, (scrollLast.y - m.y) * SCROLL_PX);
+      scrollLast = m;
+    }
+  }
+}, { passive: false });
+
+function endTouch(e) {
+  e.preventDefault();
+  for (const t of e.changedTouches) touches.delete(t.identifier);
+  if (touches.size > 0) { if (gesture !== "drag") gesture = "done"; return; }
+  clearTimeout(holdTimer);
+  if (gesture === "tap" && start && Date.now() - start.t < TAP_MS) {
+    mouse("mousemove", start.cx, start.cy, 0);
+    mouse("mousedown", start.cx, start.cy, 1);
+    mouse("mouseup", start.cx, start.cy, 0);
+  } else if (gesture === "drag" && start) {
+    // Release where the finger last was (dragLast). `touches` cannot be used
+    // here: the loop at the top of this function has already emptied it.
+    const p = dragLast || start;
+    mouse("mouseup", p.cx, p.cy, 0);
+  }
+  gesture = null; start = null; dragLast = null;
+}
+overlay.addEventListener("touchend", endTouch, { passive: false });
+overlay.addEventListener("touchcancel", endTouch, { passive: false });
+
+// Mouse fallback (desktop testing, or a phone with a trackpad).
+overlay.addEventListener("mousedown", (e) => { e.preventDefault(); mouse("mousemove", e.clientX, e.clientY, 0); mouse("mousedown", e.clientX, e.clientY, e.buttons); });
+overlay.addEventListener("mouseup", (e) => { e.preventDefault(); mouse("mouseup", e.clientX, e.clientY, 0); });
+overlay.addEventListener("mousemove", (e) => mouse("mousemove", e.clientX, e.clientY, e.buttons));
+overlay.addEventListener("wheel", (e) => { e.preventDefault(); wheel(e.clientX, e.clientY, e.deltaX, e.deltaY); }, { passive: false });
+overlay.addEventListener("contextmenu", (e) => e.preventDefault());
+
+// ---- keyboard -----------------------------------------------------------------
+// The soft keyboard types into a hidden textarea. We diff its value against the last
+// one and send the difference as key presses, which also covers paste and autocorrect.
+const PAD = "_".repeat(60);
+let lastKbd = PAD;
+function resetKbd() { kbd.value = PAD; lastKbd = PAD; }
+resetKbd();
+kbd.addEventListener("input", () => {
+  const v = kbd.value;
+  let common = 0;
+  while (common < Math.min(v.length, lastKbd.length) && v[common] === lastKbd[common]) common++;
+  for (let i = 0; i < lastKbd.length - common; i++) rfb.sendKey(KeyTable.XK_BackSpace, "Backspace");
+  for (const ch of v.slice(common)) {
+    if (ch === "\n") rfb.sendKey(KeyTable.XK_Return, "Enter");
+    else { const k = keysyms.lookup(ch.codePointAt(0)); if (k) rfb.sendKey(k); }
+  }
+  lastKbd = v;
+  if (v.length < 10 || v.length > 200) { resetKbd(); kbd.blur(); setTimeout(() => kbd.focus(), 0); }
+});
+kbd.addEventListener("keydown", (e) => {
+  // Hardware keys that never produce input events.
+  const special = { Tab: KeyTable.XK_Tab, Escape: KeyTable.XK_Escape, ArrowLeft: KeyTable.XK_Left, ArrowRight: KeyTable.XK_Right,
+                    ArrowUp: KeyTable.XK_Up, ArrowDown: KeyTable.XK_Down, Enter: KeyTable.XK_Return };
+  if (special[e.key] !== undefined) { e.preventDefault(); rfb.sendKey(special[e.key], e.code); }
+});
+const bKbd = document.getElementById("bKbd");
+kbd.addEventListener("focus", () => bKbd.classList.add("on"));
+kbd.addEventListener("blur", () => bKbd.classList.remove("on"));
+bKbd.addEventListener("click", () => { if (document.activeElement === kbd) kbd.blur(); else { resetKbd(); kbd.focus(); kbd.setSelectionRange(PAD.length, PAD.length); } });
+for (const b of document.querySelectorAll("#bar button[data-key]")) {
+  b.addEventListener("touchend", (e) => { e.preventDefault(); rfb.sendKey(KeyTable["XK_" + b.dataset.key], b.dataset.key); }, { passive: false });
+  b.addEventListener("click", () => rfb.sendKey(KeyTable["XK_" + b.dataset.key], b.dataset.key));
+}
+// Keep the soft keyboard open while tapping toolbar buttons.
+document.getElementById("bar").addEventListener("touchstart", (e) => { if (e.target !== bKbd) e.preventDefault(); }, { passive: false });
+document.getElementById("bar").addEventListener("mousedown", (e) => e.preventDefault());
+
+// ---- zoom buttons, help, viewport -------------------------------------------------
+const centre = () => { const s = stageSize(); return [s.w / 2, s.h / 2]; };
+document.getElementById("bFit").addEventListener("click", fit);
+document.getElementById("bZoomIn").addEventListener("click", () => setZoom(zoom * 1.4, ...centre()));
+document.getElementById("bZoomOut").addEventListener("click", () => setZoom(zoom / 1.4, ...centre()));
+document.getElementById("bHelp").addEventListener("click", () =>
+  showStatus("Tap = click. Hold = press and drag. One finger = pan, two fingers = scroll, pinch = zoom. ⌨︎ opens the keyboard.", true, 6000));
+
+// The soft keyboard shrinks the visual viewport; follow it so the toolbar stays reachable.
+function fitViewport() {
+  const vv = window.visualViewport;
+  const app = document.getElementById("app");
+  if (vv) { app.style.height = `${vv.height}px`; app.style.top = `${vv.offsetTop}px`; }
+  if (zoom < fitZoom()) zoom = fitZoom();
+  apply();
+}
+window.visualViewport?.addEventListener("resize", fitViewport);
+window.visualViewport?.addEventListener("scroll", fitViewport);
+window.addEventListener("resize", fitViewport);
+window.addEventListener("orientationchange", () => setTimeout(initialView, 300));
+fitViewport();
+</script>
+</body>
+</html>

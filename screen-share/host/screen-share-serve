@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Runs the browser-based screen share of the agent browser display
+# (SCREEN_SHARE_DISPLAY, default :20; started by screen-share.service).
+#
+#   x11vnc             -> unix socket ~/.screen-share/run/rfb.sock  (raw VNC, no password)
+#   websockify + noVNC -> unix socket ~/.screen-share/run/web.sock  (HTTP + WebSocket)
+#   tailscale serve mounts web.sock at https://<your machine's tailnet name>/vnc/
+#   (the plugin re-adds that mount on start if it is missing)
+#
+# No TCP port is ever opened. The sockets live in a 0700 directory, so the only
+# things that can reach them are this user and tailscaled (root). Authentication
+# is the tailnet itself: only devices in your tailnet resolve the host.
+# websockify exits after IDLE_SECONDS with no viewer; the trap then kills x11vnc.
+# Set SCREEN_SHARE_IDLE_SECONDS=0 for a permanent share.
+set -euo pipefail
+RUN="$HOME/.screen-share/run"
+IDLE_SECONDS="${SCREEN_SHARE_IDLE_SECONDS:-300}"
+SHARE_DISPLAY="${SCREEN_SHARE_DISPLAY:-:20}"
+# The viewer pages (index.html, m.html) come from this plugin's web/ folder.
+PLUGIN_WEB="${SCREEN_SHARE_WEB:?set SCREEN_SHARE_WEB to the screen-share plugin web/ folder}"
+mkdir -p "$RUN"; chmod 700 "$RUN"
+# Web root: noVNC symlinked in, plus index.html (device detection) and m.html (phone UI).
+WEB="$HOME/.screen-share/web"; mkdir -p "$WEB"
+for f in core vendor app vnc.html vnc_lite.html defaults.json mandatory.json package.json; do
+  [ -e "$WEB/$f" ] || ln -sfn "/usr/share/novnc/$f" "$WEB/$f"
+done
+for f in index.html m.html; do ln -sfn "$PLUGIN_WEB/$f" "$WEB/$f"; done
+rm -f "$RUN/rfb.sock" "$RUN/web.sock"
+
+x11vnc -display "$SHARE_DISPLAY" -unixsock "$RUN/rfb.sock" -rfbport 0 -rfbportv6 0 -nopw -shared -forever \
+       -noxdamage -cursor arrow -o "$RUN/x11vnc.log" -bg >/dev/null 2>&1
+for _ in $(seq 1 50); do [ -S "$RUN/rfb.sock" ] && break; sleep 0.1; done
+[ -S "$RUN/rfb.sock" ] || { echo "x11vnc did not create $RUN/rfb.sock" >&2; exit 1; }
+chmod 600 "$RUN/rfb.sock"
+
+cleanup() { pkill -f "[x]11vnc -display $SHARE_DISPLAY -unixsock $RUN/rfb.sock" || true; rm -f "$RUN/rfb.sock" "$RUN/web.sock"; }
+trap cleanup EXIT INT TERM
+
+exec websockify --unix-listen "$RUN/web.sock" --unix-listen-mode 0600 \
+     --web "$WEB" --file-only --unix-target "$RUN/rfb.sock" \
+     --idle-timeout "$IDLE_SECONDS" --log-file "$RUN/websockify.log"
